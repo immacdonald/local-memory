@@ -8,6 +8,7 @@ import { LocalMemory } from 'src/icons';
 import { Media } from 'src/types';
 import mediaData from './media.json';
 import zipcodeCoordinates from './zipcode_coordinates.json';
+import mediaSummary from './media_summary.json';
 
 interface SearchInput {
     country: string;
@@ -52,7 +53,8 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, limi
 const Home = () => {
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
-    const [sorted, setSorted] = useState<any[]>([]);
+    const [sorted, setSorted] = useState<Media[]>([]);
+    const [searchTotals, setSearchTotals] = useState<{ fips: number, total: number}[]>([]);
 
     const {
         register,
@@ -64,6 +66,17 @@ const Home = () => {
         const location = zipcodes[data.zipcode];
         if (location) {
             const sortedCities = sortCitiesByProximity(media, location, Number(data.count));
+
+            let totals: { fips: number, total: number}[]  = [];
+            sortedCities.forEach((organization: Media) => {
+                const exists = totals.find((value) => value.fips == organization.fips);
+                if(exists) {
+                    totals = [...totals, { fips: exists.fips, total: exists.total + 1 }]
+                } else {
+                    totals.push({fips: organization.fips, total: 1});
+                }
+            });
+            setSearchTotals(totals);
             setSorted(sortedCities);
         } else {
             console.warn('Zipcode not found!');
@@ -75,7 +88,7 @@ const Home = () => {
             <Section cssProperties={{ paddingTop: '0' }}>
                 <LocalMemory size="full" />
                 <Row>
-                    <Map />
+                    <Map data={sorted.length > 0 ? searchTotals : mediaSummary}/>
                 </Row>
                 <Text as="h4">Understanding Local News & Media</Text>
                 <Text size="lg">
@@ -85,7 +98,7 @@ const Home = () => {
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row>
                         {/*<Dropdown options={['USA']} placeholder='Country' />*/}
-                        <FormInput name="country" type="text" placeholder="Country" defaultValue="USA" register={register} validationSchema={{ required: true }} error={errors.country} disabled />
+                        <FormInput name="country" type="text" placeholder="Country" defaultValue="USA" register={register} validationSchema={{ required: true }} error={errors.country} />
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
                         <FormInput name="count" type="number" placeholder="Media Count" defaultValue="100" register={register} validationSchema={{ required: true }} error={errors.count} />
                     </Row>

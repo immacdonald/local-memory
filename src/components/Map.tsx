@@ -1,12 +1,18 @@
 import * as d3 from 'd3';
 import { FeatureCollection, GeoJsonProperties } from 'geojson';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as topojson from 'topojson-client';
 import { Objects, Topology } from 'topojson-specification';
 import counties from './counties.json';
-import media from './media_summary.json';
 
-const Map = () => {
+interface MapProps {
+    data: {
+        fips: number;
+        total: number;
+    }[]
+}
+
+const Map : React.FC<MapProps> = ({ data }) => {
     const ref = useRef<SVGSVGElement>(null);
 
     const us = counties as unknown as Topology<Objects<GeoJsonProperties>>;
@@ -42,7 +48,7 @@ const Map = () => {
             .attr('class', 'county')
             .attr('d', pathGenerator)
             .attr('fill', (d) => {
-                const county = media.find((e) => e.fips === d.id);
+                const county = data.find((e) => e.fips === d.id);
                 //console.log(county!.bachelorsOrHigher)
                 return colorScale(county?.total || 0);
             })
@@ -50,7 +56,7 @@ const Map = () => {
             .attr('stroke', 'gray')
             .attr('data-fips', (d) => d.id!)
             .attr('data-media-total', (d) => {
-                const county = media.find((e) => e.fips === d.id);
+                const county = data.find((e) => e.fips === d.id);
                 return county?.total || 0;
             });
 
@@ -63,7 +69,7 @@ const Map = () => {
             .attr('d', pathGenerator)
             .attr('fill', 'none')
             .attr('stroke', 'black');
-    }, []);
+    }, [data]);
 
     return <svg width={width} height={height} id="map" ref={ref} />;
 };
