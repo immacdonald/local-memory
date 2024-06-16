@@ -1,0 +1,69 @@
+@use 'sass:color';
+
+$primary: #2a6393;
+
+:root {
+    --s-white: rgb(254, 254, 254);
+    --s-black: rgb(1, 2, 3);
+
+    // Theme Color
+    --c-primary-light: #{color.scale($primary, $lightness: 10%)};
+    --c-primary: #{$primary};
+    --c-primary-dark: #{color.scale($primary, $lightness: -25%)};
+    --c-fg-on-primary: var(--s-white);
+    --c-secondary: #7ac7f9;
+    --c-accent: #f3c947;
+    --c-bg-accent: #fcde84;
+
+    // Foreground
+    --c-fg-light: #949ba0;
+    --c-fg: #333333;
+    --c-fg-dim: #18191b;
+    --c-fg-inverse: #f3f5f7;
+
+    // Background
+    --c-bg-light: #ffffff;
+    --c-bg: #f5f5f5;
+    --c-bg-dim: #e8eaec;
+    --c-bg-tint-light: #f7f9fb;
+    --c-bg-tint: #f3fafd;
+    --c-bg-dark: #222529;
+
+    // Indicators
+    --c-positive: rgb(131, 194, 118);
+    --c-bg-positive: rgb(69, 151, 60);
+    --c-critical: rgb(227, 63, 72);
+    --c-bg-critical: rgb(191, 53, 89);
+
+    // Alpha
+    $_alpha-base: 144, 144, 144;
+    $_alpha-base-dark: 0, 0, 0;
+    $_primary-base: 42, 99, 147;
+    --a-faint: rgba(#{$_primary-base}, 0.055);
+    --a-low: rgba(#{$_alpha-base}, 0.05);
+    --a-mid: rgba(#{$_alpha-base}, 0.25);
+    --a-dark: rgba(#{$_alpha-base-dark}, 0.025);
+    --a-darker: rgba(#{$_alpha-base-dark}, 0.15);
+
+    // Border
+    --b-light: 1px solid var(--c-bg-dim);
+    --b-dark: 1px solid var(--c-bg-dark);
+
+    // Transitions
+    --t-fast: 0.25s ease;
+    --t-mid: 0.5s ease;
+    --t-slow: 1s ease;
+
+    // Shadows
+    --shadow-low: 0 1px 1px 0 var(--a-dark);
+    --shadow-mid: 0 0 4x var(--a-mid), 0 0 2px 2px var(--a-low);
+    --shadow-high: 0px 2px 4px -1px var(--a-darker), 0px 4px 5px 0px var(--a-dark), 0px 1px 10px 0px var(--a-dark);
+
+    // Filters
+    --f-disabled-saturation: 60%;
+    --f-disabled-brightness: 0.9;
+    --f-hover-brightness: 1.1;
+
+    // Typography
+    --font-body: 'Avenir Next', Helvetica, Arial, sans-serif;
+}

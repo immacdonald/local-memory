@@ -1,0 +1,70 @@
+@use 'sass:math';
+
+.header {
+    --v-header-height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--v-header-height) !important;
+    background-color: var(--c-bg-light);
+    border-bottom: var(--b-light);
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    .content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0 $lg;
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-left: auto;
+        }
+
+        .navLinks {
+            display: flex;
+            align-items: center;
+            gap: $xs;
+        }
+    }
+
+    /*@include respond-max($screen-sm) {
+        --v-header-height: 96px;
+
+        .content {
+            flex-direction: column;
+            gap: $xs;
+            margin-top: $sm;
+
+            .navigation {
+                margin-left: 0;
+            }
+        }
+    }*/
+
+    &::before {
+        content: '';
+        position: absolute;
+        background-color: var(--c-bg-light);
+        width: 100%;
+        height: 400px;
+        top: -400px;
+    }
+}
+
+.logo {
+    text-decoration: none;
+    margin: 0px;
+}
+
+.tools {
+    display: flex;
+    flex-direction: column;
+    gap: $sm;
+}
