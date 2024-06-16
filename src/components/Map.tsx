@@ -1,12 +1,12 @@
-import * as d3 from "d3";
-import { useEffect, useRef } from "react";
+import * as d3 from 'd3';
+import { FeatureCollection, GeoJsonProperties } from 'geojson';
+import { useEffect, useRef } from 'react';
 import * as topojson from 'topojson-client';
-import { Topology, Objects } from 'topojson-specification';
-import { FeatureCollection, GeoJsonProperties } from "geojson";
+import { Objects, Topology } from 'topojson-specification';
 import counties from './counties.json';
 import media from './media_summary.json';
 
-const CountyMap = () => {
+const Map = () => {
     const ref = useRef<SVGSVGElement>(null);
 
     const us = counties as unknown as Topology<Objects<GeoJsonProperties>>;
@@ -16,59 +16,56 @@ const CountyMap = () => {
 
     useEffect(() => {
         // Clear old SVGs
-        d3.select(ref.current)
-            .select('svg').remove();
+        d3.select(ref.current).select('svg').remove();
 
         // Create SVG element
-        const svg = d3.select(ref.current)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
+        const svg = d3.select(ref.current).append('svg').attr('width', width).attr('height', height);
 
         // Create path generator
         const pathGenerator = d3.geoPath();
 
-        const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4']
+        const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
         //const colors = ['white', '#d4d4d4', '#d2b1d7', '#ea83b7', '#fa4a75', '#eb1212'];
 
         // Create color scale
-        const colorScale = d3.scaleQuantize()
+        const colorScale = d3
+            .scaleQuantize()
             .domain([0, 5])
-            //@ts-expect-error
+            //@ts-expect-error as range wants numbers rather than strings
             .range(colors);
 
         // Draw counties
-        svg.selectAll(".county")
+        svg.selectAll('.county')
             .data((topojson.feature(us, us.objects.counties) as unknown as FeatureCollection).features)
-            .enter().append("path")
-            .attr("class", "county")
-            .attr("d", pathGenerator)
-            .attr("fill", d => {
-                const county = media.find(e => e.fips === d.id);
+            .enter()
+            .append('path')
+            .attr('class', 'county')
+            .attr('d', pathGenerator)
+            .attr('fill', (d) => {
+                const county = media.find((e) => e.fips === d.id);
                 //console.log(county!.bachelorsOrHigher)
                 return colorScale(county?.total || 0);
             })
             //.attr("fill", "none")
-            .attr("stroke", "gray")
-            .attr("data-fips", d => d.id!)
-            .attr("data-media-total", d => {
-                const county = media.find(e => e.fips === d.id);
+            .attr('stroke', 'gray')
+            .attr('data-fips', (d) => d.id!)
+            .attr('data-media-total', (d) => {
+                const county = media.find((e) => e.fips === d.id);
                 return county?.total || 0;
             });
 
         // Draw states
-        svg.selectAll(".state")
+        svg.selectAll('.state')
             .data((topojson.feature(us, us.objects.states) as unknown as FeatureCollection).features)
-            .enter().append("path")
-            .attr("class", "state")
-            .attr("d", pathGenerator)
-            .attr("fill", "none")
-            .attr("stroke", "black");
+            .enter()
+            .append('path')
+            .attr('class', 'state')
+            .attr('d', pathGenerator)
+            .attr('fill', 'none')
+            .attr('stroke', 'black');
     }, []);
 
-    return (
-        <svg width={width} height={height} id="countymap" ref={ref} />
-    );
+    return <svg width={width} height={height} id="map" ref={ref} />;
 };
 
-export default CountyMap;
+export default Map;

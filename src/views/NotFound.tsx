@@ -3,7 +3,7 @@ import Text from 'components/Text';
 
 const NotFound = () => {
     return (
-        <Page title="Not Found | Local Memory Project">
+        <Page title="Local Memory Project">
             <Section variant="floating">
                 <Column>
                     <h2>Not Found</h2>

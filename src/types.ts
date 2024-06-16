@@ -1,28 +1,22 @@
-interface LocalMemoryData {
-    [state: string]: StateData;
-}
-
-interface StateData {
-    broadcast: Media[];
-    newspaper: Media[];
-    radio: Media[];
-    tv: Media[];
-
-}
-
-interface Media {
-    name: string;
-    "media-class": string;
-    "us-state": string
-;    "city-county-lat": number;
-    "city-county-long": number;
-    "city-county-name": string;
-    "extracted-from": string;
-    "open-search": [];
-    website: string;
-    wikipedia: string;
+export interface Media {
+    video?: string;
     twitter: string;
-    facebook: string;
-    video: string;
-    rss: string[];
-}   
+    mediaClass: string;
+    extractedFrom: string;
+    cityCountyLong: number;
+    mediaSubclass?: string;
+    website: string;
+    facebook?: string;
+    cityCountyLat: number;
+    name: string;
+    openSearch?: unknown[];
+    cityCountyName: string;
+    rss?: string[];
+    usState: string;
+    wikipedia?: string;
+    instagram?: string;
+    youtube?: string;
+    fips: number;
+    stateAbbr: string;
+    mediaType: string;
+}
