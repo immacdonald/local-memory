@@ -2,6 +2,7 @@
 
 .header {
     --v-header-height: 64px;
+
     width: 100%;
     display: flex;
     align-items: center;
@@ -27,14 +28,14 @@
             margin-left: auto;
         }
 
-        .navLinks {
+        .links {
             display: flex;
             align-items: center;
             gap: $xs;
         }
     }
 
-    /*@include respond-max($screen-sm) {
+    /* @include respond-max($screen-sm) {
         --v-header-height: 96px;
 
         .content {
@@ -46,7 +47,7 @@
                 margin-left: 0;
             }
         }
-    }*/
+    } */
 
     &::before {
         content: '';
@@ -60,7 +61,7 @@
 
 .logo {
     text-decoration: none;
-    margin: 0px;
+    margin: 0;
 }
 
 .tools {

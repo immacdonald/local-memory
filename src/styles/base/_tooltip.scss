@@ -5,6 +5,7 @@
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -13,8 +14,8 @@
 *[data-tooltip]:not([disabled]) {
     position: relative;
 
-    &:hover:after,
-    &:focus:after {
+    &:hover::after,
+    &:focus::after {
         content: attr(data-tooltip);
         position: absolute;
         top: -50%;

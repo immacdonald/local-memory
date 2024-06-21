@@ -14,7 +14,7 @@ const Header: FC = () => {
                     </Link>
                 </h4>
                 <div className={style.navigation}>
-                    <nav className={style.navLinks}>
+                    <nav className={style.links}>
                         <Button link="/" label="Home" />
                     </nav>
                 </div>
