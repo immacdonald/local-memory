@@ -7,9 +7,9 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "src/*": ["./src/*"],
-            "components/*": ["./src/components/*"],
-            "icons/*": ["./src/icons/*"]
+            "@components/*": ["./src/components/*"],
+            "@icons/*": ["./src/icons/*"],
+            "@views": ["./src/views"]
         },
         /* Bundler mode */
         "moduleResolution": "bundler",

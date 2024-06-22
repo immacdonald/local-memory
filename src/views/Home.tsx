@@ -1,7 +1,7 @@
+import { USMap } from '@components/USMap';
 import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from '@imacdonald/phantom';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Map from 'src/components/Map';
 import { LocalMemory } from 'src/icons';
 import { Media } from 'src/types';
 import mediaSummary from '../data/media_summary.json';
@@ -86,7 +86,7 @@ const Home = () => {
             <Section cssProperties={{ paddingTop: '0' }}>
                 <LocalMemory size="full" />
                 <Row>
-                    <Map data={sorted.length > 0 ? searchTotals : mediaSummary} />
+                    <USMap data={sorted.length > 0 ? searchTotals : mediaSummary} />
                 </Row>
                 <Text as="h4">Understanding Local News & Media</Text>
                 <Text size="lg">
@@ -128,4 +128,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export { Home };

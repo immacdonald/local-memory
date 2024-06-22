@@ -3,7 +3,7 @@ import { FeatureCollection, GeoJsonProperties } from 'geojson';
 import React, { useEffect, useRef } from 'react';
 import * as topojson from 'topojson-client';
 import { Objects, Topology } from 'topojson-specification';
-import usTopology from '../data/us_topology.json';
+import usTopology from '../../data/us_topology.json';
 
 interface MapProps {
     data: {
@@ -12,7 +12,7 @@ interface MapProps {
     }[];
 }
 
-const Map: React.FC<MapProps> = ({ data }) => {
+const USMap: React.FC<MapProps> = ({ data }) => {
     const ref = useRef<SVGSVGElement>(null);
 
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
@@ -74,4 +74,4 @@ const Map: React.FC<MapProps> = ({ data }) => {
     return <svg width={width} height={height} id="map" ref={ref} />;
 };
 
-export default Map;
+export { USMap };
