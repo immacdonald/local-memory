@@ -4,9 +4,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Map from 'src/components/Map';
 import { LocalMemory } from 'src/icons';
 import { Media } from 'src/types';
-import mediaSummary from './media_summary.json';
-import mediaData from './media.json';
-import zipcodeCoordinates from './zipcode_coordinates.json';
+import mediaSummary from '../data/media_summary.json';
+import mediaData from '../data/media.json';
+import zipcodeCoordinates from '../data/zipcode_coordinates.json';
 
 interface SearchInput {
     country: string;
