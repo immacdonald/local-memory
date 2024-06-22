@@ -1,14 +1,12 @@
-import { Button, capitalizeFirstLetter, Card, Page, Row, Section } from '@imacdonald/phantom';
-import Text from 'components/Text';
+import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from '@imacdonald/phantom';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import FormInput from 'src/components/FormInput';
 import Map from 'src/components/Map';
 import { LocalMemory } from 'src/icons';
 import { Media } from 'src/types';
+import mediaSummary from './media_summary.json';
 import mediaData from './media.json';
 import zipcodeCoordinates from './zipcode_coordinates.json';
-import mediaSummary from './media_summary.json';
 
 interface SearchInput {
     country: string;
@@ -54,7 +52,7 @@ const Home = () => {
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
-    const [searchTotals, setSearchTotals] = useState<{ fips: number, total: number}[]>([]);
+    const [searchTotals, setSearchTotals] = useState<{ fips: number; total: number }[]>([]);
 
     const {
         register,
@@ -67,13 +65,13 @@ const Home = () => {
         if (location) {
             const sortedCities = sortCitiesByProximity(media, location, Number(data.count));
 
-            let totals: { fips: number, total: number}[]  = [];
+            let totals: { fips: number; total: number }[] = [];
             sortedCities.forEach((organization: Media) => {
                 const exists = totals.find((value) => value.fips == organization.fips);
-                if(exists) {
-                    totals = [...totals, { fips: exists.fips, total: exists.total + 1 }]
+                if (exists) {
+                    totals = [...totals, { fips: exists.fips, total: exists.total + 1 }];
                 } else {
-                    totals.push({fips: organization.fips, total: 1});
+                    totals.push({ fips: organization.fips, total: 1 });
                 }
             });
             setSearchTotals(totals);
@@ -88,7 +86,7 @@ const Home = () => {
             <Section cssProperties={{ paddingTop: '0' }}>
                 <LocalMemory size="full" />
                 <Row>
-                    <Map data={sorted.length > 0 ? searchTotals : mediaSummary}/>
+                    <Map data={sorted.length > 0 ? searchTotals : mediaSummary} />
                 </Row>
                 <Text as="h4">Understanding Local News & Media</Text>
                 <Text size="lg">

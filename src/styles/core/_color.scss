@@ -50,21 +50,6 @@ $primary: #2a6393;
     --b-light: 1px solid var(--c-bg-dim);
     --b-dark: 1px solid var(--c-bg-dark);
 
-    // Transitions
-    --t-fast: 0.25s ease;
-    --t-mid: 0.5s ease;
-    --t-slow: 1s ease;
-
-    // Shadows
-    --shadow-low: 0 1px 1px 0 var(--a-dark);
-    --shadow-mid: 0 0 4px var(--a-mid), 0 0 2px 2px var(--a-low);
-    --shadow-high: 0px 2px 4px -1px var(--a-darker), 0px 4px 5px 0px var(--a-dark), 0px 1px 10px 0px var(--a-dark);
-
-    // Filters
-    --f-disabled-saturation: 60%;
-    --f-disabled-brightness: 0.9;
-    --f-hover-brightness: 1.1;
-
     // Typography
     --font-body: 'Avenir Next', helvetica, arial, sans-serif;
 }

@@ -9,10 +9,10 @@ interface MapProps {
     data: {
         fips: number;
         total: number;
-    }[]
+    }[];
 }
 
-const Map : React.FC<MapProps> = ({ data }) => {
+const Map: React.FC<MapProps> = ({ data }) => {
     const ref = useRef<SVGSVGElement>(null);
 
     const us = counties as unknown as Topology<Objects<GeoJsonProperties>>;

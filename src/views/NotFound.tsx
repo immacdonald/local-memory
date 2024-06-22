@@ -1,5 +1,4 @@
-import { Button, Column, Page, Row, Section } from '@imacdonald/phantom';
-import Text from 'components/Text';
+import { Button, Column, Page, Row, Section, Text } from '@imacdonald/phantom';
 
 const NotFound = () => {
     return (
