@@ -1,9 +1,9 @@
-import { ResponsiveContextProvider } from '@imacdonald/phantom';
+import { ResponsiveContextProvider } from 'phantom-library';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
-import '@imacdonald/phantom/style/variables';
+import 'phantom-library/style/variables';
 import './styles/core/index.module.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

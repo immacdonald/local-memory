@@ -1,4 +1,4 @@
-import { withVectorIcon } from '@imacdonald/phantom';
+import { withVectorIcon } from 'phantom-library';
 import LocalMemoryIconSVG from './local_memory_icon.svg?react';
 import LocalMemorySVG from './local_memory.svg?react';
 

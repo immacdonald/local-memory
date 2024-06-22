@@ -1,4 +1,4 @@
-import { Button, Column, Page, Row, Section, Text } from '@imacdonald/phantom';
+import { Button, Column, Page, Row, Section, Text } from 'phantom-library';
 
 const NotFound = () => {
     return (

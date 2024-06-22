@@ -1,4 +1,4 @@
-import { Button } from '@imacdonald/phantom';
+import { Button } from 'phantom-library';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { LocalMemoryIcon } from 'src/icons';

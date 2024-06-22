@@ -1,5 +1,5 @@
 import { Footer, Header } from '@components/page';
-import { PhantomApp } from '@imacdonald/phantom';
+import { PhantomApp } from 'phantom-library';
 import { Home, NotFound } from '@views';
 import { Route, Routes } from 'react-router-dom';
 

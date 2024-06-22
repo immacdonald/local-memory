@@ -1,5 +1,5 @@
 import { USMap } from '@components/USMap';
-import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from '@imacdonald/phantom';
+import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from 'phantom-library';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { LocalMemory } from 'src/icons';
