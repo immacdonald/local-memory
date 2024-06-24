@@ -1,6 +1,6 @@
 .footer {
     --v-footer-height: 128px;
-    --v-color: var(--c-fg);
+    --v-color: var(--color-text);
 
     width: 100%;
     min-height: var(--v-footer-height);
@@ -10,7 +10,7 @@
     align-items: start;
     padding-inline: max(calc((100% - $screen-lg) / 2), 3%);
     padding-bottom: $sm;
-    background-color: var(--c-bg-light);
+    background-color: var(--color-surface-foregound);
     color: var(--v-color);
     font-size: $font-xs;
     margin-top: auto;
@@ -22,7 +22,7 @@
         gap: $md;
         flex-direction: column;
         align-items: center;
-        border-top: var(--b-light);
+        border-top: var(--border-light);
         padding-top: $md;
         margin-top: $md;
     }

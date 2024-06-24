@@ -1,7 +1,7 @@
-import { Button } from 'phantom-library';
 import { FC } from 'react';
+import { Button } from 'phantom-library';
 import { Link } from 'react-router-dom';
-import { LocalMemoryIcon } from 'src/icons';
+import { LocalMemoryIcon } from '@icons';
 import style from './Header.module.scss';
 
 const Header: FC = () => {

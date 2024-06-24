@@ -1,12 +1,12 @@
-import { USMap } from '@components/USMap';
-import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from 'phantom-library';
+import type { Media } from '@types';
 import { useState } from 'react';
+import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { LocalMemory } from 'src/icons';
-import { Media } from 'src/types';
-import mediaSummary from '../data/media_summary.json';
-import mediaData from '../data/media.json';
-import zipcodeCoordinates from '../data/zipcode_coordinates.json';
+import { USMap } from '@components/USMap';
+import mediaSummary from '@data/media_summary.json';
+import mediaData from '@data/media.json';
+import zipcodeCoordinates from '@data/zipcode_coordinates.json';
+import { LocalMemory } from '@icons';
 
 interface SearchInput {
     country: string;
@@ -94,7 +94,7 @@ const Home = () => {
                     newspapsers for a city for Non-US media.
                 </Text>
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
-                    <Row>
+                    <Row verticalAlign="start">
                         {/*<Dropdown options={['USA']} placeholder='Country' />*/}
                         <FormInput name="country" type="text" placeholder="Country" defaultValue="USA" register={register} validationSchema={{ required: true }} error={errors.country} />
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />

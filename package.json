@@ -7,19 +7,18 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives && tsc --noEmit",
-        "prettier": "prettier ./ --check",
-        "prettier:fix": "prettier ./ --write",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives && tsc --noEmit --emitDeclarationOnly false",
+        "prettier": "prettier ./ --check --ignore-path ./node_modules/@imacdonald/phantom-config/.prettierignore",
+        "prettier:fix": "prettier ./ --write --ignore-path ./node_modules/@imacdonald/phantom-config/.prettierignore",
         "stylelint": "npx stylelint '**/*.{css,scss}'",
         "stylelint:fix": "npx stylelint '**/*.{css,scss}' --fix",
         "format": "npm run lint && npm run stylelint:fix && npm run prettier:fix"
     },
     "dependencies": {
         "@types/geojson": "^7946.0.14",
-        "classnames": "^2.3.2",
         "d3": "^7.9.0",
         "fast-xml-parser": "^4.4.0",
-        "phantom-library": "^0.5.1",
+        "phantom-library": "^0.8.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.49.2",
@@ -30,7 +29,7 @@
         "vite-plugin-svgr": "^4.1.0"
     },
     "devDependencies": {
-        "@immacdonald/phantom-config": "github:immacdonald/phantom-config#v0.0.6",
+        "@imacdonald/phantom-config": "^0.3.0",
         "@types/d3": "^7.4.3",
         "@types/node": "^20.11.7",
         "@types/react": "^18.2.15",

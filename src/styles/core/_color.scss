@@ -1,55 +1,12 @@
 @use 'sass:color';
 
-$primary: #2a6393;
-
-:root {
-    --s-white: rgb(254 254 254);
-    --s-black: rgb(1 2 3);
-
+:root,
+::backdrop,
+::selection {
     // Theme Color
-    --c-primary-light: #{color.scale($primary, $lightness: 10%)};
-    --c-primary: #{$primary};
-    --c-primary-dark: #{color.scale($primary, $lightness: -25%)};
-    --c-fg-on-primary: var(--s-white);
-    --c-secondary: #7ac7f9;
-    --c-accent: #f3c947;
-    --c-bg-accent: #fcde84;
+    $primary: #00e;
 
-    // Foreground
-    --c-fg-light: #949ba0;
-    --c-fg: #333;
-    --c-fg-dim: #18191b;
-    --c-fg-inverse: #f3f5f7;
-
-    // Background
-    --c-bg-light: #fff;
-    --c-bg: #f5f5f5;
-    --c-bg-dim: #e8eaec;
-    --c-bg-tint-light: #f7f9fb;
-    --c-bg-tint: #f3fafd;
-    --c-bg-dark: #222529;
-
-    // Indicators
-    --c-positive: rgb(131 194 118);
-    --c-bg-positive: rgb(69 151 60);
-    --c-critical: rgb(227 63 72);
-    --c-bg-critical: rgb(191 53 89);
-
-    // Alpha
-    $alpha-base: 144, 144, 144;
-    $alpha-base-dark: 0, 0, 0;
-    $primary-base: 42, 99, 147;
-
-    --a-faint: rgba(#{$primary-base}, 0.055);
-    --a-low: rgba(#{$alpha-base}, 0.05);
-    --a-mid: rgba(#{$alpha-base}, 0.25);
-    --a-dark: rgba(#{$alpha-base-dark}, 0.025);
-    --a-darker: rgba(#{$alpha-base-dark}, 0.15);
-
-    // Border
-    --b-light: 1px solid var(--c-bg-dim);
-    --b-dark: 1px solid var(--c-bg-dark);
-
-    // Typography
-    --font-body: 'Avenir Next', helvetica, arial, sans-serif;
+    --color-primary: #{$primary};
+    --color-primary-dark: #{color.scale($primary, $lightness: -15%)};
+    --color-primary-darker: #{color.scale($primary, $lightness: -30%)};
 }

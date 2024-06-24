@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import config from '../../../config';
+import { config } from '@config';
 import style from './Footer.module.scss';
 
 const Footer: FC = () => {

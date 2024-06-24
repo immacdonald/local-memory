@@ -1,9 +1,9 @@
-import * as d3 from 'd3';
-import { FeatureCollection, GeoJsonProperties } from 'geojson';
+import type { FeatureCollection, GeoJsonProperties } from 'geojson';
+import type { Objects, Topology } from 'topojson-specification';
 import React, { useEffect, useRef } from 'react';
+import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { Objects, Topology } from 'topojson-specification';
-import usTopology from '../../data/us_topology.json';
+import usTopology from '@data/us_topology.json';
 
 interface MapProps {
     data: {
