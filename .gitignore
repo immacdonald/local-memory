@@ -9,7 +9,5 @@ node_modules/
 # macOS
 .DS_STORE
 
-# Custom Ignores
-
 # React Vite build folder 
 /dist

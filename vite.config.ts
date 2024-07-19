@@ -1,8 +1,8 @@
-import path from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig, Plugin } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
 
 // https://vitejs.dev/config/
 // eslint-disable-next-line import-x/no-default-export
@@ -14,7 +14,8 @@ export default defineConfig(({ command }) => {
     }
 });
 
-const globalSCSS = () => ({
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+const globalSCSS = (): Plugin => ({
     name: 'vite-global-scss',
     enforce: 'pre',
     transform(content: string, id: string) {
@@ -38,7 +39,7 @@ const globalSCSS = () => ({
 });
 
 const baseConfig = {
-    plugins: [tsconfigPaths(), globalSCSS() as Plugin, svgr(), react()]
+    plugins: [tsconfigPaths(), globalSCSS(), svgr(), react()]
 };
 
 function devConfig() {
@@ -52,3 +53,4 @@ function prodConfig() {
         ...baseConfig
     };
 }
+/* eslint-enable @typescript-eslint/explicit-function-return-type */

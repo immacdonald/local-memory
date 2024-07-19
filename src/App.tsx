@@ -1,18 +1,19 @@
-import { PhantomApp } from 'phantom-library';
+import { StyledApp } from 'phantom-library';
 import { Route, Routes } from 'react-router-dom';
+import { FC } from 'react';
 import { Footer, Header } from '@components/page';
 import { Home, NotFound } from '@views';
 
-const App = () => {
+const App: FC = () => {
     return (
-        <PhantomApp anchors modals banners>
+        <StyledApp anchors modals banners>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
-        </PhantomApp>
+        </StyledApp>
     );
 };
 
