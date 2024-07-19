@@ -1,12 +1,13 @@
-import type { Media } from '@types';
-import { useState } from 'react';
+import type { Media, Coordinates } from '@types';
+import { FC, useState } from 'react';
 import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { LocalMemory } from '@icons';
 import { USMap } from '@components/USMap';
 import mediaSummary from '@data/media_summary.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
-import { LocalMemory } from '@icons';
+import { haversineDistance } from '@utility';
 
 interface SearchInput {
     country: string;
@@ -14,31 +15,7 @@ interface SearchInput {
     count: string;
 }
 
-type Coordinates = {
-    lat: number;
-    lon: number;
-};
-
-function haversineDistance(coords1: Coordinates, coords2: Coordinates) {
-    const R = 6371; // Earth's radius in kilometers
-    const lat1 = coords1.lat;
-    const lon1 = coords1.lon;
-    const lat2 = coords2.lat;
-    const lon2 = coords2.lon;
-
-    const dLat = toRadians(lat2 - lat1);
-    const dLon = toRadians(lon2 - lon1);
-
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-}
-
-function toRadians(degrees: number) {
-    return (degrees * Math.PI) / 180;
-}
-
-function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, limit = 100) {
+function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, limit = 100): Media[] {
     cities.sort((a: Media, b: Media) => {
         const distA = haversineDistance(currentCoords, { lat: a.cityCountyLat, lon: a.cityCountyLong });
         const distB = haversineDistance(currentCoords, { lat: b.cityCountyLat, lon: b.cityCountyLong });
@@ -48,7 +25,7 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, limi
     return cities.slice(0, limit);
 }
 
-const Home = () => {
+const Home: FC = () => {
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
@@ -83,10 +60,10 @@ const Home = () => {
 
     return (
         <Page title="Local Memory Project">
-            <Section cssProperties={{ paddingTop: '0' }}>
+            <Section>
                 <LocalMemory size="full" />
                 <Row>
-                    <USMap data={sorted.length > 0 ? searchTotals : mediaSummary} />
+                    <USMap data={sorted.length > 0 ? searchTotals : mediaSummary} mediaData={mediaData as any} />
                 </Row>
                 <Text as="h4">Understanding Local News & Media</Text>
                 <Text size="lg">
@@ -96,11 +73,9 @@ const Home = () => {
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
                         {/*<Dropdown options={['USA']} placeholder='Country' />*/}
-                        <FormInput name="country" type="text" placeholder="Country" defaultValue="USA" register={register} validationSchema={{ required: true }} error={errors.country} />
+                        {/*<FormInput name="country" type="text" placeholder="Country" defaultValue="USA" register={register} validationSchema={{ required: true }} error={errors.country} />*/}
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
                         <FormInput name="count" type="number" placeholder="Media Count" defaultValue="100" register={register} validationSchema={{ required: true }} error={errors.count} />
-                    </Row>
-                    <Row>
                         <Button context="primary" label="Search" visual="filled" form="search" type="submit" />
                     </Row>
                 </form>

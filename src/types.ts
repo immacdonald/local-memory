@@ -1,4 +1,4 @@
-export interface Media {
+interface Media {
     video?: string;
     twitter: string;
     mediaClass: string;
@@ -20,3 +20,10 @@ export interface Media {
     stateAbbr: string;
     mediaType: string;
 }
+
+type Coordinates = {
+    lat: number;
+    lon: number;
+};
+
+export type { Coordinates, Media };

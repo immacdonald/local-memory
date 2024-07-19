@@ -1,12 +1,14 @@
 @use 'sass:color';
 
-:root,
-::backdrop,
-::selection {
+:root {
     // Theme Color
     $primary: #00e;
 
     --color-primary: #{$primary};
     --color-primary-dark: #{color.scale($primary, $lightness: -15%)};
     --color-primary-darker: #{color.scale($primary, $lightness: -30%)};
+}
+
+section:first-of-type {
+    padding-top: 64px;
 }

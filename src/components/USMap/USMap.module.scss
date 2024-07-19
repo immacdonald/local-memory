@@ -1,0 +1,24 @@
+.map {
+    width: min(100%, 950px);
+    border: var(--border-light);
+    border-radius: $radius-md;
+    margin-bottom: $xl;
+    overflow: hidden;
+    position: relative;
+    background-color: #e3d9ff;
+
+    .tools {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: $sm;
+        position: absolute;
+        bottom: 50px;
+        right: 50px;
+        padding: $sm;
+        background-color: var(--color-surface-foreground);
+        box-shadow: var(--shadow-lifted);
+        border-radius: $xl;
+    }
+}

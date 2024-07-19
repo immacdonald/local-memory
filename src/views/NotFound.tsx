@@ -1,6 +1,7 @@
 import { Button, Column, Page, Row, Section, Text } from 'phantom-library';
+import { FC } from 'react';
 
-const NotFound = () => {
+const NotFound: FC = () => {
     return (
         <Page title="Local Memory Project">
             <Section variant="floating">
