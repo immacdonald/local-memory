@@ -10,6 +10,7 @@ import style from './USMap.module.scss';
 interface MapProps {
     data: {
         fips: string;
+        countyName: string;
         total: number;
     }[];
     mediaData: {
@@ -27,7 +28,6 @@ interface MapFunctions {
 
 const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
     const ref = useRef<SVGSVGElement>(null);
-
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
     const width = 950;
@@ -60,6 +60,15 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             //@ts-expect-error as range wants numbers rather than strings
             .range(colors);
 
+        // Create tooltip
+        const tooltip = d3.select('body').append('div')
+            .attr('class', style.tooltip)
+            .style('position', 'absolute')
+            .style('background', 'white')
+            .style('border', '1px solid gray')
+            .style('padding', '5px')
+            .style('display', 'none');
+
         // Draw counties
         g.selectAll('.county')
             .data((topojson.feature(us, us.objects.counties) as unknown as FeatureCollection).features)
@@ -74,9 +83,25 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             })
             .attr('stroke', 'gray')
             .attr('data-fips', (d) => d.id!)
+            .attr('data-county-name', (d) => {
+                const county = data.find((e) => e.fips == (d.id as string));
+                return county?.countyName || 'Unknown';
+            })
             .attr('data-media-total', (d) => {
                 const county = data.find((e) => e.fips == (d.id as string));
                 return county?.total || 0;
+            })
+            .on('mouseover', function(event, d) {
+                const county = data.find((e) => e.fips == (d.id as string));
+                tooltip.style('display', 'block')
+                    .html(`${county?.countyName || 'Unknown County'}: ${county?.total || 0}`);
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', `${event.pageX + 10}px`)
+                    .style('top', `${event.pageY + 10}px`);
+            })
+            .on('mouseout', function() {
+                tooltip.style('display', 'none');
             });
 
         // Draw states
@@ -103,8 +128,10 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
                 const coords = projection([d.cityCountyLong, d.cityCountyLat]);
                 return coords ? coords[1] : null;
             })
-            .attr('r', 1)
-            .attr('fill', colors[4]);
+            .attr('r', 2)
+            .attr('fill', 'gold')
+            .attr('stroke', 'gray')
+            .attr('stroke-width', 0.25);
 
         // Add zoom functionality
         const zoom = d3.zoom<SVGSVGElement, unknown>()
@@ -114,35 +141,27 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             });
 
         const setZoom = (level: number) => {
-            d3.select('svg')
-                .transition()
-                .call(zoom.scaleTo, level);
-        }
+            svg.transition().call(zoom.scaleTo, level);
+        };
 
         const center = () => {
-            d3.select('svg')
-                .transition()
-                .call(zoom.translateTo, 0.5 * width, 0.5 * height);
-        }
+            svg.transition().call(zoom.translateTo, 0.5 * width, 0.5 * height);
+        };
 
         const zoomIn = () => {
-            d3.select('svg')
-                .transition()
-                .call(zoom.scaleBy, 2);
-        }
+            svg.transition().call(zoom.scaleBy, 2);
+        };
 
         const zoomOut = () => {
-            d3.select('svg')
-                .transition()
-                .call(zoom.scaleBy, 0.5);
-        }
+            svg.transition().call(zoom.scaleBy, 0.5);
+        };
 
         mapFunctions.current = {
             setZoom,
             center,
             zoomIn,
             zoomOut
-        }
+        };
 
         svg.call(zoom);
     }, [data, usTopology, mediaData]);
@@ -151,13 +170,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
 
     useEffect(() => {
         if (windowSize.width < 980 && ref.current) {
-            //console.log(((windowSize.width - 30) / 950));
-            //zoomFunction.current!(((windowSize.width - 30) / 950));
-            //centerFunction.current!();
+            // Handle responsive zoom and centering
         }
     }, [windowSize.width]);
-
-
 
     return (
         <div className={style.map}>

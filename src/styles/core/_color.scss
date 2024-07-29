@@ -7,6 +7,9 @@
     --color-primary: #{$primary};
     --color-primary-dark: #{color.scale($primary, $lightness: -15%)};
     --color-primary-darker: #{color.scale($primary, $lightness: -30%)};
+
+    --font-body: helvetica, sans-serif;;
+    --font-header: helvetica, sans-serif;;
 }
 
 section:first-of-type {
