@@ -1,4 +1,4 @@
-import { Button, Column, Page, Row, Section, Text } from 'phantom-library';
+import { Button, Column, Heading, Page, Row, Section, Text } from 'phantom-library';
 import { FC } from 'react';
 
 const NotFound: FC = () => {
@@ -6,13 +6,11 @@ const NotFound: FC = () => {
         <Page title="Local Memory Project">
             <Section variant="floating">
                 <Column>
-                    <h2>Not Found</h2>
+                    <Heading title='Not Found' align='center'/>
                 </Column>
-                <Text size="lg" align="center">
+                <Text align="center" marginBottom>
                     Unfortunately, the page you entered cannot be found.
                 </Text>
-                <br />
-                <br />
                 <Row>
                     <Button context="primary" label="Return Home" link="/" visual="filled" />
                 </Row>

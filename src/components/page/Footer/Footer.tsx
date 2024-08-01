@@ -1,16 +1,24 @@
 import { FC } from 'react';
 import { config } from '@config';
 import style from './Footer.module.scss';
+import { Link } from 'react-router-dom';
+import { Text } from 'phantom-library'
 
 const Footer: FC = () => {
     return (
         <footer className={style.footer}>
             <div className={style.content}>
-                <p>&copy; 2024 Ian MacDonald & Dr. Alexander Nwala</p>
+                <Text as='span'>&copy; {new Date().getFullYear()}{' '}
+                    <Link to="https://www.wm.edu" target="_blank">
+                        Willam & Mary
+                    </Link> <Link to="https://github.com/wm-newslab" target="_blank">
+                        NEWS Lab
+                    </Link>
+                </Text>
                 {config.mode == 'development' && (
-                    <p>
+                    <Text as='span' newline>
                         <i>Development Version {config.version}</i>
-                    </p>
+                    </Text>
                 )}
             </div>
         </footer>

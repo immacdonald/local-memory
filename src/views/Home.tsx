@@ -1,6 +1,6 @@
 import type { Media, Coordinates } from '@types';
-import { FC, useState } from 'react';
-import { Button, capitalizeFirstLetter, Card, FormInput, Page, Row, Section, Text } from 'phantom-library';
+import { FC, useEffect, useState } from 'react';
+import { Button, capitalizeFirstLetter, Card, FormInput, Heading, Page, Row, Section, Text } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { LocalMemory } from '@icons';
 import { USMap } from '@components/USMap';
@@ -58,46 +58,76 @@ const Home: FC = () => {
         }
     };
 
+    const [location, setLocation] = useState<{ latitude: number | null, longitude: number | null }>({ latitude: null, longitude: null });
+    const [error, setError] = useState<string | null>(null);
+
+    const getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLocation({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    });
+                    setError(null);
+                },
+                (error) => {
+                    setError(error.message);
+                    setLocation({ latitude: null, longitude: null });
+                }
+            );
+        } else {
+            setError('Geolocation is not supported by this browser.');
+        }
+    };
+
+    useEffect(() => {
+        getLocation();
+    }, [])
+
     return (
         <Page title="Local Memory Project">
             <Section>
-                <LocalMemory size="full" />
+                <Heading align='center' title={<LocalMemory size="full" />} subtitle='US Local Media Per County' bold={true}/>
                 <Row>
-                    <USMap data={sorted.length > 0 ? searchTotals : mediaSummary} mediaData={mediaData as any} />
+                    <USMap data={mediaSummary} mediaData={mediaData as any} location={location} />
                 </Row>
-                <Text as="h4">Understanding Local News & Media</Text>
-                <Text size="lg">
+                <Text>
                     This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of
-                    newspapsers for a city for Non-US media.
+                    newspapers for a city for Non-US media.
                 </Text>
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
-                        {/*<Dropdown options={['USA']} placeholder='Country' />*/}
-                        {/*<FormInput name="country" type="text" placeholder="Country" defaultValue="USA" register={register} validationSchema={{ required: true }} error={errors.country} />*/}
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
                         <FormInput name="count" type="number" placeholder="Media Count" defaultValue="100" register={register} validationSchema={{ required: true }} error={errors.count} />
                         <Button context="primary" label="Search" visual="filled" form="search" type="submit" />
                     </Row>
                 </form>
                 <br />
-                <div>
-                    {sorted &&
-                        sorted.map((organization: Media, index: number) => {
-                            return (
-                                <Card key={index} cssProperties={{ marginBottom: '16px' }}>
-                                    <Card.Header title={`${organization.name}`} subtitle={`${capitalizeFirstLetter(organization.mediaType)}`} />
-                                    <Card.Body>
-                                        <p>
-                                            County: {organization['cityCountyName']}, {organization.usState}
-                                        </p>
-                                        <p>
-                                            Type: {capitalizeFirstLetter(organization.mediaSubclass!)} {capitalizeFirstLetter(organization.mediaClass!)}
-                                        </p>
-                                    </Card.Body>
-                                </Card>
-                            );
-                        })}
-                </div>
+                {sorted.length > 0 && (
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style={{ width: '320px' }}>Location</th>
+                                    <th>Media Organization</th>
+                                    <th style={{ width: '240px' }}>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {sorted.map((organization: Media, index: number) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{organization['cityCountyName']}, {organization.usState}</td>
+                                            <td>{organization.name}</td>
+                                            <td>{capitalizeFirstLetter(organization.mediaSubclass!)} {capitalizeFirstLetter(organization.mediaClass!)}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </Section>
         </Page>
     );

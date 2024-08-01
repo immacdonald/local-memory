@@ -3,7 +3,7 @@
 .header {
     --v-header-height: 64px;
 
-    width: 100%;
+    @include responsive-width;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -3,9 +3,10 @@ import type { Objects, Topology } from 'topojson-specification';
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { Button, Callback, Recenter, ZoomIn, ZoomOut, useResponsiveContext } from 'phantom-library';
+import { Button, Callback, MultiCallback, Recenter, ZoomIn, ZoomOut, useResponsiveContext } from 'phantom-library';
 import usTopology from '@data/us_topology.json';
 import style from './USMap.module.scss';
+import countyData from '@data/fips.json';
 
 interface MapProps {
     data: {
@@ -17,6 +18,7 @@ interface MapProps {
         cityCountyLat: number;
         cityCountyLong: number;
     }[];
+    location: { latitude: number | null, longitude: number | null }
 }
 
 interface MapFunctions {
@@ -24,9 +26,10 @@ interface MapFunctions {
     zoomIn: Callback<void>;
     zoomOut: Callback<void>;
     center: Callback<void>;
+    addCircle: MultiCallback<number, number>
 }
 
-const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
+const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
     const ref = useRef<SVGSVGElement>(null);
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -52,6 +55,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
         const pathGenerator = d3.geoPath();
 
         const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
+
+        const flatCounties = Object.values(countyData).flat();
+        console.log(flatCounties);
 
         // Create color scale
         const colorScale = d3
@@ -84,24 +90,34 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             .attr('stroke', 'gray')
             .attr('data-fips', (d) => d.id!)
             .attr('data-county-name', (d) => {
-                const county = data.find((e) => e.fips == (d.id as string));
-                return county?.countyName || 'Unknown';
+                const county = flatCounties.find((e) => e.fips == d.id);
+                return county?.name || 'Unknown';
             })
             .attr('data-media-total', (d) => {
                 const county = data.find((e) => e.fips == (d.id as string));
                 return county?.total || 0;
             })
-            .on('mouseover', function(event, d) {
+            .on('mouseover', function (event, d) {
                 const county = data.find((e) => e.fips == (d.id as string));
+                const countyData = flatCounties.find((e) => e.fips == d.id);
                 tooltip.style('display', 'block')
-                    .html(`${county?.countyName || 'Unknown County'}: ${county?.total || 0}`);
+                    .html(`${countyData?.name || 'Unknown County'}: ${county?.total || 0}`);
+
+                // Darken the county color
+                const currentFill = d3.select(this).attr('fill');
+                const darkerColor = d3.color(currentFill)!.darker(0.75);
+                d3.select(this).attr('fill', darkerColor as any);
             })
-            .on('mousemove', function(event) {
+            .on('mousemove', function (event) {
                 tooltip.style('left', `${event.pageX + 10}px`)
                     .style('top', `${event.pageY + 10}px`);
             })
-            .on('mouseout', function() {
+            .on('mouseout', function (event, d) {
                 tooltip.style('display', 'none');
+
+                // Restore the original county color
+                const county = data.find((e) => e.fips == (d.id as string));
+                d3.select(this).attr('fill', colorScale(county?.total || 0));
             });
 
         // Draw states
@@ -131,7 +147,21 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             .attr('r', 2)
             .attr('fill', 'gold')
             .attr('stroke', 'gray')
-            .attr('stroke-width', 0.25);
+            .attr('stroke-width', 0.25)
+            .style('pointer-events', 'none');
+
+        // Function to add a circle at a given latitude and longitude
+        const addCircle = (latitude: number, longitude: number, radius = 8, color = '#ff0000') => {
+            const coords = projection([longitude, latitude]);
+            if (coords) {
+                g.append('circle')
+                    .attr('cx', coords[0])
+                    .attr('cy', coords[1])
+                    .attr('r', radius)
+                    .attr('fill', color)
+                    .style('pointer-events', 'none');;
+            }
+        };
 
         // Add zoom functionality
         const zoom = d3.zoom<SVGSVGElement, unknown>()
@@ -160,8 +190,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             setZoom,
             center,
             zoomIn,
-            zoomOut
-        };
+            zoomOut,
+            addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude)
+        }
 
         svg.call(zoom);
     }, [data, usTopology, mediaData]);
@@ -173,6 +204,12 @@ const USMap: React.FC<MapProps> = ({ data, mediaData }) => {
             // Handle responsive zoom and centering
         }
     }, [windowSize.width]);
+
+    useEffect(() => {
+        if(location.latitude && location.longitude) {
+            mapFunctions.current!.addCircle(location.latitude, location.longitude);
+        }
+    }, [location]);
 
     return (
         <div className={style.map}>
