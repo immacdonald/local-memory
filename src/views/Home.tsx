@@ -1,31 +1,44 @@
-import type { Media, Coordinates } from '@types';
+import type { Media, Coordinates, LocationData } from '@types';
 import { FC, useEffect, useState } from 'react';
-import { Button, capitalizeFirstLetter, Card, FormInput, Heading, Page, Row, Section, Text } from 'phantom-library';
+import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, Text, decimalPlaces } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { LocalMemory } from '@icons';
+import { Facebook, LocalMemory, Twitter, YouTube } from '@icons';
 import { USMap } from '@components/USMap';
 import mediaSummary from '@data/media_summary.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { haversineDistance } from '@utility';
+import { Link } from 'react-router-dom';
+import style from './Home.module.scss';
+
+interface MediaWithDistance extends Media {
+    distance?: number;
+}
+
+function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxDistance: number, limit = 500): MediaWithDistance[] {
+    cities.forEach((city: MediaWithDistance) => {
+        city.distance = haversineDistance(currentCoords, { latitude: city.cityCountyLat, longitude: city.cityCountyLong });
+    });
+
+    const filteredCities = cities.filter((city: MediaWithDistance) => city.distance! <= maxDistance);
+
+    filteredCities.sort((a: MediaWithDistance, b: MediaWithDistance) => a.distance! - b.distance!);
+
+    return filteredCities.slice(0, limit);
+}
+
+interface HomeProps {
+    geolocation: LocationData;
+}
 
 interface SearchInput {
     country: string;
     zipcode: string;
-    count: string;
+    radius: string;
 }
 
-function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, limit = 100): Media[] {
-    cities.sort((a: Media, b: Media) => {
-        const distA = haversineDistance(currentCoords, { lat: a.cityCountyLat, lon: a.cityCountyLong });
-        const distB = haversineDistance(currentCoords, { lat: b.cityCountyLat, lon: b.cityCountyLong });
-        return distA - distB;
-    });
 
-    return cities.slice(0, limit);
-}
-
-const Home: FC = () => {
+const Home: FC<HomeProps> = ({ geolocation }) => {
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
@@ -33,14 +46,15 @@ const Home: FC = () => {
 
     const {
         register,
+        setValue,
         formState: { errors },
         handleSubmit
     } = useForm<SearchInput>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
     const onSubmit: SubmitHandler<SearchInput> = (data) => {
-        const location = zipcodes[data.zipcode];
+        const location = data.zipcode == 'Current Location' ? geolocation.location! : zipcodes[data.zipcode];
         if (location) {
-            const sortedCities = sortCitiesByProximity(media, location, Number(data.count));
+            const sortedCities = sortCitiesByProximity(media, location, Number(data.radius));
 
             let totals: { fips: number; total: number }[] = [];
             sortedCities.forEach((organization: Media) => {
@@ -58,39 +72,18 @@ const Home: FC = () => {
         }
     };
 
-    const [location, setLocation] = useState<{ latitude: number | null, longitude: number | null }>({ latitude: null, longitude: null });
-    const [error, setError] = useState<string | null>(null);
-
-    const getLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setLocation({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    });
-                    setError(null);
-                },
-                (error) => {
-                    setError(error.message);
-                    setLocation({ latitude: null, longitude: null });
-                }
-            );
-        } else {
-            setError('Geolocation is not supported by this browser.');
-        }
-    };
-
     useEffect(() => {
-        getLocation();
-    }, [])
+        if(!geolocation.loading && geolocation.location) {
+            setValue('zipcode', 'Current Location');
+        }
+    }, [geolocation.loading, geolocation.location])
 
     return (
         <Page title="Local Memory Project">
             <Section>
                 <Heading align='center' title={<LocalMemory size="full" />} subtitle='US Local Media Per County' bold={true}/>
                 <Row>
-                    <USMap data={mediaSummary} mediaData={mediaData as any} location={location} />
+                    <USMap data={mediaSummary} mediaData={mediaData as any} location={geolocation.location} />
                 </Row>
                 <Text>
                     This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of
@@ -99,28 +92,40 @@ const Home: FC = () => {
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
-                        <FormInput name="count" type="number" placeholder="Media Count" defaultValue="100" register={register} validationSchema={{ required: true }} error={errors.count} />
+                        <FormInput name="radius" type="number" placeholder="Radius (miles)" defaultValue="100" register={register} validationSchema={{ required: true }} error={errors.radius}/>
                         <Button context="primary" label="Search" visual="filled" form="search" type="submit" />
                     </Row>
                 </form>
                 <br />
                 {sorted.length > 0 && (
                     <div>
-                        <table>
+                        <table className={style.table}>
                             <thead>
                                 <tr>
+                                    <th>Rank</th>
+                                    <th style={{ width: '240px' }}>Distance (mi)</th>
+                                    <th>Name</th>
                                     <th style={{ width: '320px' }}>Location</th>
-                                    <th>Media Organization</th>
+                                    <th>Socials</th>
                                     <th style={{ width: '240px' }}>Type</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {sorted.map((organization: Media, index: number) => {
+                                {sorted.map((organization: MediaWithDistance, index: number) => {
                                     return (
                                         <tr key={index}>
+                                            <td>{index + 1}.</td>
+                                            <td>{decimalPlaces(organization.distance!, 1)}</td>
+                                            <td><Button link={organization.website} label={organization.name} align='start' visual='text'/></td>
                                             <td>{organization['cityCountyName']}, {organization.usState}</td>
-                                            <td>{organization.name}</td>
-                                            <td>{capitalizeFirstLetter(organization.mediaSubclass!)} {capitalizeFirstLetter(organization.mediaClass!)}</td>
+                                            <td>
+                                                <Row gap="0px" align='start'>
+                                                {organization.twitter && <Button Icon={Twitter} link={organization.twitter} visual='text'/>}
+                                                {organization.facebook && <Button Icon={Facebook} link={organization.facebook} visual='text'/>}
+                                                {organization.video && <Button Icon={YouTube} link={organization.video} visual='text'/>}
+                                                </Row>
+                                            </td>
+                                            <td>{capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}</td>
                                         </tr>
                                     );
                                 })}

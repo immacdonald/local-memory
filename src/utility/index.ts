@@ -2,10 +2,10 @@ import { Coordinates } from '@types';
 
 const haversineDistance = (coords1: Coordinates, coords2: Coordinates): number => {
     const R = 6371; // Earth's radius in kilometers
-    const lat1 = coords1.lat;
-    const lon1 = coords1.lon;
-    const lat2 = coords2.lat;
-    const lon2 = coords2.lon;
+    const lat1 = coords1.latitude;
+    const lon1 = coords1.longitude;
+    const lat2 = coords2.latitude;
+    const lon2 = coords2.longitude;
 
     const dLat = toRadians(lat2 - lat1);
     const dLon = toRadians(lon2 - lon1);

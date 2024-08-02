@@ -50,8 +50,6 @@
     margin: 0;
 }
 
-.tools {
-    display: flex;
-    flex-direction: column;
-    gap: $sm;
+.locationPopover {
+    min-width: 320px !important;
 }

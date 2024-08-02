@@ -21,9 +21,14 @@ interface Media {
     mediaType: string;
 }
 
+interface LocationData {
+    loading: boolean;
+    location: Coordinates | null;
+}
+
 type Coordinates = {
-    lat: number;
-    lon: number;
+    latitude: number;
+    longitude: number;
 };
 
-export type { Coordinates, Media };
+export type { Coordinates, LocationData, Media };

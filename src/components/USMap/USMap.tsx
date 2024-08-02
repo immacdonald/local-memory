@@ -7,6 +7,9 @@ import { Button, Callback, MultiCallback, Recenter, ZoomIn, ZoomOut, useResponsi
 import usTopology from '@data/us_topology.json';
 import style from './USMap.module.scss';
 import countyData from '@data/fips.json';
+import { Coordinates } from '@types';
+
+import { LocationPinFillInline } from '@icons';
 
 interface MapProps {
     data: {
@@ -18,7 +21,7 @@ interface MapProps {
         cityCountyLat: number;
         cityCountyLong: number;
     }[];
-    location: { latitude: number | null, longitude: number | null }
+    location: Coordinates | null;
 }
 
 interface MapFunctions {
@@ -26,7 +29,8 @@ interface MapFunctions {
     zoomIn: Callback<void>;
     zoomOut: Callback<void>;
     center: Callback<void>;
-    addCircle: MultiCallback<number, number>
+    addCircle: MultiCallback<number, number>;
+    addSVG: MultiCallback<number, number, string>
 }
 
 const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
@@ -57,7 +61,6 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
         const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
 
         const flatCounties = Object.values(countyData).flat();
-        console.log(flatCounties);
 
         // Create color scale
         const colorScale = d3
@@ -87,7 +90,8 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
                 return colorScale(county?.total || 0);
                 //return 'white';
             })
-            .attr('stroke', 'gray')
+            .attr('stroke', colors[4])
+            .attr('stroke-width', 0.25)
             .attr('data-fips', (d) => d.id!)
             .attr('data-county-name', (d) => {
                 const county = flatCounties.find((e) => e.fips == d.id);
@@ -146,9 +150,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
             })
             .attr('r', 2)
             .attr('fill', 'gold')
-            .attr('stroke', 'gray')
-            .attr('stroke-width', 0.25)
-            .style('pointer-events', 'none');
+            .attr('stroke', 'black')
+            .attr('stroke-width', 0.25);
+        //.style('pointer-events', 'none');
 
         // Function to add a circle at a given latitude and longitude
         const addCircle = (latitude: number, longitude: number, radius = 8, color = '#ff0000') => {
@@ -160,6 +164,20 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
                     .attr('r', radius)
                     .attr('fill', color)
                     .style('pointer-events', 'none');;
+            }
+        };
+
+        // Function to add a custom SVG at given latitude and longitude
+        const addCustomSVG = (latitude: number, longitude: number, svgPath: string, width = 16, height = 16) => {
+            const coords = projection([longitude, latitude]);
+            if (coords) {
+                g.append('image')
+                    .attr('xlink:href', svgPath)
+                    .attr('x', coords[0] - width / 2)
+                    .attr('y', coords[1] - height / 2)
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('pointer-events', 'none');
             }
         };
 
@@ -191,7 +209,8 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
             center,
             zoomIn,
             zoomOut,
-            addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude)
+            addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude),
+            addSVG: (latitude: number, longitude: number, svgPath: string) => addCustomSVG(latitude, longitude, svgPath)
         }
 
         svg.call(zoom);
@@ -206,8 +225,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
     }, [windowSize.width]);
 
     useEffect(() => {
-        if(location.latitude && location.longitude) {
-            mapFunctions.current!.addCircle(location.latitude, location.longitude);
+        if (location) {
+            mapFunctions.current!.addSVG(location.latitude, location.longitude, LocationPinFillInline);
+            //mapFunctions.current!.addCircle(location.latitude, location.longitude);
         }
     }, [location]);
 
