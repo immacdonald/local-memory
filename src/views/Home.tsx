@@ -8,7 +8,6 @@ import mediaSummary from '@data/media_summary.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { haversineDistance } from '@utility';
-import { Link } from 'react-router-dom';
 import style from './Home.module.scss';
 
 interface MediaWithDistance extends Media {
@@ -34,15 +33,17 @@ interface HomeProps {
 interface SearchInput {
     country: string;
     zipcode: string;
-    radius: string;
+    radius: number;
 }
 
+const DEFAULT_SEARCH_RADIUS = 100;
 
 const Home: FC<HomeProps> = ({ geolocation }) => {
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
-    const [searchTotals, setSearchTotals] = useState<{ fips: number; total: number }[]>([]);
+
+    const [search, setSearch] = useState<{location: Coordinates, radius: number} | null>(null);
 
     const {
         register,
@@ -52,29 +53,28 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
     } = useForm<SearchInput>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
     const onSubmit: SubmitHandler<SearchInput> = (data) => {
+
         const location = data.zipcode == 'Current Location' ? geolocation.location! : zipcodes[data.zipcode];
         if (location) {
-            const sortedCities = sortCitiesByProximity(media, location, Number(data.radius));
-
-            let totals: { fips: number; total: number }[] = [];
-            sortedCities.forEach((organization: Media) => {
-                const exists = totals.find((value) => value.fips == organization.fips);
-                if (exists) {
-                    totals = [...totals, { fips: exists.fips, total: exists.total + 1 }];
-                } else {
-                    totals.push({ fips: organization.fips, total: 1 });
-                }
-            });
-            setSearchTotals(totals);
-            setSorted(sortedCities);
+            onSearch(location, data.radius)
         } else {
             console.warn('Zipcode not found!');
+            setSorted([]);
+            setSearch(null);
         }
     };
+
+    const onSearch = (location: Coordinates, radius: number) => {
+        setSearch({location, radius});
+
+        const sortedCities = sortCitiesByProximity(media, location, radius);
+        setSorted(sortedCities);
+    }
 
     useEffect(() => {
         if(!geolocation.loading && geolocation.location) {
             setValue('zipcode', 'Current Location');
+            onSearch(geolocation.location, DEFAULT_SEARCH_RADIUS);
         }
     }, [geolocation.loading, geolocation.location])
 
@@ -83,7 +83,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
             <Section>
                 <Heading align='center' title={<LocalMemory size="full" />} subtitle='US Local Media Per County' bold={true}/>
                 <Row>
-                    <USMap data={mediaSummary} mediaData={mediaData as any} location={geolocation.location} />
+                    <USMap data={mediaSummary} mediaData={mediaData as any} search={search} />
                 </Row>
                 <Text>
                     This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of
@@ -92,7 +92,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
-                        <FormInput name="radius" type="number" placeholder="Radius (miles)" defaultValue="100" register={register} validationSchema={{ required: true }} error={errors.radius}/>
+                        <FormInput name="radius" type="number" placeholder="Radius (miles)" defaultValue={DEFAULT_SEARCH_RADIUS} register={register} validationSchema={{ required: true }} error={errors.radius}/>
                         <Button context="primary" label="Search" visual="filled" form="search" type="submit" />
                     </Row>
                 </form>

@@ -21,7 +21,10 @@ interface MapProps {
         cityCountyLat: number;
         cityCountyLong: number;
     }[];
-    location: Coordinates | null;
+    search: {
+        location: Coordinates;
+        radius: number;
+    } | null;
 }
 
 interface MapFunctions {
@@ -30,10 +33,12 @@ interface MapFunctions {
     zoomOut: Callback<void>;
     center: Callback<void>;
     addCircle: MultiCallback<number, number>;
-    addSVG: MultiCallback<number, number, string>
+    addGeoCircle: MultiCallback<number, number, number>;
+    addSVG: MultiCallback<number, number, string>;
+    removeIndicators: Callback<void>;
 }
 
-const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
+const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
     const ref = useRef<SVGSVGElement>(null);
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -163,7 +168,7 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
                     .attr('cy', coords[1])
                     .attr('r', radius)
                     .attr('fill', color)
-                    .style('pointer-events', 'none');;
+                    .style('pointer-events', 'none');
             }
         };
 
@@ -177,9 +182,27 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
                     .attr('y', coords[1] - height / 2)
                     .attr('width', width)
                     .attr('height', height)
+                    .attr('class', 'indicator')
                     .style('pointer-events', 'none');
             }
         };
+
+        const addGeoCircle = (latitude: number, longitude: number, distance: number, color: string) => {
+            const circumference = 3958 * Math.PI * 2;
+            const angle = distance / circumference * 360;
+            const circle = d3.geoCircle().center([longitude, latitude]).radius(angle);
+            const path = d3.geoPath().projection(projection)
+
+            g.append('path')
+                .attr('fill', color)
+                .attr('d', path(circle()))
+                .attr('class', 'indicator')
+                .style('pointer-events', 'none');
+        }
+
+        const removeIndicators = () => {
+            svg.selectAll(".indicator").remove()
+        }
 
         // Add zoom functionality
         const zoom = d3.zoom<SVGSVGElement, unknown>()
@@ -210,7 +233,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
             zoomIn,
             zoomOut,
             addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude),
-            addSVG: (latitude: number, longitude: number, svgPath: string) => addCustomSVG(latitude, longitude, svgPath)
+            addGeoCircle: (latitude: number, longitude: number, distance: number) => addGeoCircle(latitude, longitude, distance, '#ff000040'),
+            addSVG: (latitude: number, longitude: number, svgPath: string) => addCustomSVG(latitude, longitude, svgPath),
+            removeIndicators
         }
 
         svg.call(zoom);
@@ -225,11 +250,12 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, location }) => {
     }, [windowSize.width]);
 
     useEffect(() => {
-        if (location) {
-            mapFunctions.current!.addSVG(location.latitude, location.longitude, LocationPinFillInline);
-            //mapFunctions.current!.addCircle(location.latitude, location.longitude);
+        mapFunctions.current!.removeIndicators();
+        if (search) {
+            mapFunctions.current!.addSVG(search.location.latitude, search.location.longitude, LocationPinFillInline);
+            mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius)
         }
-    }, [location]);
+    }, [search]);
 
     return (
         <div className={style.map}>
