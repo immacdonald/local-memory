@@ -53,7 +53,8 @@ function devConfig(): UserConfig {
 
 function prodConfig(): UserConfig {
     return {
-        ...baseConfig
+        ...baseConfig,
+        base: '/tools/local-memory'
     };
 }
 /* eslint-enable @typescript-eslint/explicit-function-return-type */
