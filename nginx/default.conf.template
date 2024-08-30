@@ -2,7 +2,7 @@ server {
     listen 80;
     server_name _;
 
-    location /tools/local-memory/ {
+    location /tools/local-memory {
         root   /usr/share/nginx/html;
         index  index.html;
         try_files $uri $uri/ /tools/local-memory/index.html;
