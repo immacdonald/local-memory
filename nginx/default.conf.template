@@ -1,13 +1,10 @@
 server {
-    include /etc/nginx/mime.types;
     listen 80;
     server_name _;
-    server_tokens off;
-    client_max_body_size 20M;
 
-    location / {
+    location /tools/local-memory/ {
         root   /usr/share/nginx/html;
-        index  index.html index.htm;
-        try_files $uri $uri/ /index.html;
+        index  index.html;
+        try_files $uri $uri/ /tools/local-memory/index.html;
     }
 }
