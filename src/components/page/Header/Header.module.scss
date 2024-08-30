@@ -4,6 +4,7 @@
     --v-header-height: 64px;
 
     @include responsive-width;
+
     display: flex;
     align-items: center;
     justify-content: center;

@@ -6,7 +6,7 @@ const NotFound: FC = () => {
         <Page title="Local Memory Project">
             <Section variant="floating">
                 <Column>
-                    <Heading title='Not Found' align='center'/>
+                    <Heading title="Not Found" align="center" />
                 </Column>
                 <Text align="center" marginBottom>
                     Unfortunately, the page you entered cannot be found.

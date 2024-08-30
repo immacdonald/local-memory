@@ -1,8 +1,9 @@
 .footer {
-    --v-footer-height: 128px;
+    --v-footer-height: 64px;
     --v-color: var(--color-text);
 
     @include responsive-width;
+
     min-height: var(--v-footer-height);
     display: flex;
     flex-direction: row;

@@ -1,15 +1,14 @@
 import type { FeatureCollection, GeoJsonProperties } from 'geojson';
 import type { Objects, Topology } from 'topojson-specification';
+import { Coordinates } from '@types';
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { Button, Callback, MultiCallback, Recenter, ZoomIn, ZoomOut, useResponsiveContext } from 'phantom-library';
-import usTopology from '@data/us_topology.json';
-import style from './USMap.module.scss';
-import countyData from '@data/fips.json';
-import { Coordinates } from '@types';
-
+import { Button, Callback, MultiCallback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import { LocationPinFillInline } from '@icons';
+import usTopology from '@data/us_topology.json';
+import countyData from '@data/fips.json';
+import style from './USMap.module.scss';
 
 interface MapProps {
     data: {
@@ -18,13 +17,16 @@ interface MapProps {
         total: number;
     }[];
     mediaData: {
+        name: string;
         cityCountyLat: number;
         cityCountyLong: number;
+        fips: number;
     }[];
     search: {
         location: Coordinates;
         radius: number;
     } | null;
+    updateSearchRadius: Callback<number>;
 }
 
 interface MapFunctions {
@@ -38,7 +40,7 @@ interface MapFunctions {
     removeIndicators: Callback<void>;
 }
 
-const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
+const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius = () => {} }) => {
     const ref = useRef<SVGSVGElement>(null);
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -54,8 +56,11 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
         // Create SVG element
         const svg = d3.select(ref.current).append('svg').attr('width', width).attr('height', height);
 
-        // Create a group for zoomable content
-        const g = svg.append('g');
+        // Create groups for each layer
+        const group = svg.append('g');
+        const baseLayer = group.append('g').attr('class', 'base-layer');
+        const interactableLayer = group.append('g').attr('class', 'interactable-layer');
+        const mediaLayer = group.append('g').attr('class', 'media-layer');
 
         // Create a projection
         const projection = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
@@ -71,11 +76,12 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
         const colorScale = d3
             .scaleQuantize()
             .domain([0, 5])
-            //@ts-expect-error as range wants numbers rather than strings
-            .range(colors);
+            .range(colors as any);
 
         // Create tooltip
-        const tooltip = d3.select('body').append('div')
+        const tooltip = d3
+            .select('body')
+            .append('div')
             .attr('class', style.tooltip)
             .style('position', 'absolute')
             .style('background', 'white')
@@ -83,8 +89,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
             .style('padding', '5px')
             .style('display', 'none');
 
-        // Draw counties
-        g.selectAll('.county')
+        // Draw counties in the base layer
+        baseLayer
+            .selectAll('.county')
             .data((topojson.feature(us, us.objects.counties) as unknown as FeatureCollection).features)
             .enter()
             .append('path')
@@ -93,7 +100,6 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
             .attr('fill', (d) => {
                 const county = data.find((e) => e.fips == (d.id as string));
                 return colorScale(county?.total || 0);
-                //return 'white';
             })
             .attr('stroke', colors[4])
             .attr('stroke-width', 0.25)
@@ -106,11 +112,10 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
                 const county = data.find((e) => e.fips == (d.id as string));
                 return county?.total || 0;
             })
-            .on('mouseover', function (event, d) {
+            .on('mouseover', function (_, d) {
                 const county = data.find((e) => e.fips == (d.id as string));
                 const countyData = flatCounties.find((e) => e.fips == d.id);
-                tooltip.style('display', 'block')
-                    .html(`${countyData?.name || 'Unknown County'}: ${county?.total || 0}`);
+                tooltip.style('display', 'block').html(`${`${countyData?.name || 'Unknown'} County`}: ${county?.total || 0}`);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
@@ -118,10 +123,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
                 d3.select(this).attr('fill', darkerColor as any);
             })
             .on('mousemove', function (event) {
-                tooltip.style('left', `${event.pageX + 10}px`)
-                    .style('top', `${event.pageY + 10}px`);
+                tooltip.style('left', `${event.pageX + 10}px`).style('top', `${event.pageY + 10}px`);
             })
-            .on('mouseout', function (event, d) {
+            .on('mouseout', function (_, d) {
                 tooltip.style('display', 'none');
 
                 // Restore the original county color
@@ -129,8 +133,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
                 d3.select(this).attr('fill', colorScale(county?.total || 0));
             });
 
-        // Draw states
-        g.selectAll('.state')
+        // Draw states in the base layer
+        baseLayer
+            .selectAll('.state')
             .data((topojson.feature(us, us.objects.states) as unknown as FeatureCollection).features)
             .enter()
             .append('path')
@@ -139,8 +144,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
             .attr('fill', 'none')
             .attr('stroke', 'black');
 
-        // Add circles for media objects
-        g.selectAll('.media')
+        // Add circles for media objects in the media layer
+        mediaLayer
+            .selectAll('.media')
             .data(mediaData)
             .enter()
             .append('circle')
@@ -156,27 +162,41 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
             .attr('r', 2)
             .attr('fill', 'gold')
             .attr('stroke', 'black')
-            .attr('stroke-width', 0.25);
-        //.style('pointer-events', 'none');
+            .attr('stroke-width', 0.25)
+            .on('mouseover', function (_, d) {
+                const county = data.find((e) => e.fips == (d.fips as unknown as string));
+                const countyData = flatCounties.find((e) => e.fips == d.fips);
+                tooltip.style('display', 'block').html(`<b>${d.name}</b><br>${`${countyData?.name || 'Unknown'} County`}: ${county?.total || 0}`);
 
-        // Function to add a circle at a given latitude and longitude
+                // Darken the county color
+                const currentFill = d3.select(this).attr('fill');
+                const darkerColor = d3.color(currentFill)!.darker(0.75);
+                d3.select(this).attr('fill', darkerColor as any);
+            })
+            .on('mousemove', function (event) {
+                tooltip.style('left', `${event.pageX + 10}px`).style('top', `${event.pageY + 10}px`);
+            })
+            .on('mouseout', function () {
+                tooltip.style('display', 'none');
+
+                // Restore the original media color
+                d3.select(this).attr('fill', 'gold');
+            });
+
+        // Function to add a circle at a given latitude and longitude in the interactable layer
         const addCircle = (latitude: number, longitude: number, radius = 8, color = '#ff0000') => {
             const coords = projection([longitude, latitude]);
             if (coords) {
-                g.append('circle')
-                    .attr('cx', coords[0])
-                    .attr('cy', coords[1])
-                    .attr('r', radius)
-                    .attr('fill', color)
-                    .style('pointer-events', 'none');
+                interactableLayer.append('circle').attr('cx', coords[0]).attr('cy', coords[1]).attr('r', radius).attr('fill', color).style('pointer-events', 'none');
             }
         };
 
-        // Function to add a custom SVG at given latitude and longitude
+        // Function to add a custom SVG at given latitude and longitude in the interactable layer
         const addCustomSVG = (latitude: number, longitude: number, svgPath: string, width = 16, height = 16) => {
             const coords = projection([longitude, latitude]);
             if (coords) {
-                g.append('image')
+                interactableLayer
+                    .append('image')
                     .attr('xlink:href', svgPath)
                     .attr('x', coords[0] - width / 2)
                     .attr('y', coords[1] - height / 2)
@@ -189,26 +209,81 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
 
         const addGeoCircle = (latitude: number, longitude: number, distance: number, color: string) => {
             const circumference = 3958 * Math.PI * 2;
-            const angle = distance / circumference * 360;
-            const circle = d3.geoCircle().center([longitude, latitude]).radius(angle);
-            const path = d3.geoPath().projection(projection)
+            const initialAngle = (distance / circumference) * 360;
+            let currentAngle = initialAngle;
 
-            g.append('path')
+            const circle = d3.geoCircle().center([longitude, latitude]).radius(currentAngle);
+            const path = d3.geoPath().projection(projection);
+
+            const dragBehavior = d3.drag().on('start', dragStarted).on('drag', dragged).on('end', dragEnded);
+
+            let initialPosition = { x: 0, y: 0 };
+            let currentPosition = { x: 0, y: 0 };
+
+            let currentRadius = distance;
+
+            function dragStarted(event: any) {
+                initialPosition = { x: event.x, y: event.y };
+                currentPosition = { x: event.x, y: event.y };
+                /* @tslint:disable-next-line */
+                currentRadius = Number(d3.select(event.target).attr('data-radius'));
+            }
+
+            function dragged(event: any) {
+                currentPosition = { x: event.x, y: event.y };
+
+                const dx = currentPosition.x - initialPosition.x;
+                const dy = currentPosition.y - initialPosition.y;
+
+                // Calculate the distance dragged
+                const distanceDragged = Math.sqrt(dx * dx + dy * dy);
+
+                // Determine direction of drag
+                const direction = dx + dy > 0 ? 1 : -1;
+
+                // Update the circle's radius based on the drag distance and direction
+                currentRadius = currentRadius + direction * (distanceDragged / 10); // Adjust divisor to change sensitivity
+                currentAngle = (currentRadius / circumference) * 360;
+
+                // Ensure the radius does not go negative
+                if (currentAngle < 0) currentAngle = 0;
+
+                updateCircle();
+            }
+
+            function dragEnded() {
+                //console.log('Drag ended');
+                updateSearchRadius(currentRadius);
+            }
+
+            function updateCircle() {
+                const updatedCircle = d3.geoCircle().center([longitude, latitude]).radius(currentAngle);
+                circlePath.attr('d', path(updatedCircle()));
+                circlePath.attr('data-radius', currentRadius);
+            }
+
+            const circlePath = interactableLayer
+                .append('path')
                 .attr('fill', color)
                 .attr('d', path(circle()))
                 .attr('class', 'indicator')
-                .style('pointer-events', 'none');
-        }
+                .attr('data-radius', currentRadius)
+                .call(dragBehavior as any)
+                .style('pointer-events', 'all')
+                .style('cursor', 'ew-resize')
+                .lower();
+        };
 
         const removeIndicators = () => {
-            svg.selectAll(".indicator").remove()
-        }
+            svg.selectAll('.indicator').remove();
+        };
 
         // Add zoom functionality
-        const zoom = d3.zoom<SVGSVGElement, unknown>()
+        const zoom = d3
+            .zoom<SVGSVGElement, unknown>()
             .scaleExtent([1, 8])
             .on('zoom', (event) => {
-                g.attr('transform', event.transform);
+                group.attr('transform', event.transform);
             });
 
         const setZoom = (level: number) => {
@@ -236,24 +311,16 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
             addGeoCircle: (latitude: number, longitude: number, distance: number) => addGeoCircle(latitude, longitude, distance, '#ff000040'),
             addSVG: (latitude: number, longitude: number, svgPath: string) => addCustomSVG(latitude, longitude, svgPath),
             removeIndicators
-        }
+        };
 
         svg.call(zoom);
     }, [data, usTopology, mediaData]);
-
-    const { windowSize } = useResponsiveContext();
-
-    useEffect(() => {
-        if (windowSize.width < 980 && ref.current) {
-            // Handle responsive zoom and centering
-        }
-    }, [windowSize.width]);
 
     useEffect(() => {
         mapFunctions.current!.removeIndicators();
         if (search) {
             mapFunctions.current!.addSVG(search.location.latitude, search.location.longitude, LocationPinFillInline);
-            mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius)
+            mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius);
         }
     }, [search]);
 
@@ -261,12 +328,12 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search }) => {
         <div className={style.map}>
             <svg width={width} height={height} ref={ref} />
             <div className={style.tools}>
-                <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomIn} rounded />
-                <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOut} rounded />
-                <Button onClick={() => mapFunctions.current!.center()} Icon={Recenter} rounded />
+                <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
+                <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
+                <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
             </div>
         </div>
     );
-}
+};
 
 export { USMap };

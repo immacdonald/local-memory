@@ -1,15 +1,15 @@
+import { LocationData } from '@types';
 import { StyledApp } from 'phantom-library';
 import { Route, Routes } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { Footer, Header } from '@components/page';
 import { About, Home, NotFound } from '@views';
-import { LocationData } from '@types';
 
 const App: FC = () => {
-    const [locationData, setLocationData] = useState<LocationData>({loading: true, location: null});
-    const [_, setError] = useState<string | null>(null);
+    const [locationData, setLocationData] = useState<LocationData>({ loading: true, location: null });
+    const [locationError, setError] = useState<string | null>(null);
 
-    const getLocation = () => {
+    const getLocation = (): void => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -41,13 +41,19 @@ const App: FC = () => {
 
     useEffect(() => {
         getLocation();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (locationError) {
+            console.warn(locationError);
+        }
+    }, [locationError]);
 
     return (
         <StyledApp anchors modals banners>
-            <Header geolocation={locationData}/>
+            <Header geolocation={locationData} />
             <Routes>
-                <Route path="/" element={<Home geolocation={locationData}/>} />
+                <Route path="/" element={<Home geolocation={locationData} />} />
                 <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

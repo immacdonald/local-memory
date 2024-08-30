@@ -1,8 +1,8 @@
 import type { Media, Coordinates, LocationData } from '@types';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, Text, decimalPlaces } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Facebook, LocalMemory, Twitter, YouTube } from '@icons';
+import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
 import { USMap } from '@components/USMap';
 import mediaSummary from '@data/media_summary.json';
 import mediaData from '@data/media.json';
@@ -26,6 +26,21 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxD
     return filteredCities.slice(0, limit);
 }
 
+function findClosestZipcode(zipcodes: Record<string, Coordinates>, target: Coordinates): string {
+    let closestZipcode = '';
+    let minDistance = Infinity;
+
+    for (const [zipcode, coords] of Object.entries(zipcodes)) {
+        const distance = haversineDistance(target, coords);
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestZipcode = zipcode;
+        }
+    }
+
+    return closestZipcode;
+}
+
 interface HomeProps {
     geolocation: LocationData;
 }
@@ -43,7 +58,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
 
-    const [search, setSearch] = useState<{location: Coordinates, radius: number} | null>(null);
+    const search = useRef<{ location: Coordinates; radius: number } | null>(null);
 
     const {
         register,
@@ -53,46 +68,60 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
     } = useForm<SearchInput>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
     const onSubmit: SubmitHandler<SearchInput> = (data) => {
-
-        const location = data.zipcode == 'Current Location' ? geolocation.location! : zipcodes[data.zipcode];
+        const location = data.zipcode.includes('Current Location') ? geolocation.location! : zipcodes[data.zipcode];
         if (location) {
-            onSearch(location, data.radius)
+            onSearch(location, data.radius);
         } else {
             console.warn('Zipcode not found!');
             setSorted([]);
-            setSearch(null);
+            search.current = null;
         }
     };
 
-    const onSearch = (location: Coordinates, radius: number) => {
-        setSearch({location, radius});
+    const onSearch = (location: Coordinates, radius: number): void => {
+        console.log('Set search to', location, radius);
+        search.current = { location, radius };
 
         const sortedCities = sortCitiesByProximity(media, location, radius);
         setSorted(sortedCities);
-    }
+    };
 
     useEffect(() => {
-        if(!geolocation.loading && geolocation.location) {
-            setValue('zipcode', 'Current Location');
+        if (!geolocation.loading && geolocation.location) {
+            const zipcode = findClosestZipcode(zipcodes, geolocation.location);
+            setValue('zipcode', `Current Location (${zipcode})`);
             onSearch(geolocation.location, DEFAULT_SEARCH_RADIUS);
         }
-    }, [geolocation.loading, geolocation.location])
+    }, [geolocation.loading, geolocation.location]);
+
+    const updateSearchRadius = (radius: number): void => {
+        setValue('radius', decimalPlaces(radius, 0));
+        onSearch(search.current!.location, radius);
+    };
 
     return (
         <Page title="Local Memory Project">
             <Section>
-                <Heading align='center' title={<LocalMemory size="full" />} subtitle='US Local Media Per County' bold={true}/>
+                <Heading align="center" title={<LocalMemoryFullIcon size="full" />} subtitle="US Local Media Per County" />
                 <Row>
-                    <USMap data={mediaSummary} mediaData={mediaData as any} search={search} />
+                    <USMap data={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
                 </Row>
                 <Text>
-                    This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of
-                    newspapers for a city for Non-US media.
+                    This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of newspapers
+                    for a city for Non-US media.
                 </Text>
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
-                        <FormInput name="radius" type="number" placeholder="Radius (miles)" defaultValue={DEFAULT_SEARCH_RADIUS} register={register} validationSchema={{ required: true }} error={errors.radius}/>
+                        <FormInput
+                            name="radius"
+                            type="number"
+                            placeholder="Radius (miles)"
+                            defaultValue={DEFAULT_SEARCH_RADIUS}
+                            register={register}
+                            validationSchema={{ required: true }}
+                            error={errors.radius}
+                        />
                         <Button context="primary" label="Search" visual="filled" form="search" type="submit" />
                     </Row>
                 </form>
@@ -116,16 +145,22 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                         <tr key={index}>
                                             <td>{index + 1}.</td>
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
-                                            <td><Button link={organization.website} label={organization.name} align='start' visual='text'/></td>
-                                            <td>{organization['cityCountyName']}, {organization.usState}</td>
                                             <td>
-                                                <Row gap="0px" align='start'>
-                                                {organization.twitter && <Button Icon={Twitter} link={organization.twitter} visual='text'/>}
-                                                {organization.facebook && <Button Icon={Facebook} link={organization.facebook} visual='text'/>}
-                                                {organization.video && <Button Icon={YouTube} link={organization.video} visual='text'/>}
+                                                <Button link={organization.website} label={organization.name} align="start" visual="text" />
+                                            </td>
+                                            <td>
+                                                {organization['cityCountyName']}, {organization.usState}
+                                            </td>
+                                            <td>
+                                                <Row gap="0px" align="start">
+                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} visual="text" />}
+                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} visual="text" />}
+                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} visual="text" />}
                                                 </Row>
                                             </td>
-                                            <td>{capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}</td>
+                                            <td>
+                                                {capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}
+                                            </td>
                                         </tr>
                                     );
                                 })}

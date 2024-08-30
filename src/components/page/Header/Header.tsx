@@ -1,9 +1,9 @@
+import { LocationData } from '@types';
 import { FC } from 'react';
-import { Button, MoonFilled, Popover, SunFilled, useResponsiveContext, Text } from 'phantom-library';
+import { Button, MoonFilledIcon, Popover, SunFilledIcon, useResponsiveContext, Text } from 'phantom-library';
 import { Link } from 'react-router-dom';
-import { LocalMemoryIcon, LocationPin } from '@icons';
+import { LocalMemoryIcon, LocationPinIcon } from '@icons';
 import style from './Header.module.scss';
-import { Coordinates, LocationData } from '@types';
 
 interface HeaderProps {
     geolocation: LocationData;
@@ -16,12 +16,14 @@ const Header: FC<HeaderProps> = ({ geolocation }) => {
         <Text>Loading location data...</Text>
     ) : geolocation.location ? (
         <>
-            <Text><small>Current Location</small></Text>
+            <Text>
+                <small>Current Location</small>
+            </Text>
             <Text>{`(${geolocation.location.latitude}, ${geolocation.location.longitude})`}</Text>
         </>
     ) : (
         <Text>Unable to get location data. Please check your privacy settings.</Text>
-    )
+    );
 
     return (
         <header className={style.header}>
@@ -35,10 +37,10 @@ const Header: FC<HeaderProps> = ({ geolocation }) => {
                     <nav className={style.links}>
                         <Button link="/" label="Home" visual="text" />
                         <Button link="/about" label="About" visual="text" />
-                        <Popover content={locationPopover} customStyle={style.locationPopover} direction='bottom'>
-                            <Button rounded Icon={LocationPin} visual="text" />
+                        <Popover content={locationPopover} customStyle={style.locationPopover} direction="bottom">
+                            <Button rounded Icon={LocationPinIcon} visual="text" />
                         </Popover>
-                        <Button rounded visual="text" onClick={() => toggleTheme()} Icon={theme == 'light' ? SunFilled : MoonFilled} />
+                        <Button rounded visual="text" onClick={() => toggleTheme()} Icon={theme == 'light' ? SunFilledIcon : MoonFilledIcon} />
                     </nav>
                 </div>
             </div>
