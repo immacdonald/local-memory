@@ -7,11 +7,10 @@ import * as topojson from 'topojson-client';
 import { Button, Callback, MultiCallback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import { LocationPinFillInline } from '@icons';
 import usTopology from '@data/us_topology.json';
-import countyData from '@data/fips.json';
 import style from './USMap.module.scss';
 
 interface MapProps {
-    data: {
+    heatmap: {
         fips: string;
         countyName: string;
         total: number;
@@ -20,7 +19,7 @@ interface MapProps {
         name: string;
         cityCountyLat: number;
         cityCountyLong: number;
-        fips: number;
+        fips: string;
     }[];
     search: {
         location: Coordinates;
@@ -40,7 +39,7 @@ interface MapFunctions {
     removeIndicators: Callback<void>;
 }
 
-const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius = () => {} }) => {
+const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRadius = () => {} }) => {
     const ref = useRef<SVGSVGElement>(null);
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -70,7 +69,7 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius
 
         const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
 
-        const flatCounties = Object.values(countyData).flat();
+        const flatCounties = heatmap;
 
         // Create color scale
         const colorScale = d3
@@ -98,7 +97,7 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius
             .attr('class', 'county')
             .attr('d', pathGenerator)
             .attr('fill', (d) => {
-                const county = data.find((e) => e.fips == (d.id as string));
+                const county = heatmap.find((e) => e.fips == (d.id as string));
                 return colorScale(county?.total || 0);
             })
             .attr('stroke', colors[4])
@@ -106,16 +105,16 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius
             .attr('data-fips', (d) => d.id!)
             .attr('data-county-name', (d) => {
                 const county = flatCounties.find((e) => e.fips == d.id);
-                return county?.name || 'Unknown';
+                return county?.countyName || 'Unknown';
             })
             .attr('data-media-total', (d) => {
-                const county = data.find((e) => e.fips == (d.id as string));
+                const county = heatmap.find((e) => e.fips == (d.id as string));
                 return county?.total || 0;
             })
             .on('mouseover', function (_, d) {
-                const county = data.find((e) => e.fips == (d.id as string));
+                const county = heatmap.find((e) => e.fips == (d.id as string));
                 const countyData = flatCounties.find((e) => e.fips == d.id);
-                tooltip.style('display', 'block').html(`${`${countyData?.name || 'Unknown'} County`}: ${county?.total || 0}`);
+                tooltip.style('display', 'block').html(`${`${countyData?.countyName || 'Unknown County'}`}: ${county?.total || 0}`);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
@@ -129,7 +128,7 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius
                 tooltip.style('display', 'none');
 
                 // Restore the original county color
-                const county = data.find((e) => e.fips == (d.id as string));
+                const county = heatmap.find((e) => e.fips == (d.id as string));
                 d3.select(this).attr('fill', colorScale(county?.total || 0));
             });
 
@@ -164,9 +163,9 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius
             .attr('stroke', 'black')
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
-                const county = data.find((e) => e.fips == (d.fips as unknown as string));
+                const county = heatmap.find((e) => e.fips == (d.fips as unknown as string));
                 const countyData = flatCounties.find((e) => e.fips == d.fips);
-                tooltip.style('display', 'block').html(`<b>${d.name}</b><br>${`${countyData?.name || 'Unknown'} County`}: ${county?.total || 0}`);
+                tooltip.style('display', 'block').html(`<b>${d.name}</b><br>${`${countyData?.countyName || 'Unknown County'}`}: ${county?.total || 0}`);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
@@ -314,7 +313,7 @@ const USMap: React.FC<MapProps> = ({ data, mediaData, search, updateSearchRadius
         };
 
         svg.call(zoom);
-    }, [data, usTopology, mediaData]);
+    }, [heatmap, usTopology, mediaData]);
 
     useEffect(() => {
         mapFunctions.current!.removeIndicators();

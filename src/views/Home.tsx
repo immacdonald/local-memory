@@ -4,11 +4,12 @@ import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
 import { USMap } from '@components/USMap';
-import mediaSummary from '@data/media_summary.json';
+import mediaSummary from '@data/media_heatmap.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { haversineDistance } from '@utility';
 import style from './Home.module.scss';
+import { Link } from 'react-router-dom';
 
 interface MediaWithDistance extends Media {
     distance?: number;
@@ -104,7 +105,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
             <Section>
                 <Heading align="center" title={<LocalMemoryFullIcon size="full" />} subtitle="US Local Media Per County" />
                 <Row>
-                    <USMap data={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
+                    <USMap heatmap={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
                 </Row>
                 <Text>
                     This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of newspapers
@@ -132,7 +133,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                             <thead>
                                 <tr>
                                     <th>Rank</th>
-                                    <th style={{ width: '240px' }}>Distance (mi)</th>
+                                    <th style={{ width: '140px' }}>Distance (mi)</th>
                                     <th>Name</th>
                                     <th style={{ width: '320px' }}>Location</th>
                                     <th>Socials</th>
@@ -146,7 +147,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                             <td>{index + 1}.</td>
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
                                             <td>
-                                                <Button link={organization.website} label={organization.name} align="start" visual="text" />
+                                                <Link to={organization.website} target="_blank" rel="noreferrer">{organization.name}</Link>
                                             </td>
                                             <td>
                                                 {organization['cityCountyName']}, {organization.usState}
