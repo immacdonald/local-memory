@@ -4,7 +4,7 @@ import { FC } from 'react';
 const About: FC = () => {
     return (
         <Page title="About | Local Memory Project">
-            <Section variant="inset">
+            <Section variant="inset" hasBackground>
                 <Heading align="center" title="About" />
                 <Heading minor title="Methodology" />
                 <Text>

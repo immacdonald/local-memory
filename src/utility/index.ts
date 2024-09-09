@@ -1,4 +1,7 @@
 import { Coordinates } from '@types';
+import { IconProps } from 'phantom-library';
+import { ComponentType } from 'react';
+import { BroadcastIcon, BroadcastIconInline, NewsIcon, NewsIconInline, RadioIcon, RadioIconInline, TVIcon, TVIconInline } from '@icons';
 
 const haversineDistance = (coords1: Coordinates, coords2: Coordinates): number => {
     const R = 6371; // Earth's radius in kilometers
@@ -19,4 +22,27 @@ const toRadians = (degrees: number): number => {
     return (degrees * Math.PI) / 180;
 };
 
-export { haversineDistance, toRadians };
+const svgForMediaClass: Record<string, { Icon: ComponentType<IconProps>; inline: string }> = {
+    newspaper: {
+        inline: NewsIconInline,
+        Icon: NewsIcon
+    },
+    broadcast: {
+        inline: BroadcastIconInline,
+        Icon: BroadcastIcon
+    },
+    radio: {
+        inline: RadioIconInline,
+        Icon: RadioIcon
+    },
+    tv: {
+        inline: TVIconInline,
+        Icon: TVIcon
+    }
+};
+
+const getIconForMediaClass = (mediaClass: string, inline: boolean = false) => {
+    return svgForMediaClass[mediaClass][inline ? 'inline' : 'Icon'];
+};
+
+export { haversineDistance, toRadians, getIconForMediaClass };

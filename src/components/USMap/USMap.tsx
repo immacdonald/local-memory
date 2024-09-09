@@ -7,6 +7,7 @@ import * as topojson from 'topojson-client';
 import { Button, Callback, MultiCallback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import { LocationPinFillInline } from '@icons';
 import usTopology from '@data/us_topology.json';
+import { getIconForMediaClass } from '@utility';
 import style from './USMap.module.scss';
 
 interface MapProps {
@@ -14,12 +15,18 @@ interface MapProps {
         fips: string;
         countyName: string;
         total: number;
+        newspaper: number;
+        broadcast: number;
+        tv: number;
+        radio: number;
     }[];
     mediaData: {
         name: string;
         cityCountyLat: number;
         cityCountyLong: number;
         fips: string;
+        website: string;
+        mediaClass: string;
     }[];
     search: {
         location: Coordinates;
@@ -48,6 +55,11 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
 
     const mapFunctions = useRef<MapFunctions | null>(null);
 
+    // Returns an <img/> using the svg as a source to display inline with D3
+    const inlineSVG = (path: string): string => {
+        return `<img src="${path}" style="width: 20px; display: inline-block; position: relative; top: 4px"/>`;
+    };
+
     useEffect(() => {
         // Clear old SVGs
         d3.select(ref.current).select('svg').remove();
@@ -69,8 +81,6 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
 
         const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
 
-        const flatCounties = heatmap;
-
         // Create color scale
         const colorScale = d3
             .scaleQuantize()
@@ -83,6 +93,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             .append('div')
             .attr('class', style.tooltip)
             .style('position', 'absolute')
+            .style('min-width', '150px')
             .style('background', 'white')
             .style('border', '1px solid gray')
             .style('padding', '5px')
@@ -97,24 +108,41 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             .attr('class', 'county')
             .attr('d', pathGenerator)
             .attr('fill', (d) => {
-                const county = heatmap.find((e) => e.fips == (d.id as string));
+                const county = heatmap.find((e) => e.fips == d.id);
                 return colorScale(county?.total || 0);
             })
             .attr('stroke', colors[4])
             .attr('stroke-width', 0.25)
             .attr('data-fips', (d) => d.id!)
             .attr('data-county-name', (d) => {
-                const county = flatCounties.find((e) => e.fips == d.id);
+                const county = heatmap.find((e) => e.fips == d.id);
                 return county?.countyName || 'Unknown';
             })
             .attr('data-media-total', (d) => {
-                const county = heatmap.find((e) => e.fips == (d.id as string));
+                const county = heatmap.find((e) => e.fips == d.id);
                 return county?.total || 0;
             })
             .on('mouseover', function (_, d) {
-                const county = heatmap.find((e) => e.fips == (d.id as string));
-                const countyData = flatCounties.find((e) => e.fips == d.id);
-                tooltip.style('display', 'block').html(`${`${countyData?.countyName || 'Unknown County'}`}: ${county?.total || 0}`);
+                const county = heatmap.find((e) => e.fips == d.id);
+                tooltip.style('display', 'block').html(`
+                    <i>${`${county?.countyName || 'Unknown County'}`}</i>
+                    <br>
+                    ${
+                        county?.total || 0 > 0
+                            ? `
+                        Total: ${county!.total}
+                        <br>
+                        Newspapers: ${county!.newspaper}
+                        <br>
+                        TV: ${county!.tv}
+                        <br>
+                        Broadcast: ${county!.broadcast}
+                        <br>
+                        Radio: ${county!.radio}
+                    `
+                            : 'No news organizations found'
+                    }
+                `);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
@@ -163,9 +191,28 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             .attr('stroke', 'black')
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
-                const county = heatmap.find((e) => e.fips == (d.fips as unknown as string));
-                const countyData = flatCounties.find((e) => e.fips == d.fips);
-                tooltip.style('display', 'block').html(`<b>${d.name}</b><br>${`${countyData?.countyName || 'Unknown County'}`}: ${county?.total || 0}`);
+                const county = heatmap.find((e) => e.fips == d.fips);
+                tooltip.style('display', 'block').html(`
+                    <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
+                    <br>
+                    <i>${`${county?.countyName || 'Unknown County'}`}</i>
+                    <br>
+                    ${
+                        county?.total || 0 > 0
+                            ? `
+                        Total: ${county!.total}
+                        <br>
+                        Newspapers: ${county!.newspaper}
+                        <br>
+                        TV: ${county!.tv}
+                        <br>
+                        Broadcast: ${county!.broadcast}
+                        <br>
+                        Radio: ${county!.radio}
+                    `
+                            : 'No news organizations found'
+                    }
+                `);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
@@ -180,6 +227,9 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
 
                 // Restore the original media color
                 d3.select(this).attr('fill', 'gold');
+            })
+            .on('mousedown', function (_, d) {
+                window.open(d.website, '_blank');
             });
 
         // Function to add a circle at a given latitude and longitude in the interactable layer
@@ -290,6 +340,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         };
 
         const center = () => {
+            console.log(width, height);
             svg.transition().call(zoom.translateTo, 0.5 * width, 0.5 * height);
         };
 

@@ -4,7 +4,7 @@ import { FC } from 'react';
 const NotFound: FC = () => {
     return (
         <Page title="Local Memory Project">
-            <Section variant="floating">
+            <Section variant="floating" hasBackground>
                 <Column>
                     <Heading title="Not Found" align="center" />
                 </Column>

@@ -1,6 +1,6 @@
 import { LocationData } from '@types';
 import { FC } from 'react';
-import { Button, MoonFilledIcon, Popover, SunFilledIcon, useResponsiveContext, Text } from 'phantom-library';
+import { Button, Popover, SimpleDynamicHeader, Text } from 'phantom-library';
 import { Link } from 'react-router-dom';
 import { LocalMemoryIcon, LocationPinIcon } from '@icons';
 import style from './Header.module.scss';
@@ -10,8 +10,6 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ geolocation }) => {
-    const { theme, toggleTheme } = useResponsiveContext();
-
     const locationPopover = geolocation.loading ? (
         <Text>Loading location data...</Text>
     ) : geolocation.location ? (
@@ -26,25 +24,36 @@ const Header: FC<HeaderProps> = ({ geolocation }) => {
     );
 
     return (
-        <header className={style.header}>
+        <SimpleDynamicHeader hasBackground inline pageSpace="overlap" dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }}>
             <div className={style.content}>
-                <h4 className={style.logo}>
+                <div className={style.logo}>
                     <Link to="/">
                         <LocalMemoryIcon size="large" />
                     </Link>
-                </h4>
+                </div>
+                <div className={style.newslab}>
+                    <span>A </span>
+                    <b>
+                        <Link to="https://newsresearch.lab.wm.edu" target="_blank">
+                            NEWS Lab
+                        </Link>
+                    </b>
+                    <span> Project</span>
+                </div>
                 <div className={style.navigation}>
                     <nav className={style.links}>
                         <Button link="/" label="Home" visual="text" />
                         <Button link="/about" label="About" visual="text" />
-                        <Popover content={locationPopover} customStyle={style.locationPopover} direction="bottom">
-                            <Button rounded Icon={LocationPinIcon} visual="text" />
-                        </Popover>
-                        <Button rounded visual="text" onClick={() => toggleTheme()} Icon={theme == 'light' ? SunFilledIcon : MoonFilledIcon} />
+                        {false && (
+                            <Popover content={locationPopover} customStyle={style.locationPopover} direction="bottom">
+                                <Button rounded Icon={LocationPinIcon} visual="text" />
+                            </Popover>
+                        )}
+                        {/*<Button rounded visual="text" onClick={() => toggleTheme()} Icon={theme == 'light' ? SunFilledIcon : MoonFilledIcon} />*/}
                     </nav>
                 </div>
             </div>
-        </header>
+        </SimpleDynamicHeader>
     );
 };
 

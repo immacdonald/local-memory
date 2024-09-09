@@ -9,11 +9,8 @@ const Footer: FC = () => {
             <div className={style.content}>
                 <Text as="span">
                     &copy; {new Date().getFullYear()}{' '}
-                    <Link to="https://www.wm.edu" target="_blank">
-                        Willam & Mary
-                    </Link>{' '}
-                    <Link to="https://github.com/wm-newslab" target="_blank">
-                        NEWS Lab
+                    <Link to="https://newsresearch.lab.wm.edu" target="_blank">
+                        Willam & Mary NEWS Lab
                     </Link>
                 </Text>
             </div>

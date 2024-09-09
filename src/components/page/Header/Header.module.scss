@@ -1,54 +1,35 @@
-@use 'sass:math';
-
-.header {
-    --v-header-height: 64px;
-
-    @include responsive-width;
-
+.content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: var(--v-header-height) !important;
-    background-color: var(--color-surface-foreground);
-    border-bottom: var(--border-light);
-    z-index: 10;
-    position: fixed;
-    top: 0;
-    left: 0;
+    width: 100%;
+    padding: 0 $lg;
 
-    .content {
+    .navigation {
         display: flex;
         align-items: center;
-        width: 100%;
-        padding: 0 $lg;
-
-        .navigation {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-left: auto;
-        }
-
-        .links {
-            display: flex;
-            align-items: center;
-            gap: $xs;
-        }
+        justify-content: space-between;
+        margin-left: auto;
     }
 
-    &::before {
-        content: '';
-        position: absolute;
-        background-color: var(--color-surface-foreground);
-        width: 100%;
-        height: 400px;
-        top: -400px;
+    .links {
+        display: flex;
+        align-items: center;
+        gap: $xs;
     }
 }
 
 .logo {
     text-decoration: none;
     margin: 0;
+}
+
+.newslab {
+    margin-left: $lg;
+
+    a {
+        text-decoration: none !important;
+        color: var(--color-text);
+    }
 }
 
 .locationPopover {

@@ -1,15 +1,15 @@
 import type { Media, Coordinates, LocationData } from '@types';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, Text, decimalPlaces } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
 import { USMap } from '@components/USMap';
 import mediaSummary from '@data/media_heatmap.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
-import { haversineDistance } from '@utility';
+import { getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Home.module.scss';
-import { Link } from 'react-router-dom';
 
 interface MediaWithDistance extends Media {
     distance?: number;
@@ -100,6 +100,11 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
         onSearch(search.current!.location, radius);
     };
 
+    const tableIcon = (mediaClass: string): ReactElement => {
+        const As = getIconForMediaClass(mediaClass);
+        return <As />;
+    };
+
     return (
         <Page title="Local Memory Project">
             <Section>
@@ -108,8 +113,8 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                     <USMap heatmap={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
                 </Row>
                 <Text>
-                    This website returns a collection of <i>newspapers</i> and/or <i>TV</i> and/or <i>radio stations</i> in order of proximity to a zip code for US media, or a collection of newspapers
-                    for a city for Non-US media.
+                    Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection of{' '}
+                    <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is also sorted by proximity to your location (or any zip code).
                 </Text>
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
@@ -134,7 +139,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                 <tr>
                                     <th>Rank</th>
                                     <th style={{ width: '140px' }}>Distance (mi)</th>
-                                    <th>Name</th>
+                                    <th style={{ width: '200px' }}>Name</th>
                                     <th style={{ width: '320px' }}>Location</th>
                                     <th>Socials</th>
                                     <th style={{ width: '240px' }}>Type</th>
@@ -147,7 +152,9 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                             <td>{index + 1}.</td>
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
                                             <td>
-                                                <Link to={organization.website} target="_blank" rel="noreferrer">{organization.name}</Link>
+                                                <Link to={organization.website} target="_blank" rel="noreferrer">
+                                                    {organization.name}
+                                                </Link>
                                             </td>
                                             <td>
                                                 {organization['cityCountyName']}, {organization.usState}
@@ -160,7 +167,8 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                                 </Row>
                                             </td>
                                             <td>
-                                                {capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}
+                                                {capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}{' '}
+                                                {tableIcon(organization.mediaClass!)}
                                             </td>
                                         </tr>
                                     );
