@@ -127,6 +127,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                 tooltip.style('display', 'block').html(`
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
+                    <br>
                     ${
                         county?.total || 0 > 0
                             ? `
@@ -196,6 +197,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                     <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
                     <br>
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
+                    <br>
                     <br>
                     ${
                         county?.total || 0 > 0

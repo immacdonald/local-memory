@@ -167,8 +167,8 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                                 </Row>
                                             </td>
                                             <td>
-                                                {capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}{' '}
-                                                {tableIcon(organization.mediaClass!)}
+                                                {tableIcon(organization.mediaClass!)}{' '}
+                                                {capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}
                                             </td>
                                         </tr>
                                     );
