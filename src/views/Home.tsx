@@ -5,12 +5,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
 import { USMap } from '@components/USMap';
+import { Header } from '@components/page';
 import mediaSummary from '@data/media_heatmap.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Home.module.scss';
-import { Header } from '@components/page';
 
 interface MediaWithDistance extends Media {
     distance?: number;

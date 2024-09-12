@@ -4,7 +4,7 @@ import { Coordinates } from '@types';
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { Button, Callback, Column, Flex, MultiCallback, RecenterIcon, Typography, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
+import { Button, Callback, MultiCallback, RecenterIcon, Typography, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import { CircleFillIcon, LocationPinFillInline } from '@icons';
 import usTopology from '@data/us_topology.json';
 import { getIconForMediaClass } from '@utility';
