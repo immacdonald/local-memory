@@ -15,6 +15,13 @@ import TVSVG from './tv.svg?react';
 import BroadcastSVG from './broadcast.svg?react';
 import RadioSVG from './radio.svg?react';
 
+import CircleFillSVG from './circle_fill.svg?react';
+import CircleSVG from './circle.svg?react';
+import DottedLineSVG from './dotted_line.svg?react';
+export const CircleIcon = withVectorIcon(CircleSVG);
+export const CircleFillIcon = withVectorIcon(CircleFillSVG);
+export const DottedLineIcon = withVectorIcon(DottedLineSVG);
+
 export const LocalMemoryFullIcon = withVectorIcon(LocalMemorySVG);
 export const LocalMemoryIcon = withVectorIcon(LocalMemoryIconSVG);
 export const LocationPinIcon = withVectorIcon(LocationPinSVG);

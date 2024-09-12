@@ -3,3 +3,9 @@
         height: 52px;
     }
 }
+
+.page {
+    > section:first-child {
+        padding-top: $lg !important;
+    }
+}

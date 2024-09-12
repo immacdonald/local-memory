@@ -1,18 +1,16 @@
-import { Button, Column, Heading, Page, Row, Section, Text } from 'phantom-library';
+import { Button, Heading, Page, Row, Section, Typography } from 'phantom-library';
 import { FC } from 'react';
 
 const NotFound: FC = () => {
     return (
         <Page title="Local Memory Project">
             <Section variant="floating" hasBackground>
-                <Column>
-                    <Heading title="Not Found" align="center" />
-                </Column>
-                <Text align="center" marginBottom>
+                <Heading align="center" />
+                <Typography.Paragraph align="center">
                     Unfortunately, the page you entered cannot be found.
-                </Text>
+                </Typography.Paragraph>
                 <Row>
-                    <Button context="primary" label="Return Home" link="/" visual="filled" />
+                    <Button context="primary" link="/" visual="filled">Return Home</Button>
                 </Row>
             </Section>
         </Page>

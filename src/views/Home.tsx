@@ -1,6 +1,6 @@
 import type { Media, Coordinates, LocationData } from '@types';
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
-import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, Text, decimalPlaces } from 'phantom-library';
+import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, decimalPlaces, Typography } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
@@ -10,6 +10,7 @@ import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Home.module.scss';
+import { Header } from '@components/page';
 
 interface MediaWithDistance extends Media {
     distance?: number;
@@ -80,7 +81,6 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
     };
 
     const onSearch = (location: Coordinates, radius: number): void => {
-        console.log('Set search to', location, radius);
         search.current = { location, radius };
 
         const sortedCities = sortCitiesByProximity(media, location, radius);
@@ -106,16 +106,17 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
     };
 
     return (
-        <Page title="Local Memory Project">
+        <Page title="Local Memory Project" header={<Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad'}}/>} className={style.page}>
             <Section>
-                <Heading align="center" title={<LocalMemoryFullIcon size="full" />} subtitle="US Local Media Per County" />
+                <Heading align="center" subtitle="US Local Media Per County"><LocalMemoryFullIcon size="full" /></Heading>
                 <Row>
                     <USMap heatmap={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
                 </Row>
-                <Text>
+                <Typography.Paragraph>
                     Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection of{' '}
                     <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is also sorted by proximity to your location (or any zip code).
-                </Text>
+                </Typography.Paragraph>
+                <hr/>
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
@@ -128,7 +129,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                             validationSchema={{ required: true }}
                             error={errors.radius}
                         />
-                        <Button context="primary" label="Search" visual="filled" form="search" type="submit" />
+                        <Button context="primary" visual="filled" form="search" type="submit">Search</Button>
                     </Row>
                 </form>
                 <br />

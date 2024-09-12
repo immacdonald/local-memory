@@ -4,8 +4,8 @@ import { Coordinates } from '@types';
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-import { Button, Callback, MultiCallback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
-import { LocationPinFillInline } from '@icons';
+import { Button, Callback, Column, Flex, MultiCallback, RecenterIcon, Typography, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
+import { CircleFillIcon, LocationPinFillInline } from '@icons';
 import usTopology from '@data/us_topology.json';
 import { getIconForMediaClass } from '@utility';
 import style from './USMap.module.scss';
@@ -46,8 +46,8 @@ interface MapFunctions {
     removeIndicators: Callback<void>;
 }
 
-const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRadius = () => {} }) => {
-    const ref = useRef<SVGSVGElement>(null);
+const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRadius = () => { } }) => {
+    const ref = useRef<HTMLDivElement>(null);
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
     const width = 950;
@@ -65,7 +65,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         d3.select(ref.current).select('svg').remove();
 
         // Create SVG element
-        const svg = d3.select(ref.current).append('svg').attr('width', width).attr('height', height);
+        const svg = d3.select(ref.current).append('svg').attr('width', '100%').attr('height', height);
 
         // Create groups for each layer
         const group = svg.append('g');
@@ -128,9 +128,8 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${
-                        county?.total || 0 > 0
-                            ? `
+                    ${county?.total || 0 > 0
+                        ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -141,7 +140,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                         <br>
                         Radio: ${county!.radio}
                     `
-                            : 'No news organizations found'
+                        : 'No news organizations found'
                     }
                 `);
 
@@ -199,9 +198,8 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${
-                        county?.total || 0 > 0
-                            ? `
+                    ${county?.total || 0 > 0
+                        ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -212,7 +210,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                         <br>
                         Radio: ${county!.radio}
                     `
-                            : 'No news organizations found'
+                        : 'No news organizations found'
                     }
                 `);
 
@@ -263,47 +261,56 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             const initialAngle = (distance / circumference) * 360;
             let currentAngle = initialAngle;
 
+            const centerCoords: [number, number] = projection([longitude, latitude])!;
             const circle = d3.geoCircle().center([longitude, latitude]).radius(currentAngle);
             const path = d3.geoPath().projection(projection);
 
             const dragBehavior = d3.drag().on('start', dragStarted).on('drag', dragged).on('end', dragEnded);
 
             let initialPosition = { x: 0, y: 0 };
-            let currentPosition = { x: 0, y: 0 };
+    let initialDistanceFromCenter = 0;
+    let currentPosition = { x: 0, y: 0 };
 
-            let currentRadius = distance;
+    let currentRadius = distance;
 
-            function dragStarted(event: any) {
-                initialPosition = { x: event.x, y: event.y };
-                currentPosition = { x: event.x, y: event.y };
-                /* @tslint:disable-next-line */
-                currentRadius = Number(d3.select(event.target).attr('data-radius'));
-            }
+    function dragStarted(event: any) {
+        initialPosition = { x: event.x, y: event.y };
 
-            function dragged(event: any) {
-                currentPosition = { x: event.x, y: event.y };
+        // Calculate the initial distance from the center of the circle to the mouse position
+        const dx = initialPosition.x - centerCoords[0];
+        const dy = initialPosition.y - centerCoords[1];
+        initialDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
 
-                const dx = currentPosition.x - initialPosition.x;
-                const dy = currentPosition.y - initialPosition.y;
+        /* @tslint:disable-next-line */
+        currentRadius = Number(d3.select(event.target).attr('data-radius'));
+    }
 
-                // Calculate the distance dragged
-                const distanceDragged = Math.sqrt(dx * dx + dy * dy);
+    function dragged(event: any) {
+        currentPosition = { x: event.x, y: event.y };
 
-                // Determine direction of drag
-                const direction = dx + dy > 0 ? 1 : -1;
+        // Calculate the new distance from the center of the circle to the current mouse position
+        const dx = currentPosition.x - centerCoords[0];
+        const dy = currentPosition.y - centerCoords[1];
+        const newDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
 
-                // Update the circle's radius based on the drag distance and direction
-                currentRadius = currentRadius + direction * (distanceDragged / 10); // Adjust divisor to change sensitivity
-                currentAngle = (currentRadius / circumference) * 360;
+        // Adjust the radius by the difference between the initial and current distance
+        const distanceChange = newDistanceFromCenter - initialDistanceFromCenter;
+        currentRadius += distanceChange;
 
-                // Ensure the radius does not go negative
-                if (currentAngle < 0) currentAngle = 0;
+        // Ensure the radius does not go negative
+        if (currentRadius < 0) currentRadius = 0;
 
-                updateCircle();
-            }
+        // Update the angle for the circle's radius
+        currentAngle = (currentRadius / circumference) * 360;
+
+        updateCircle();
+
+        // Update the initial distance so that further drags adjust relative to the last position
+        initialDistanceFromCenter = newDistanceFromCenter;
+    }
 
             function dragEnded() {
-                //console.log('Drag ended');
+                // Update the search radius or any other final actions
                 updateSearchRadius(currentRadius);
             }
 
@@ -342,8 +349,9 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         };
 
         const center = () => {
-            console.log(width, height);
+            //svg.transition().call(zoom.scaleTo, 1);
             svg.transition().call(zoom.translateTo, 0.5 * width, 0.5 * height);
+
         };
 
         const zoomIn = () => {
@@ -377,12 +385,23 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
     }, [search]);
 
     return (
-        <div className={style.map}>
-            <svg width={width} height={height} ref={ref} />
-            <div className={style.tools}>
-                <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
-                <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
-                <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
+        <div className={style.visualization}>
+            <div className={style.map}>
+                <div ref={ref} />
+                <div className={style.tools}>
+                    <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
+                    <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
+                    <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
+                </div>
+            </div>
+            <div className={style.legend}>
+                <Typography.Text><b>Legend</b></Typography.Text>
+                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "gold" }} /> Media Organization</Typography.Text>
+                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#e3d9ff" }} /> 0 in County</Typography.Text>
+                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#bea9f8" }} /> 1 in County</Typography.Text>
+                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#9879ee" }} /> 2 in County</Typography.Text>
+                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#6e48e2" }} /> 3 in County</Typography.Text>
+                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#3700d4" }} /> 4+ in County</Typography.Text>
             </div>
         </div>
     );

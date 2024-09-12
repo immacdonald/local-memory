@@ -19,7 +19,7 @@
         "@types/geojson": "^7946.0.14",
         "d3": "^7.9.0",
         "fast-xml-parser": "^4.4.0",
-        "phantom-library": "^0.15.0",
+        "phantom-library": "^0.17.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.49.2",

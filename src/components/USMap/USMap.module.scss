@@ -1,25 +1,73 @@
-.map {
-    width: min(100%, 950px);
-    height: 650px;
-    border: var(--border-light);
-    border-radius: $radius-md;
+.visualization {
+    width: 100%;
+    background-color: #f3f3ff;
+    border-radius: var(--border-radius);
     margin-bottom: $xl;
     overflow: hidden;
     position: relative;
-    background-color: #e3d9ff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $md;
 
-    .tools {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: $sm;
-        position: absolute;
-        bottom: 50px;
-        right: 50px;
-        padding: $sm;
+    .map {
+        width: 100%;
+        height: 650px;
+        position: relative;
+        //border: var(--border-dark);
+        border-radius: var(--border-radius);
+        background-color: #ffffff80;
+
+        .tools {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: $sm;
+            position: absolute;
+            bottom: $md;
+            right: $md;
+            padding: $sm;
+            background-color: var(--color-surface-foreground);
+            box-shadow: var(--shadow-lifted);
+            border-radius: var(--border-radius);
+        }
+    }
+
+    .legend {
+        width: 240px;
+        height: fit-content;
+        min-height: 48px;
         background-color: var(--color-surface-foreground);
         box-shadow: var(--shadow-lifted);
-        border-radius: $xl;
+        border-radius: var(--border-radius);
+        margin-left: $md;
+        padding: $md;
+        font-size: $font-sm;
+
+        display: flex;
+        flex-direction: column;
+        gap: $md;
+
+        @include respond-max($screen-lg) {
+            width: 100%;
+            margin-top: $md;
+            margin-left: 0;
+            display: grid;
+            grid-template-columns: 80px repeat(3, 140px);
+            grid-template-rows: 1fr 1fr;
+            grid-row-gap: 0;
+            grid-column-gap: $md;
+
+            > :first-child {
+                grid-row: 1 / span 2;
+                align-self: center;
+            }
+        }
+    }
+
+    @include respond-max($screen-lg) {
+        flex-direction: column;
+        align-items: start;
     }
 }

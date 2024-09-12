@@ -1,30 +1,30 @@
 import { LocationData } from '@types';
 import { FC } from 'react';
-import { Button, Popover, SimpleDynamicHeader, Text } from 'phantom-library';
+import { Button, DynamicHeaderProps, Popover, SimpleDynamicHeader, Typography } from 'phantom-library';
 import { Link } from 'react-router-dom';
 import { LocalMemoryIcon, LocationPinIcon } from '@icons';
 import style from './Header.module.scss';
 
-interface HeaderProps {
-    geolocation: LocationData;
+interface HeaderProps extends DynamicHeaderProps {
+    geolocation?: LocationData;
 }
 
-const Header: FC<HeaderProps> = ({ geolocation }) => {
-    const locationPopover = geolocation.loading ? (
-        <Text>Loading location data...</Text>
-    ) : geolocation.location ? (
+const Header: FC<HeaderProps> = ({ geolocation, ...props }) => {
+    const locationPopover = !geolocation || geolocation?.loading ? (
+        < Typography.Text>Loading location data...</ Typography.Text>
+    ) : geolocation!.location ? (
         <>
-            <Text>
+            < Typography.Text>
                 <small>Current Location</small>
-            </Text>
-            <Text>{`(${geolocation.location.latitude}, ${geolocation.location.longitude})`}</Text>
+            </ Typography.Text>
+            < Typography.Text>{`(${geolocation!.location.latitude}, ${geolocation!.location.longitude})`}</ Typography.Text>
         </>
     ) : (
-        <Text>Unable to get location data. Please check your privacy settings.</Text>
+        < Typography.Text>Unable to get location data. Please check your privacy settings.</ Typography.Text>
     );
 
     return (
-        <SimpleDynamicHeader hasBackground inline pageSpace="overlap" dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }}>
+        <SimpleDynamicHeader {...props}>
             <div className={style.content}>
                 <div className={style.logo}>
                     <Link to="/">
@@ -42,8 +42,8 @@ const Header: FC<HeaderProps> = ({ geolocation }) => {
                 </div>
                 <div className={style.navigation}>
                     <nav className={style.links}>
-                        <Button link="/" label="Home" visual="text" />
-                        <Button link="/about" label="About" visual="text" />
+                        <Button link="/" visual="text">Home</Button>
+                        <Button link="/about" visual="text">About</Button>
                         {false && (
                             <Popover content={locationPopover} customStyle={style.locationPopover} direction="bottom">
                                 <Button rounded Icon={LocationPinIcon} visual="text" />
