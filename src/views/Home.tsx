@@ -10,7 +10,7 @@ import mediaSummary from '@data/media_heatmap.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { getIconForMediaClass, haversineDistance } from '@utility';
-import style from './Home.module.scss';
+import style from './Views.module.scss';
 
 interface MediaWithDistance extends Media {
     distance?: number;
