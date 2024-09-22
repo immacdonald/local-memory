@@ -106,9 +106,15 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
     };
 
     return (
-        <Page title="Local Memory Project" header={<Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad'}}/>} className={style.page}>
+        <Page
+            title="Local Memory Project"
+            header={<Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }} />}
+            className={style.page}
+        >
             <Section>
-                <Heading align="center" subtitle="US Local Media Per County"><LocalMemoryFullIcon size="full" /></Heading>
+                <Heading align="center" subtitle="US Local Media Per County">
+                    <LocalMemoryFullIcon size="full" />
+                </Heading>
                 <Row>
                     <USMap heatmap={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
                 </Row>
@@ -116,7 +122,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                     Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection of{' '}
                     <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is also sorted by proximity to your location (or any zip code).
                 </Typography.Paragraph>
-                <hr/>
+                <hr />
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row verticalAlign="start">
                         <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
@@ -129,7 +135,9 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                             validationSchema={{ required: true }}
                             error={errors.radius}
                         />
-                        <Button context="primary" visual="filled" form="search" type="submit">Search</Button>
+                        <Button context="primary" visual="filled" form="search" type="submit">
+                            Search
+                        </Button>
                     </Row>
                 </form>
                 <br />
@@ -168,8 +176,8 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                                 </Row>
                                             </td>
                                             <td>
-                                                {tableIcon(organization.mediaClass!)}{' '}
-                                                {capitalizeFirstLetter(organization.mediaSubclass!)} {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}
+                                                {tableIcon(organization.mediaClass!)} {capitalizeFirstLetter(organization.mediaSubclass!)}{' '}
+                                                {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}
                                             </td>
                                         </tr>
                                     );

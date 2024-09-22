@@ -22,7 +22,9 @@ const toRadians = (degrees: number): number => {
     return (degrees * Math.PI) / 180;
 };
 
-const svgForMediaClass: Record<string, { Icon: ComponentType<IconProps>; inline: string }> = {
+type MediaClassSVG = { Icon: ComponentType<IconProps>; inline: string };
+
+const svgForMediaClass: Record<string, MediaClassSVG> = {
     newspaper: {
         inline: NewsIconInline,
         Icon: NewsIcon
@@ -41,7 +43,7 @@ const svgForMediaClass: Record<string, { Icon: ComponentType<IconProps>; inline:
     }
 };
 
-const getIconForMediaClass = (mediaClass: string, inline: boolean = false) => {
+const getIconForMediaClass = (mediaClass: string, inline: boolean = false): string | ComponentType<IconProps> => {
     return svgForMediaClass[mediaClass][inline ? 'inline' : 'Icon'];
 };
 

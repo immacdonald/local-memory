@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import { Button, Callback, MultiCallback, RecenterIcon, Typography, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
-import { CircleFillIcon, LocationPinFillInline } from '@icons';
+import { CircleFillIcon, LocationPinFillInline, SquareFillIcon } from '@icons';
 import usTopology from '@data/us_topology.json';
 import { getIconForMediaClass } from '@utility';
 import style from './USMap.module.scss';
@@ -46,7 +46,7 @@ interface MapFunctions {
     removeIndicators: Callback<void>;
 }
 
-const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRadius = () => { } }) => {
+const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRadius = () => {} }) => {
     const ref = useRef<HTMLDivElement>(null);
     const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -128,8 +128,9 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${county?.total || 0 > 0
-                        ? `
+                    ${
+                        county?.total || 0 > 0
+                            ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -140,7 +141,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                         <br>
                         Radio: ${county!.radio}
                     `
-                        : 'No news organizations found'
+                            : 'No news organizations found'
                     }
                 `);
 
@@ -198,8 +199,9 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${county?.total || 0 > 0
-                        ? `
+                    ${
+                        county?.total || 0 > 0
+                            ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -210,7 +212,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                         <br>
                         Radio: ${county!.radio}
                     `
-                        : 'No news organizations found'
+                            : 'No news organizations found'
                     }
                 `);
 
@@ -268,46 +270,46 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             const dragBehavior = d3.drag().on('start', dragStarted).on('drag', dragged).on('end', dragEnded);
 
             let initialPosition = { x: 0, y: 0 };
-    let initialDistanceFromCenter = 0;
-    let currentPosition = { x: 0, y: 0 };
+            let initialDistanceFromCenter = 0;
+            let currentPosition = { x: 0, y: 0 };
 
-    let currentRadius = distance;
+            let currentRadius = distance;
 
-    function dragStarted(event: any) {
-        initialPosition = { x: event.x, y: event.y };
+            function dragStarted(event: any) {
+                initialPosition = { x: event.x, y: event.y };
 
-        // Calculate the initial distance from the center of the circle to the mouse position
-        const dx = initialPosition.x - centerCoords[0];
-        const dy = initialPosition.y - centerCoords[1];
-        initialDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
+                // Calculate the initial distance from the center of the circle to the mouse position
+                const dx = initialPosition.x - centerCoords[0];
+                const dy = initialPosition.y - centerCoords[1];
+                initialDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
 
-        /* @tslint:disable-next-line */
-        currentRadius = Number(d3.select(event.target).attr('data-radius'));
-    }
+                /* @tslint:disable-next-line */
+                currentRadius = Number(d3.select(event.target).attr('data-radius'));
+            }
 
-    function dragged(event: any) {
-        currentPosition = { x: event.x, y: event.y };
+            function dragged(event: any) {
+                currentPosition = { x: event.x, y: event.y };
 
-        // Calculate the new distance from the center of the circle to the current mouse position
-        const dx = currentPosition.x - centerCoords[0];
-        const dy = currentPosition.y - centerCoords[1];
-        const newDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
+                // Calculate the new distance from the center of the circle to the current mouse position
+                const dx = currentPosition.x - centerCoords[0];
+                const dy = currentPosition.y - centerCoords[1];
+                const newDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
 
-        // Adjust the radius by the difference between the initial and current distance
-        const distanceChange = newDistanceFromCenter - initialDistanceFromCenter;
-        currentRadius += distanceChange;
+                // Adjust the radius by the difference between the initial and current distance
+                const distanceChange = newDistanceFromCenter - initialDistanceFromCenter;
+                currentRadius += distanceChange;
 
-        // Ensure the radius does not go negative
-        if (currentRadius < 0) currentRadius = 0;
+                // Ensure the radius does not go negative
+                if (currentRadius < 0) currentRadius = 0;
 
-        // Update the angle for the circle's radius
-        currentAngle = (currentRadius / circumference) * 360;
+                // Update the angle for the circle's radius
+                currentAngle = (currentRadius / circumference) * 360;
 
-        updateCircle();
+                updateCircle();
 
-        // Update the initial distance so that further drags adjust relative to the last position
-        initialDistanceFromCenter = newDistanceFromCenter;
-    }
+                // Update the initial distance so that further drags adjust relative to the last position
+                initialDistanceFromCenter = newDistanceFromCenter;
+            }
 
             function dragEnded() {
                 // Update the search radius or any other final actions
@@ -351,7 +353,6 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         const center = () => {
             //svg.transition().call(zoom.scaleTo, 1);
             svg.transition().call(zoom.translateTo, 0.5 * width, 0.5 * height);
-
         };
 
         const zoomIn = () => {
@@ -384,24 +385,34 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         }
     }, [search]);
 
+    useEffect(() => {
+        mapFunctions.current!.center();
+    }, [mapFunctions.current]);
+
     return (
         <div className={style.visualization}>
             <div className={style.map}>
                 <div ref={ref} />
+                <div className={style.legend}>
+                    <Typography.Text>
+                        <b>Legend</b>
+                    </Typography.Text>
+                    <Typography.Text newline>
+                        <CircleFillIcon inline cssProperties={{ color: 'gold' }} /> Media
+                    </Typography.Text>
+                    <Typography.Text newline>
+                        0 in County <SquareFillIcon inline cssProperties={{ color: '#e3d9ff' }} />
+                        <SquareFillIcon inline cssProperties={{ color: '#bea9f8' }} />
+                        <SquareFillIcon inline cssProperties={{ color: '#9879ee' }} />
+                        <SquareFillIcon inline cssProperties={{ color: '#6e48e2' }} />
+                        <SquareFillIcon inline cssProperties={{ color: '#3700d4' }} /> 4+ in County
+                    </Typography.Text>
+                </div>
                 <div className={style.tools}>
                     <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
                 </div>
-            </div>
-            <div className={style.legend}>
-                <Typography.Text><b>Legend</b></Typography.Text>
-                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "gold" }} /> Media Organization</Typography.Text>
-                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#e3d9ff" }} /> 0 in County</Typography.Text>
-                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#bea9f8" }} /> 1 in County</Typography.Text>
-                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#9879ee" }} /> 2 in County</Typography.Text>
-                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#6e48e2" }} /> 3 in County</Typography.Text>
-                <Typography.Text newline><CircleFillIcon inline cssProperties={{ color: "#3700d4" }} /> 4+ in County</Typography.Text>
             </div>
         </div>
     );

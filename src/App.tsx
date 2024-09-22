@@ -7,10 +7,10 @@ import { About, Home, NotFound } from '@views';
 
 const styleConfiguration: StyleConfiguration = {
     page: {
-        defaultHeader: <Header hasBackground pageSpace='pad' />,
+        defaultHeader: <Header hasBackground pageSpace="pad" />,
         defaultFooter: <Footer />
     }
-}
+};
 
 const App: FC = () => {
     const [locationData, setLocationData] = useState<LocationData>({ loading: true, location: null });

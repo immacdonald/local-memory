@@ -18,17 +18,13 @@
     }
 }
 
-.logo {
-    text-decoration: none;
-    margin: 0;
-}
-
 .newslab {
     margin-left: $lg;
+    font-size: $font-sm;
 
     a {
         text-decoration: none !important;
-        color: var(--color-text);
+        color: var(--color-text) !important;
     }
 }
 
