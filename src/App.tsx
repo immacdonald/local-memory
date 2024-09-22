@@ -3,7 +3,7 @@ import { StyleConfiguration, StyledApp } from 'phantom-library';
 import { Route, Routes } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { Footer, Header } from '@components/page';
-import { About, Home, NotFound } from '@views';
+import { About, Home, NotFound, World } from '@views';
 
 const styleConfiguration: StyleConfiguration = {
     page: {
@@ -61,6 +61,7 @@ const App: FC = () => {
             <Routes>
                 <Route path="/" element={<Home geolocation={locationData} />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/world" element={<World />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </StyledApp>
