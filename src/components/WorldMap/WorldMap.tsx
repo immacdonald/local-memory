@@ -14,7 +14,20 @@ interface MapFunctions {
     center: Callback<void>;
 }
 
-const WorldMap: React.FC = () => {
+interface WorldMapProps {
+    mediaData: {
+        name: string;
+        cityCountyLat: number;
+        cityCountyLong: number;
+        fips: string;
+        website: string;
+        mediaClass: string;
+        city: string;
+        country: string;
+    }[];
+}
+
+const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
     const ref = useRef<HTMLDivElement>(null);
     const world = worldTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -34,7 +47,7 @@ const WorldMap: React.FC = () => {
         const group = svg.append('g');
         const baseLayer = group.append('g').attr('class', 'base-layer');
         //const interactableLayer = group.append('g').attr('class', 'interactable-layer');
-        //const mediaLayer = group.append('g').attr('class', 'media-layer');
+        const mediaLayer = group.append('g').attr('class', 'media-layer');
 
         // Create a projection
         const projection = d3.geoNaturalEarth1().scale(200).translate([475, 300]);
@@ -87,6 +100,50 @@ const WorldMap: React.FC = () => {
             .on('mouseout', function () {
                 tooltip.style('display', 'none');
                 d3.select(this).attr('fill', '#3700d4');
+            });
+
+        // Add circles for media objects in the media layer
+        mediaLayer
+            .selectAll('.media')
+            .data(mediaData)
+            .enter()
+            .append('circle')
+            .attr('class', 'media')
+            .attr('cx', (d) => {
+                const coords = projection([d.cityCountyLong, d.cityCountyLat]);
+                return coords ? coords[0] : null;
+            })
+            .attr('cy', (d) => {
+                const coords = projection([d.cityCountyLong, d.cityCountyLat]);
+                return coords ? coords[1] : null;
+            })
+            .attr('r', 2)
+            .attr('fill', 'gold')
+            .attr('stroke', 'black')
+            .attr('stroke-width', 0.25)
+            .on('mouseover', function (_, d) {
+                tooltip.style('display', 'block').html(`
+                    <b>${d.name} ${d.mediaClass}</b>
+                    <br/>
+                    <i>${d.city}, ${d.country}</i>
+                `);
+
+                // Darken the county color
+                const currentFill = d3.select(this).attr('fill');
+                const darkerColor = d3.color(currentFill)!.darker(0.75);
+                d3.select(this).attr('fill', darkerColor as any);
+            })
+            .on('mousemove', function (event) {
+                tooltip.style('left', `${event.pageX + 10}px`).style('top', `${event.pageY + 10}px`);
+            })
+            .on('mouseout', function () {
+                tooltip.style('display', 'none');
+
+                // Restore the original media color
+                d3.select(this).attr('fill', 'gold');
+            })
+            .on('mousedown', function (_, d) {
+                window.open(d.website, '_blank');
             });
 
         //const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];

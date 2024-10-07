@@ -1,11 +1,14 @@
 import { FC } from 'react';
 import { Heading, Page, Row, Section, Typography } from 'phantom-library';
 import { LocalMemoryFullIcon } from '@icons';
+import { useAnalytics } from 'src/hooks';
 import { Header } from '@components/page';
 import { WorldMap } from '@components/WorldMap';
+import worldMediaData from '@data/world_media.json';
 import style from './Views.module.scss';
 
 const World: FC = () => {
+    useAnalytics('/tools/local-memory');
     return (
         <Page
             title="Local Memory Project"
@@ -17,7 +20,7 @@ const World: FC = () => {
                     <LocalMemoryFullIcon size="full" />
                 </Heading>
                 <Row>
-                    <WorldMap />
+                    <WorldMap mediaData={worldMediaData as any} />
                 </Row>
                 <Typography.Paragraph>
                     Local Memory provides data about the geographic distribution of local news organizations across the globe. This website displays an interactive map showing a collection of{' '}

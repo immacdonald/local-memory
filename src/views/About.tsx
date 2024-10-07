@@ -1,9 +1,11 @@
 import { Heading, Page, Section, Typography } from 'phantom-library';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { useAnalytics } from 'src/hooks';
 import style from './Views.module.scss';
 
 const About: FC = () => {
+    useAnalytics('/tools/local-memory');
     return (
         <Page title="About | Local Memory Project" className={style.page}>
             <Section variant="inset" hasBackground>
