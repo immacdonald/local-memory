@@ -5,6 +5,8 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import { Button, Callback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import worldTopology from '@data/world_topology.json';
+import heatmap from '@data/world_heatmap.json';
+import { getIconForMediaClass } from '@utility';
 import style from './WorldMap.module.scss';
 
 interface MapFunctions {
@@ -36,6 +38,11 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
 
     const mapFunctions = useRef<MapFunctions | null>(null);
 
+    // Returns an <img/> using the svg as a source to display inline with D3
+    const inlineSVG = (path: string): string => {
+        return `<img src="${path}" style="width: 20px; display: inline-block; position: relative; top: 4px"/>`;
+    };
+
     useEffect(() => {
         // Clear old SVGs
         d3.select(ref.current).select('svg').remove();
@@ -54,6 +61,14 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
         const pathGenerator = d3.geoPath().projection(projection);
 
         const countries = topojson.feature(world, world.objects.countries);
+
+        const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
+
+        // Create color scale
+        const colorScale = d3
+            .scaleQuantize()
+            .domain([0, 40])
+            .range(colors as any);
 
         /*baseLayer.append('path')
             .attr('class', 'sphere')
@@ -81,13 +96,53 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
             .attr('d', pathGenerator)
             .attr('data-country', (d) => d.properties!['name'])
             .attr('data-country-id', (d) => d.id!)
-            .attr('fill', '#3700d4')
+            .attr('fill', (d) => {
+                if (d.properties!['name'] == 'United States of America') {
+                    return `grey`;
+                } else {
+                    const county = heatmap.find((e) => e.countryCode == d.id);
+                    if (!county) {
+                        console.log('No country found for', d.id, d.properties!.name);
+                    }
+                    return colorScale(county?.total || 0);
+                }
+            })
             .attr('stroke', 'white')
             .attr('stroke-width', '0.25')
             .on('mouseover', function (_, d) {
-                tooltip.style('display', 'block').html(`
-                    <b>${d.properties!['name']}</b>
+                if (d.properties!['name'] == 'United States of America') {
+                    d3.select(this).attr('fill', 'grey');
+
+                    tooltip.style('display', 'block').html(`
+                        <i>${d.properties!.name}</i>
+                        <br>
+                        <br>
+                        <span>View the main page for a detailed US media map.</span>
+                    `);
+                } else {
+                    const county = heatmap.find((e) => e.countryCode == d.id);
+
+                    tooltip.style('display', 'block').html(`
+                    <i>${d.properties!.name}</i>
+                    <br>
+                    <br>
+                    ${
+                        county?.total || 0 > 0
+                            ? `
+                        Total: ${county!.total}
+                        <br>
+                        Newspapers: ${county!.newspaper}
+                        <br>
+                        TV: ${county!.tv}
+                        <br>
+                        Broadcast: ${county!.broadcast}
+                        <br>
+                        Radio: ${county!.radio}
+                    `
+                            : 'No news organizations found'
+                    }
                 `);
+                }
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
@@ -97,9 +152,14 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
             .on('mousemove', function (event) {
                 tooltip.style('left', `${event.pageX + 10}px`).style('top', `${event.pageY + 10}px`);
             })
-            .on('mouseout', function () {
+            .on('mouseout', function (_, d) {
                 tooltip.style('display', 'none');
-                d3.select(this).attr('fill', '#3700d4');
+                if (d.properties!['name'] == 'United States of America') {
+                    d3.select(this).attr('fill', 'grey');
+                } else {
+                    const county = heatmap.find((e) => e.countryCode == d.id);
+                    d3.select(this).attr('fill', colorScale(county?.total || 0));
+                }
             });
 
         // Add circles for media objects in the media layer
@@ -117,15 +177,35 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
                 const coords = projection([d.cityCountyLong, d.cityCountyLat]);
                 return coords ? coords[1] : null;
             })
-            .attr('r', 2)
+            .attr('r', 1.5)
             .attr('fill', 'gold')
             .attr('stroke', 'black')
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
+                // @ts-expect-error id doesn't play nice?
+                const county = heatmap.find((e) => e.countryCode == d.id);
+
                 tooltip.style('display', 'block').html(`
-                    <b>${d.name} ${d.mediaClass}</b>
-                    <br/>
+                    <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
+                    <br>
                     <i>${d.city}, ${d.country}</i>
+                    <br>
+                    <br>
+                    ${
+                        county?.total || 0 > 0
+                            ? `
+                        Total: ${county!.total}
+                        <br>
+                        Newspapers: ${county!.newspaper}
+                        <br>
+                        TV: ${county!.tv}
+                        <br>
+                        Broadcast: ${county!.broadcast}
+                        <br>
+                        Radio: ${county!.radio}
+                    `
+                            : 'No news organizations found'
+                    }
                 `);
 
                 // Darken the county color

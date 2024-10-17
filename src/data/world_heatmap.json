@@ -1,0 +1,1649 @@
+[
+    {
+        "countryName": "Afghanistan",
+        "countryCode": 4,
+        "newspaper": 15,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 15
+    },
+    {
+        "countryName": "Albania",
+        "countryCode": 8,
+        "newspaper": 9,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 9
+    },
+    {
+        "countryName": "Algeria",
+        "countryCode": 12,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Andorra",
+        "countryCode": 20,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Antigua and Barbuda",
+        "countryCode": 28,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Argentina",
+        "countryCode": 32,
+        "newspaper": 50,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 50
+    },
+    {
+        "countryName": "Armenia",
+        "countryCode": 51,
+        "newspaper": 23,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 23
+    },
+    {
+        "countryName": "Australia",
+        "countryCode": 36,
+        "newspaper": 359,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 359
+    },
+    {
+        "countryName": "Austria",
+        "countryCode": 40,
+        "newspaper": 46,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 46
+    },
+    {
+        "countryName": "Azerbaijan",
+        "countryCode": 31,
+        "newspaper": 42,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 42
+    },
+    {
+        "countryName": "Bahrain",
+        "countryCode": 48,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Bangladesh",
+        "countryCode": 50,
+        "newspaper": 28,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 28
+    },
+    {
+        "countryName": "Barbados",
+        "countryCode": 52,
+        "newspaper": 4,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 4
+    },
+    {
+        "countryName": "Belarus",
+        "countryCode": 112,
+        "newspaper": 17,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 17
+    },
+    {
+        "countryName": "Belgium",
+        "countryCode": 56,
+        "newspaper": 18,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 18
+    },
+    {
+        "countryName": "Belize",
+        "countryCode": 84,
+        "newspaper": 8,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 8
+    },
+    {
+        "countryName": "Benin",
+        "countryCode": 204,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Bermuda",
+        "countryCode": 60,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Bhutan",
+        "countryCode": 64,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Bolivia",
+        "countryCode": 68,
+        "newspaper": 33,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 33
+    },
+    {
+        "countryName": "Bosnia and Herzegovina",
+        "countryCode": 70,
+        "newspaper": 18,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 18
+    },
+    {
+        "countryName": "Botswana",
+        "countryCode": 72,
+        "newspaper": 10,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 10
+    },
+    {
+        "countryName": "Brasov",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Brazil",
+        "countryCode": 76,
+        "newspaper": 35,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 35
+    },
+    {
+        "countryName": "Brunei",
+        "countryCode": "Unknown",
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Bulgaria",
+        "countryCode": 100,
+        "newspaper": 57,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 57
+    },
+    {
+        "countryName": "Burkina Faso",
+        "countryCode": 854,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Cambodia",
+        "countryCode": 116,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Cameroon",
+        "countryCode": 120,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Canada",
+        "countryCode": 124,
+        "newspaper": 581,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 581
+    },
+    {
+        "countryName": "Caribbean Netherlands",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Cayman Islands",
+        "countryCode": 136,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Chile",
+        "countryCode": 152,
+        "newspaper": 29,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 29
+    },
+    {
+        "countryName": "China",
+        "countryCode": 156,
+        "newspaper": 29,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 29
+    },
+    {
+        "countryName": "Colombia",
+        "countryCode": 170,
+        "newspaper": 18,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 18
+    },
+    {
+        "countryName": "Costa Rica",
+        "countryCode": 188,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "Croatia",
+        "countryCode": 191,
+        "newspaper": 43,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 43
+    },
+    {
+        "countryName": "Cuba",
+        "countryCode": 192,
+        "newspaper": 10,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 10
+    },
+    {
+        "countryName": "Curacao",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Cyprus",
+        "countryCode": 196,
+        "newspaper": 26,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 26
+    },
+    {
+        "countryName": "Czech Republic",
+        "countryCode": "Unknown",
+        "newspaper": 118,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 118
+    },
+    {
+        "countryName": "Democratic Republic of Congo",
+        "countryCode": "Unknown",
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Denmark",
+        "countryCode": 208,
+        "newspaper": 112,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 112
+    },
+    {
+        "countryName": "Dominica",
+        "countryCode": 212,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Dominican Republic",
+        "countryCode": 214,
+        "newspaper": 34,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 34
+    },
+    {
+        "countryName": "Dutch Antilles",
+        "countryCode": "Unknown",
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "Ecuador",
+        "countryCode": 218,
+        "newspaper": 37,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 37
+    },
+    {
+        "countryName": "Egypt",
+        "countryCode": 818,
+        "newspaper": 35,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 35
+    },
+    {
+        "countryName": "El Salvador",
+        "countryCode": 222,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "England",
+        "countryCode": "Unknown",
+        "newspaper": 539,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 539
+    },
+    {
+        "countryName": "Equatorial Guinea",
+        "countryCode": 226,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Estonia",
+        "countryCode": 233,
+        "newspaper": 47,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 47
+    },
+    {
+        "countryName": "Ethiopia",
+        "countryCode": 231,
+        "newspaper": 8,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 8
+    },
+    {
+        "countryName": "Faroe Islands",
+        "countryCode": 234,
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "Fiji",
+        "countryCode": 242,
+        "newspaper": 4,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 4
+    },
+    {
+        "countryName": "Finland",
+        "countryCode": 246,
+        "newspaper": 177,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 177
+    },
+    {
+        "countryName": "France",
+        "countryCode": 250,
+        "newspaper": 105,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 105
+    },
+    {
+        "countryName": "Gambia",
+        "countryCode": 270,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Georgia",
+        "countryCode": 268,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "Germany",
+        "countryCode": 276,
+        "newspaper": 392,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 392
+    },
+    {
+        "countryName": "Ghana",
+        "countryCode": 288,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Gibraltar",
+        "countryCode": 292,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Greece",
+        "countryCode": 300,
+        "newspaper": 50,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 50
+    },
+    {
+        "countryName": "Guam",
+        "countryCode": 316,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Guatemala",
+        "countryCode": 320,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "Guinea",
+        "countryCode": 324,
+        "newspaper": 8,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 8
+    },
+    {
+        "countryName": "Guyana",
+        "countryCode": 328,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Haiti",
+        "countryCode": 332,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Hedmark Fylke",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Honduras",
+        "countryCode": 340,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "Hong Kong",
+        "countryCode": 344,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Hungary",
+        "countryCode": 348,
+        "newspaper": 28,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 28
+    },
+    {
+        "countryName": "Iceland",
+        "countryCode": 352,
+        "newspaper": 23,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 23
+    },
+    {
+        "countryName": "India",
+        "countryCode": 356,
+        "newspaper": 324,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 324
+    },
+    {
+        "countryName": "Indonesia",
+        "countryCode": 360,
+        "newspaper": 57,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 57
+    },
+    {
+        "countryName": "Iran",
+        "countryCode": 364,
+        "newspaper": 30,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 30
+    },
+    {
+        "countryName": "Iraq",
+        "countryCode": 368,
+        "newspaper": 15,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 15
+    },
+    {
+        "countryName": "Ireland",
+        "countryCode": 372,
+        "newspaper": 87,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 87
+    },
+    {
+        "countryName": "Isle of Man",
+        "countryCode": 833,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Israel",
+        "countryCode": 376,
+        "newspaper": 17,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 17
+    },
+    {
+        "countryName": "Italy",
+        "countryCode": 380,
+        "newspaper": 213,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 213
+    },
+    {
+        "countryName": "Ivory Coast",
+        "countryCode": "Unknown",
+        "newspaper": 7,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 7
+    },
+    {
+        "countryName": "Jamaica",
+        "countryCode": 388,
+        "newspaper": 4,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 4
+    },
+    {
+        "countryName": "Japan",
+        "countryCode": 392,
+        "newspaper": 120,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 120
+    },
+    {
+        "countryName": "Jordan",
+        "countryCode": 400,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Kazakhstan",
+        "countryCode": 398,
+        "newspaper": 17,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 17
+    },
+    {
+        "countryName": "Kenya",
+        "countryCode": 404,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Kosovo",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Kuwait",
+        "countryCode": 414,
+        "newspaper": 21,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 21
+    },
+    {
+        "countryName": "Kyrgyzstan",
+        "countryCode": 417,
+        "newspaper": 8,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 8
+    },
+    {
+        "countryName": "Laos",
+        "countryCode": "Unknown",
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Latvia",
+        "countryCode": 428,
+        "newspaper": 50,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 50
+    },
+    {
+        "countryName": "Lebanon",
+        "countryCode": 422,
+        "newspaper": 37,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 37
+    },
+    {
+        "countryName": "Libya",
+        "countryCode": 434,
+        "newspaper": 7,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 7
+    },
+    {
+        "countryName": "Liechtenstein",
+        "countryCode": 438,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Lithuania",
+        "countryCode": 440,
+        "newspaper": 53,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 53
+    },
+    {
+        "countryName": "Luxembourg",
+        "countryCode": 442,
+        "newspaper": 9,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 9
+    },
+    {
+        "countryName": "Macedonia",
+        "countryCode": "Unknown",
+        "newspaper": 16,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 16
+    },
+    {
+        "countryName": "Madagascar",
+        "countryCode": 450,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Malawi",
+        "countryCode": 454,
+        "newspaper": 6,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 6
+    },
+    {
+        "countryName": "Malaysia",
+        "countryCode": 458,
+        "newspaper": 43,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 43
+    },
+    {
+        "countryName": "Malta",
+        "countryCode": 470,
+        "newspaper": 10,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 10
+    },
+    {
+        "countryName": "Mauritius",
+        "countryCode": 480,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Mexico",
+        "countryCode": 484,
+        "newspaper": 38,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 38
+    },
+    {
+        "countryName": "Moldova",
+        "countryCode": 498,
+        "newspaper": 23,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 23
+    },
+    {
+        "countryName": "Mongolia",
+        "countryCode": 496,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Montenegro",
+        "countryCode": 499,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Montserrat",
+        "countryCode": 500,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Morocco",
+        "countryCode": 504,
+        "newspaper": 41,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 41
+    },
+    {
+        "countryName": "Myanmar",
+        "countryCode": 104,
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "Namibia",
+        "countryCode": 516,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Nepal",
+        "countryCode": 524,
+        "newspaper": 8,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 8
+    },
+    {
+        "countryName": "Netherlands",
+        "countryCode": 528,
+        "newspaper": 48,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 48
+    },
+    {
+        "countryName": "New Caledonia",
+        "countryCode": 540,
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "New Zealand",
+        "countryCode": 554,
+        "newspaper": 66,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 66
+    },
+    {
+        "countryName": "Nicaragua",
+        "countryCode": 558,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Nigeria",
+        "countryCode": 566,
+        "newspaper": 41,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 41
+    },
+    {
+        "countryName": "North Korea",
+        "countryCode": 408,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Northern Ireland",
+        "countryCode": "Unknown",
+        "newspaper": 45,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 45
+    },
+    {
+        "countryName": "Norway",
+        "countryCode": 578,
+        "newspaper": 237,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 237
+    },
+    {
+        "countryName": "Oman",
+        "countryCode": 512,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Pakistan",
+        "countryCode": 586,
+        "newspaper": 108,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 108
+    },
+    {
+        "countryName": "Palestine",
+        "countryCode": "Unknown",
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "Panama",
+        "countryCode": 591,
+        "newspaper": 13,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 13
+    },
+    {
+        "countryName": "Papua New Guinea",
+        "countryCode": 598,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Paraguay",
+        "countryCode": 600,
+        "newspaper": 15,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 15
+    },
+    {
+        "countryName": "Peru",
+        "countryCode": 604,
+        "newspaper": 62,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 62
+    },
+    {
+        "countryName": "Philippines",
+        "countryCode": 608,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    },
+    {
+        "countryName": "Poland",
+        "countryCode": 616,
+        "newspaper": 67,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 67
+    },
+    {
+        "countryName": "Portugal",
+        "countryCode": 620,
+        "newspaper": 47,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 47
+    },
+    {
+        "countryName": "Puerto Rico",
+        "countryCode": 630,
+        "newspaper": 6,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 6
+    },
+    {
+        "countryName": "Qatar",
+        "countryCode": 634,
+        "newspaper": 6,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 6
+    },
+    {
+        "countryName": "Reunion",
+        "countryCode": "Unknown",
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Romania",
+        "countryCode": 642,
+        "newspaper": 132,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 132
+    },
+    {
+        "countryName": "Russia",
+        "countryCode": 643,
+        "newspaper": 33,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 33
+    },
+    {
+        "countryName": "Saint Kitts and Nevis",
+        "countryCode": 659,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Samoa",
+        "countryCode": 882,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "San Marino",
+        "countryCode": 674,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Saudi Arabia",
+        "countryCode": 682,
+        "newspaper": 8,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 8
+    },
+    {
+        "countryName": "Scotland",
+        "countryCode": "Unknown",
+        "newspaper": 127,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 127
+    },
+    {
+        "countryName": "Senegal",
+        "countryCode": 686,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Serbia",
+        "countryCode": 688,
+        "newspaper": 17,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 17
+    },
+    {
+        "countryName": "Seychelles",
+        "countryCode": 690,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Sierra Leone",
+        "countryCode": 694,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Singapore",
+        "countryCode": 702,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "Slovakia",
+        "countryCode": 703,
+        "newspaper": 10,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 10
+    },
+    {
+        "countryName": "Slovenia",
+        "countryCode": 705,
+        "newspaper": 6,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 6
+    },
+    {
+        "countryName": "Somalia",
+        "countryCode": 706,
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "South Africa",
+        "countryCode": 710,
+        "newspaper": 81,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 81
+    },
+    {
+        "countryName": "South Korea",
+        "countryCode": 410,
+        "newspaper": 15,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 15
+    },
+    {
+        "countryName": "Spain",
+        "countryCode": 724,
+        "newspaper": 101,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 101
+    },
+    {
+        "countryName": "Sri Lanka",
+        "countryCode": 144,
+        "newspaper": 30,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 30
+    },
+    {
+        "countryName": "St Helena",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "St. Lucia",
+        "countryCode": "Unknown",
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Sudan",
+        "countryCode": 729,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Suriname",
+        "countryCode": 740,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Swaziland",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Sweden",
+        "countryCode": 752,
+        "newspaper": 152,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 152
+    },
+    {
+        "countryName": "Switzerland",
+        "countryCode": 756,
+        "newspaper": 115,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 115
+    },
+    {
+        "countryName": "Syria",
+        "countryCode": "Unknown",
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Taiwan",
+        "countryCode": 158,
+        "newspaper": 5,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 5
+    },
+    {
+        "countryName": "Tanzania",
+        "countryCode": 834,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Thailand",
+        "countryCode": 764,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "The Bahamas",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "The Gambia",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Tonga",
+        "countryCode": 776,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Trinidad and Tobago",
+        "countryCode": 780,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Tunisia",
+        "countryCode": 788,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "Turkey",
+        "countryCode": 792,
+        "newspaper": 25,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 25
+    },
+    {
+        "countryName": "Turkmenistan",
+        "countryCode": 795,
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Uganda",
+        "countryCode": 800,
+        "newspaper": 14,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 14
+    },
+    {
+        "countryName": "Ukraine",
+        "countryCode": 804,
+        "newspaper": 11,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 11
+    },
+    {
+        "countryName": "United Arab Emirates",
+        "countryCode": 784,
+        "newspaper": 21,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 21
+    },
+    {
+        "countryName": "Uruguay",
+        "countryCode": 858,
+        "newspaper": 9,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 9
+    },
+    {
+        "countryName": "Uzbekistan",
+        "countryCode": 860,
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "Vatican City",
+        "countryCode": "Unknown",
+        "newspaper": 1,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 1
+    },
+    {
+        "countryName": "Venezuela",
+        "countryCode": 862,
+        "newspaper": 23,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 23
+    },
+    {
+        "countryName": "Vietnam",
+        "countryCode": "Unknown",
+        "newspaper": 4,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 4
+    },
+    {
+        "countryName": "Virgin Islands",
+        "countryCode": 850,
+        "newspaper": 3,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 3
+    },
+    {
+        "countryName": "Wales",
+        "countryCode": "Unknown",
+        "newspaper": 38,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 38
+    },
+    {
+        "countryName": "Yemen",
+        "countryCode": 887,
+        "newspaper": 7,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 7
+    },
+    {
+        "countryName": "Zambia",
+        "countryCode": 894,
+        "newspaper": 2,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 2
+    },
+    {
+        "countryName": "Zimbabwe",
+        "countryCode": 716,
+        "newspaper": 12,
+        "broadcast": 0,
+        "radio": 0,
+        "tv": 0,
+        "total": 12
+    }
+]
