@@ -64,7 +64,7 @@ const App: FC = () => {
             <Routes>
                 <Route path="/" element={<Home geolocation={locationData} />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/world" element={<World />} />
+                <Route path="/world" element={<World geolocation={locationData} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </StyledApp>
