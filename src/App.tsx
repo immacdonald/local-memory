@@ -14,7 +14,7 @@ const styleConfiguration: StyleConfiguration = {
 };
 
 const App: FC = () => {
-    useAnalytics();
+    useAnalytics('/tools/local-memory');
 
     const [locationData, setLocationData] = useState<LocationData>({ loading: true, location: null });
     const [locationError, setError] = useState<string | null>(null);

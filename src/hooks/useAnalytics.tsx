@@ -5,7 +5,7 @@ import { config } from '@config';
 
 const measurementID = 'G-HP48JN1DVH';
 
-const useAnalytics = (): void => {
+const useAnalytics = (base?: string): void => {
     const location = useLocation();
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const useAnalytics = (): void => {
     }, []);
 
     useEffect(() => {
-        const path = location.pathname + location.search;
+        const path = `${base ?? ''}${location.pathname + location.search}`;
 
         if (config.mode == 'production') {
             ReactGA.send({ hitType: 'pageview', page: path });
