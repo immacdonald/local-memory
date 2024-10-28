@@ -1,14 +1,12 @@
 import { FC } from 'react';
 import { Heading, Page, Row, Section, Typography } from 'phantom-library';
 import { LocalMemoryFullIcon } from '@icons';
-import { useAnalytics } from 'src/hooks';
 import { Header } from '@components/page';
 import { WorldMap } from '@components/WorldMap';
 import worldMediaData from '@data/world_media.json';
 import style from './Views.module.scss';
 
 const World: FC = () => {
-    useAnalytics('/tools/local-memory');
     return (
         <Page
             title="Local Memory Project"

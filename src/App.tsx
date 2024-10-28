@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { Footer, Header } from '@components/page';
 import { About, Home, NotFound, World } from '@views';
+import { useAnalytics } from './hooks/useAnalytics';
 
 const styleConfiguration: StyleConfiguration = {
     page: {
@@ -13,6 +14,8 @@ const styleConfiguration: StyleConfiguration = {
 };
 
 const App: FC = () => {
+    useAnalytics();
+
     const [locationData, setLocationData] = useState<LocationData>({ loading: true, location: null });
     const [locationError, setError] = useState<string | null>(null);
 

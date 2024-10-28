@@ -4,7 +4,6 @@ import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { useAnalytics } from 'src/hooks';
 import { USMap } from '@components/USMap';
 import { Header } from '@components/page';
 import mediaSummary from '@data/media_heatmap.json';
@@ -57,7 +56,6 @@ interface SearchInput {
 const DEFAULT_SEARCH_RADIUS = 100;
 
 const Home: FC<HomeProps> = ({ geolocation }) => {
-    useAnalytics('/tools/local-memory');
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
