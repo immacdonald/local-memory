@@ -1,1 +1,10 @@
 @forward 'color';
+
+[class^='phantom-icon'] {
+    vertical-align: bottom;
+}
+
+[class^='phantom-input'] {
+    margin: 0;
+    padding: 0;
+}

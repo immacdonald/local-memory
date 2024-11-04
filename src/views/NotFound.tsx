@@ -1,21 +1,22 @@
-import { Button, Heading, Page, Row, Section, Typography } from 'phantom-library';
 import { FC } from 'react';
+import { Button, Heading, Row, Section, Typography } from 'phantom-library';
+import { Layout } from 'src/layouts';
 
 const NotFound: FC = () => {
     return (
-        <Page title="Local Memory Project">
+        <Layout>
             <Section variant="floating" hasBackground>
-                <Heading subtitle="404 Page Not Found Error" align="center">
+                <Heading subheading="404 Page Not Found Error" align="center">
                     Not Found
                 </Heading>
                 <Typography.Paragraph align="center">Unfortunately, the page you entered cannot be found.</Typography.Paragraph>
                 <Row>
-                    <Button context="primary" link="/" visual="filled">
+                    <Button type="primary" link="/">
                         Return Home
                     </Button>
                 </Row>
             </Section>
-        </Page>
+        </Layout>
     );
 };
 

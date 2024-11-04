@@ -1,26 +1,27 @@
 import { withVectorIcon } from 'phantom-library';
-import LocalMemoryIconSVG from './local_memory_icon.svg?react';
-import LocalMemorySVG from './local_memory.svg?react';
-import LocationPinSVG from './location_pin.svg?react';
-import LocationPinFillInline from './location_pin_fill.svg';
-import FacebookSVG from './facebook.svg?react';
-import TwitterSVG from './twitter.svg?react';
-import YouTubeSVG from './youtube.svg?react';
+import BroadcastIconInline from './broadcast.svg';
+import BroadcastSVG from './broadcast.svg?react';
 import CircleFillSVG from './circle_fill.svg?react';
 import CircleSVG from './circle.svg?react';
 import DottedLineSVG from './dotted_line.svg?react';
-import SquareSVG from './square_fill.svg?react';
-
-/* eslint-disable import-x/no-duplicates */
+import FacebookSVG from './facebook.svg?react';
+import FullscreenExitSVG from './fullscreen_exit.svg?react';
+import FullscreenSVG from './fullscreen.svg?react';
+import LocalMemoryIconSVG from './local_memory_icon.svg?react';
+import LocalMemorySVG from './local_memory.svg?react';
+import LocationPinFillInline from './location_pin_fill.svg';
+import LocationPinSVG from './location_pin.svg?react';
 import NewsIconInline from './news.svg';
-import TVIconInline from './tv.svg';
-import BroadcastIconInline from './broadcast.svg';
-import RadioIconInline from './radio.svg';
 import NewsSVG from './news.svg?react';
-import TVSVG from './tv.svg?react';
-import BroadcastSVG from './broadcast.svg?react';
+import RadioIconInline from './radio.svg';
 import RadioSVG from './radio.svg?react';
-/* eslint-enable import-x/no-duplicates */
+import SquareSVG from './square_fill.svg?react';
+import SwipeSVG from './swipe.svg?react';
+import TouchSVG from './touch.svg?react';
+import TVIconInline from './tv.svg';
+import TVSVG from './tv.svg?react';
+import TwitterSVG from './twitter.svg?react';
+import YouTubeSVG from './youtube.svg?react';
 
 export const LocalMemoryFullIcon = withVectorIcon(LocalMemorySVG);
 export const LocalMemoryIcon = withVectorIcon(LocalMemoryIconSVG);
@@ -38,3 +39,8 @@ export const CircleIcon = withVectorIcon(CircleSVG);
 export const CircleFillIcon = withVectorIcon(CircleFillSVG);
 export const DottedLineIcon = withVectorIcon(DottedLineSVG);
 export const SquareFillIcon = withVectorIcon(SquareSVG);
+
+export const FullscreenIcon = withVectorIcon(FullscreenSVG);
+export const FullscreenExitIcon = withVectorIcon(FullscreenExitSVG);
+export const SwipeIcon = withVectorIcon(SwipeSVG);
+export const TouchIcon = withVectorIcon(TouchSVG);

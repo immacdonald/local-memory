@@ -6,6 +6,25 @@
 
 .page {
     > section:first-child {
-        padding-top: $lg !important;
+        padding-top: var(--space-lg) !important;
     }
+}
+
+.currentLocationSearch {
+    position: relative;
+    width: 100%;
+
+    > button {
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        right: 6px;
+        top: 14px;
+    }
+}
+
+.background {
+    background-image: radial-gradient(circle at 1px 1px, #00000040 1px, transparent 0);
+    background-size: 24px 24px;
+    background-position: center;
 }

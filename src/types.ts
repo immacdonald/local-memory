@@ -2,7 +2,7 @@ interface Media {
     video?: string;
     twitter: string;
     mediaClass: string;
-    extractedFrom: string;
+    //extractedFrom: string;
     cityCountyLong: number;
     mediaSubclass?: string;
     website: string;
@@ -16,14 +16,16 @@ interface Media {
     wikipedia?: string;
     instagram?: string;
     youtube?: string;
-    fips: number;
+    fips: string;
     stateAbbr: string;
-    mediaType: string;
+    country?: string;
+    city?: string;
 }
 
 interface LocationData {
     loading: boolean;
     location: Coordinates | null;
+    zipcode: string | null;
 }
 
 type Coordinates = {
@@ -31,4 +33,24 @@ type Coordinates = {
     longitude: number;
 };
 
-export type { Coordinates, LocationData, Media };
+interface USHeatmapData {
+    countyName: string;
+    fips: string;
+    total: number;
+    newspaper: number;
+    broadcast: number;
+    tv: number;
+    radio: number;
+}
+
+interface WorldHeatmapData {
+    countryName: string;
+    countryCode: number;
+    newspaper: number;
+    broadcast: number;
+    radio: number;
+    tv: number;
+    total: number;
+}
+
+export type { Coordinates, LocationData, Media, USHeatmapData, WorldHeatmapData };

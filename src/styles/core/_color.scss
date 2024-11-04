@@ -2,14 +2,9 @@
 
 :root {
     // Theme Color
-    $primary: #00e;
+    $primary: rgb(60 60 237);
 
     --color-primary: #{$primary};
     --color-primary-dark: #{color.scale($primary, $lightness: -15%)};
     --color-primary-darker: #{color.scale($primary, $lightness: -30%)};
-
-    $font: 'Helvetica Neue', helvetica, arial, sans-serif;
-
-    --font-body: #{$font};
-    --font-heading: #{$font};
 }
