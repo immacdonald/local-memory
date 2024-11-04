@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { LocalMemoryFullIcon, LocalMemoryIcon } from '@icons';
-import { Button, Column, DynamicHeader, DynamicHeaderProps, Row } from 'phantom-library';
+import { Button, Column, DynamicHeader, DynamicHeaderProps, Row, StyledLink } from 'phantom-library';
 import style from './Header.module.scss';
 
 interface HeaderProps extends DynamicHeaderProps {}
@@ -11,17 +10,17 @@ const Header: FC<HeaderProps> = ({ ...props }) => {
         <DynamicHeader {...props}>
             <div className={style.content}>
                 <Row>
-                    <Link to="/">
+                    <StyledLink to="/">
                         <LocalMemoryIcon size="large" />
-                    </Link>
+                    </StyledLink>
                     <Column align="start">
                         <LocalMemoryFullIcon style={{ width: '256px' }} />
                         <div className={style.newslab}>
                             <span>A </span>
                             <b>
-                                <Link to="https://newsresearch.lab.wm.edu" target="_blank">
+                                <StyledLink to="https://newsresearch.lab.wm.edu" external>
                                     NEWS Lab
-                                </Link>
+                                </StyledLink>
                             </b>
                             <span> Project</span>
                         </div>

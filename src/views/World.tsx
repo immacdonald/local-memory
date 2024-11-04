@@ -1,8 +1,7 @@
 import { Coordinates, Media } from '@types';
-import { FC, ReactElement, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, decimalPlaces, Heading, Row, Section, Typography } from 'phantom-library';
+import { Button, capitalizeFirstLetter, Column, decimalPlaces, Divider, Heading, Row, Section, StyledLink, Typography } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { WorldMap } from '@components/WorldMap';
@@ -23,7 +22,6 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxD
 
     filteredCities.sort((a: MediaWithDistance, b: MediaWithDistance) => a.distance! - b.distance!);
 
-    console.log(filteredCities);
     return filteredCities.slice(0, limit);
 }
 
@@ -35,13 +33,8 @@ const World: FC = () => {
     const media = worldMediaData as unknown as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
 
-    const onSearch = (location: Coordinates, radius: number): void => {
-        const sortedCities = sortCitiesByProximity(media, location, radius);
-        setSorted(sortedCities);
-    };
-
     useEffect(() => {
-        if (!geolocation.loading && geolocation.location) {
+        if (geolocation.location) {
             onSearch(geolocation.location, DEFAULT_SEARCH_RADIUS);
         }
     }, [geolocation.loading, geolocation.location]);
@@ -51,19 +44,37 @@ const World: FC = () => {
         return <As />;
     };
 
+    const search = useRef<{ location: Coordinates; radius: number } | null>(null);
+
+    const onSearch = (location: Coordinates, radius: number): void => {
+        search.current = { location, radius };
+
+        const sortedCities = sortCitiesByProximity(media, location, radius);
+        setSorted(sortedCities);
+    };
+
+    const updateSearch = (coordinates: Coordinates | undefined, radius: number | undefined): void => {
+        if (radius) {
+            onSearch(search.current!.location, radius);
+        } else if (coordinates) {
+            onSearch(coordinates, search.current!.radius);
+        }
+    };
+
     return (
         <Layout>
             <Section>
-                <Heading align="center" subheading="Local Media Across the World">
-                    <LocalMemoryFullIcon size="full" />
+                <Heading align="center" subheading={<LocalMemoryFullIcon inline />}>
+                    Local Media Across the Globe
                 </Heading>
-                <Row>
-                    <WorldMap mediaData={worldMediaData as any} />
-                </Row>
-                <Typography.Paragraph>
-                    Local Memory provides data about the geographic distribution of local news organizations across the globe. This website displays an interactive map showing a collection of{' '}
-                    <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-country level around the world. The data is sorted by proximity to your current location.
-                </Typography.Paragraph>
+                <Column style={{ minHeight: '720px' }} verticalAlign="start">
+                    <WorldMap search={search.current} updateSearch={updateSearch} />
+                    <Typography.Paragraph>
+                        Local Memory provides data about the geographic distribution of local news organizations across the globe. This website displays an interactive map showing a collection of{' '}
+                        <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-country level around the world. The data is sorted by proximity to your current location.
+                    </Typography.Paragraph>
+                </Column>
+                <Divider />
                 {sorted.length > 0 && (
                     <div>
                         <table className={style.table}>
@@ -84,9 +95,9 @@ const World: FC = () => {
                                             <td>{index + 1}.</td>
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
                                             <td>
-                                                <Link to={organization.website} target="_blank" rel="noreferrer">
+                                                <StyledLink to={organization.website} external>
                                                     {organization.name}
-                                                </Link>
+                                                </StyledLink>
                                             </td>
                                             <td>
                                                 {organization['cityCountyName']}, {(organization as any).country}

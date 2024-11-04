@@ -11,7 +11,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ title, darkBackground = false, children }) => {
     return (
         <>
-            <Header hasBackground pageSpace="pad" />
+            <Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }} />
             <Page title={title ?? 'Local Memory Project'} style={{ backgroundColor: orUndefined(darkBackground, 'var(--color-background)') }}>
                 {children}
             </Page>

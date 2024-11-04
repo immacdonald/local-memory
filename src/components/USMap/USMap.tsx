@@ -364,11 +364,11 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
         };
 
         const zoomIn = () => {
-            svg.transition().call(zoom.scaleBy, 2);
+            svg.transition().duration(500).call(zoom.scaleBy, 2);
         };
 
         const zoomOut = () => {
-            svg.transition().call(zoom.scaleBy, 0.5);
+            svg.transition().duration(500).call(zoom.scaleBy, 0.5);
         };
 
         mapFunctions.current = {

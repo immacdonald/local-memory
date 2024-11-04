@@ -1,12 +1,14 @@
-import type { FeatureCollection, GeoJsonProperties } from 'geojson';
-import type { Objects, Topology } from 'topojson-specification';
-import React, { useEffect, useRef } from 'react';
+import type { FeatureCollection } from 'geojson';
+import { Coordinates } from '@types';
+import { FC, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FullscreenExitIcon, FullscreenIcon, LocationPinFillInline, SwipeIcon, TouchIcon } from '@icons';
 import * as d3 from 'd3';
-import { Button, Callback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
+import { Button, Callback, MultiCallback, orUndefined, RecenterIcon, useNoScroll, useWindowSize, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import * as topojson from 'topojson-client';
-import heatmap from '@data/world_heatmap.json';
-import worldTopology from '@data/world_topology.json';
+import { mediaHeatmapWorld, mediaWorld, topologyWorld } from '@data';
 import { getIconForMediaClass } from '@utility';
+import { WorldMapLegend } from './WorldMapLegend';
 import style from './WorldMap.module.scss';
 
 interface MapFunctions {
@@ -14,29 +16,32 @@ interface MapFunctions {
     zoomIn: Callback<void>;
     zoomOut: Callback<void>;
     center: Callback<void>;
+    addCircle: MultiCallback<number, number>;
+    addGeoCircle: MultiCallback<number, number, number, string>;
+    addSVG: MultiCallback<number, number, string>;
+    removeIndicators: Callback<void>;
 }
 
-interface WorldMapProps {
-    mediaData: {
-        name: string;
-        cityCountyLat: number;
-        cityCountyLong: number;
-        fips: string;
-        website: string;
-        mediaClass: string;
-        city: string;
-        country: string;
-    }[];
+interface MapProps {
+    search: {
+        location: Coordinates;
+        radius: number;
+    } | null;
+    updateSearch: MultiCallback<Coordinates | undefined, number | undefined>;
 }
 
-const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
+const defaultWidth = 960;
+const defaultHeight = 660;
+
+const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
     const ref = useRef<HTMLDivElement>(null);
-    const world = worldTopology as unknown as Topology<Objects<GeoJsonProperties>>;
 
-    const width = 950;
-    const height = 650;
+    const [width, setWidth] = useState<number>(defaultWidth);
+    const [height, setHeight] = useState<number>(defaultHeight);
 
     const mapFunctions = useRef<MapFunctions | null>(null);
+
+    const navigate = useNavigate();
 
     // Returns an <img/> using the svg as a source to display inline with D3
     const inlineSVG = (path: string): string => {
@@ -53,14 +58,14 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
         // Create groups for each layer
         const group = svg.append('g');
         const baseLayer = group.append('g').attr('class', 'base-layer');
-        //const interactableLayer = group.append('g').attr('class', 'interactable-layer');
+        const interactableLayer = group.append('g').attr('class', 'interactable-layer');
         const mediaLayer = group.append('g').attr('class', 'media-layer');
 
         // Create a projection
         const projection = d3.geoNaturalEarth1().scale(200).translate([475, 300]);
         const pathGenerator = d3.geoPath().projection(projection);
 
-        const countries = topojson.feature(world, world.objects.countries);
+        const countries = topojson.feature(topologyWorld, topologyWorld.objects.countries);
 
         const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
 
@@ -86,9 +91,9 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
                 if (d.properties!['name'] == 'United States of America') {
                     return `grey`;
                 } else {
-                    const county = heatmap.find((e) => e.countryCode == d.id);
+                    const county = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
                     if (!county) {
-                        console.log('No country found for', d.id, d.properties!.name);
+                        //console.log('No country found for', d.id, d.properties!.name);
                     }
                     return colorScale(county?.total || 0);
                 }
@@ -96,17 +101,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
             .attr('stroke', 'white')
             .attr('stroke-width', '0.25')
             .on('mouseover', function (_, d) {
-                if (d.properties!['name'] == 'United States of America') {
-                    d3.select(this).attr('fill', 'grey');
-
-                    tooltip.style('display', 'block').html(`
-                        <i>${d.properties!.name}</i>
-                        <br>
-                        <br>
-                        <span>View the main page for a detailed US media map.</span>
-                    `);
-                } else {
-                    const county = heatmap.find((e) => e.countryCode == d.id);
+                if (d.properties!['name'] != 'United States of America') {
+                    const county = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
 
                     tooltip.style('display', 'block').html(`
                     <i>${d.properties!.name}</i>
@@ -143,15 +139,28 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
                 if (d.properties!['name'] == 'United States of America') {
                     d3.select(this).attr('fill', 'grey');
                 } else {
-                    const county = heatmap.find((e) => e.countryCode == d.id);
+                    const county = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
                     d3.select(this).attr('fill', colorScale(county?.total || 0));
+                }
+            })
+            .on('mousedown', function (event, d) {
+                if (d.properties!['name'] == 'United States of America') {
+                    navigate('/');
+                } else if (interactionMode.current) {
+                    event.stopPropagation();
+
+                    // Convert the pixel coordinates to geographic coordinates (latitude and longitude)
+                    const [x, y] = d3.pointer(event);
+                    const [longitude, latitude] = projection.invert!([x, y])!;
+
+                    updateSearch({ latitude, longitude }, undefined);
                 }
             });
 
         // Add circles for media objects in the media layer
         mediaLayer
             .selectAll('.media')
-            .data(mediaData)
+            .data(mediaWorld)
             .enter()
             .append('circle')
             .attr('class', 'media')
@@ -169,7 +178,7 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
                 // @ts-expect-error id doesn't play nice?
-                const county = heatmap.find((e) => e.countryCode == d.id);
+                const county = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
 
                 tooltip.style('display', 'block').html(`
                     <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
@@ -212,9 +221,117 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
                 window.open(d.website, '_blank');
             });
 
+        // Function to add a circle at a given latitude and longitude in the interactable layer
+        const addCircle = (latitude: number, longitude: number, radius = 8, color = '#ff0000'): void => {
+            const coords = projection([longitude, latitude]);
+            if (coords) {
+                interactableLayer.append('circle').attr('cx', coords[0]).attr('cy', coords[1]).attr('r', radius).attr('fill', color).style('pointer-events', 'none');
+            }
+        };
+
+        // Function to add a custom SVG at given latitude and longitude in the interactable layer
+        const addSVG = (latitude: number, longitude: number, svgPath: string, width = 16, height = 16): void => {
+            const coords = projection([longitude, latitude]);
+            if (coords) {
+                interactableLayer
+                    .append('image')
+                    .attr('xlink:href', svgPath)
+                    .attr('x', coords[0] - width / 2)
+                    .attr('y', coords[1] - height / 2)
+                    .attr('width', width)
+                    .attr('height', height)
+                    .attr('class', 'indicator')
+                    .style('pointer-events', 'none');
+            }
+        };
+
+        const addGeoCircle = (latitude: number, longitude: number, distance: number, color: string): void => {
+            const circumference = 3958 * Math.PI * 2;
+            const initialAngle = (distance / circumference) * 360;
+            let currentAngle = initialAngle;
+
+            const centerCoords: [number, number] = projection([longitude, latitude])!;
+            const circle = d3.geoCircle().center([longitude, latitude]).radius(currentAngle);
+            const path = d3.geoPath().projection(projection);
+
+            const dragBehavior = d3.drag().on('start', dragStarted).on('drag', dragged).on('end', dragEnded);
+
+            let initialPosition = { x: 0, y: 0 };
+            let initialDistanceFromCenter = 0;
+            let currentPosition = { x: 0, y: 0 };
+
+            let currentRadius = distance;
+
+            function dragStarted(event: any) {
+                initialPosition = { x: event.x, y: event.y };
+
+                // Calculate the initial distance from the center of the circle to the mouse position
+                const dx = initialPosition.x - centerCoords[0];
+                const dy = initialPosition.y - centerCoords[1];
+                initialDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
+
+                /* @tslint:disable-next-line */
+                currentRadius = Number(d3.select(event.target).attr('data-radius'));
+            }
+
+            function dragged(event: any) {
+                currentPosition = { x: event.x, y: event.y };
+
+                // Calculate the new distance from the center of the circle to the current mouse position
+                const dx = currentPosition.x - centerCoords[0];
+                const dy = currentPosition.y - centerCoords[1];
+                const newDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
+
+                // Adjust the radius by the difference between the initial and current distance
+                const distanceChange = newDistanceFromCenter - initialDistanceFromCenter;
+                currentRadius += distanceChange;
+
+                // Ensure the radius does not go negative
+                if (currentRadius < 0) currentRadius = 0;
+
+                // Update the angle for the circle's radius
+                currentAngle = (currentRadius / circumference) * 360;
+
+                updateCircle();
+
+                // Update the initial distance so that further drags adjust relative to the last position
+                initialDistanceFromCenter = newDistanceFromCenter;
+            }
+
+            function dragEnded() {
+                // Update the search radius or any other final actions
+                updateSearch(undefined, currentRadius);
+            }
+
+            function updateCircle() {
+                const updatedCircle = d3.geoCircle().center([longitude, latitude]).radius(currentAngle);
+                circlePath.attr('d', path(updatedCircle()));
+                circlePath.attr('data-radius', currentRadius);
+            }
+
+            const circlePath = interactableLayer
+                .append('path')
+                .attr('fill', color)
+                .attr('d', path(circle()))
+                .attr('class', 'indicator')
+                .attr('data-radius', currentRadius)
+                .call(dragBehavior as any)
+                .style('pointer-events', 'all')
+                .style('cursor', 'ew-resize')
+                .lower();
+        };
+
+        const removeIndicators = () => {
+            svg.selectAll('.indicator').remove();
+        };
+
         // Add zoom functionality
         const zoom = d3
             .zoom<SVGSVGElement, unknown>()
+            .extent([
+                [0, 0],
+                [width, height]
+            ])
             .scaleExtent([1, 8])
             .on('zoom', (event) => {
                 group.attr('transform', event.transform);
@@ -225,41 +342,95 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
         };
 
         const center = () => {
-            //svg.transition().call(zoom.scaleTo, 1);
-            svg.transition().call(zoom.translateTo, 0.5 * width, 0.5 * height);
+            const containerWidth = ref.current?.clientWidth || width;
+            const containerHeight = ref.current?.clientHeight || height;
+
+            // Calculate bounding box of the map elements
+            const bbox = group.node()!.getBBox();
+
+            // Calculate offsets for centering the bounding box within the container
+            const offsetX = containerWidth / 2 - (bbox.x + bbox.width / 2);
+            const offsetY = containerHeight / 2 - (bbox.y + bbox.height / 2);
+
+            // Apply centering translation
+            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY).scale(1));
         };
 
         const zoomIn = () => {
-            svg.transition().call(zoom.scaleBy, 2);
+            svg.transition().duration(500).call(zoom.scaleBy, 2);
         };
 
         const zoomOut = () => {
-            svg.transition().call(zoom.scaleBy, 0.5);
+            svg.transition().duration(500).call(zoom.scaleBy, 0.5);
         };
 
         mapFunctions.current = {
             setZoom,
             center,
             zoomIn,
-            zoomOut
+            zoomOut,
+            addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude),
+            addGeoCircle,
+            addSVG,
+            removeIndicators
         };
 
         svg.call(zoom);
     }, []);
 
     useEffect(() => {
+        mapFunctions.current!.removeIndicators();
+        if (search) {
+            mapFunctions.current!.addSVG(search.location.latitude, search.location.longitude, LocationPinFillInline);
+            //mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius, '#ff000040');
+        }
+    }, [search]);
+
+    useEffect(() => {
         mapFunctions.current!.center();
     }, [mapFunctions.current]);
 
+    const [fullscreen, setFullscreen] = useState<boolean>(false);
+
+    const noScroll = useNoScroll();
+    const windowSize = useWindowSize();
+
+    const toggleFullscreen = () => {
+        const toggled = !fullscreen;
+        setFullscreen(toggled);
+        noScroll(toggled);
+
+        const newHeight = toggled ? windowSize.height : defaultHeight;
+        setWidth(toggled ? windowSize.width : defaultWidth);
+        setHeight(newHeight);
+        d3.select(ref.current).select('svg').attr('height', newHeight);
+
+        setTimeout(() => {
+            mapFunctions.current!.center();
+        });
+    };
+
+    const interactionMode = useRef<boolean>(false);
+    const [interactionModeInteral, setInteractionModeInternal] = useState<boolean>(false);
+
+    const toggleInteractionMode = () => {
+        const mode = !interactionMode.current;
+        interactionMode.current = mode;
+        setInteractionModeInternal(mode);
+    };
+
     return (
-        <div className={style.visualization}>
+        <div className={style.visualization} data-fullscreen={orUndefined(fullscreen, '')}>
             <div className={style.map}>
                 <div ref={ref} />
                 <div className={style.tools}>
+                    <Button onClick={() => toggleInteractionMode()} Icon={interactionModeInteral ? TouchIcon : SwipeIcon} />
                     <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
+                    <Button onClick={() => toggleFullscreen()} Icon={fullscreen ? FullscreenExitIcon : FullscreenIcon} rounded />
                 </div>
+                <WorldMapLegend />
             </div>
         </div>
     );

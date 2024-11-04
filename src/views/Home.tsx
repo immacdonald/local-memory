@@ -1,9 +1,8 @@
 import type { Media, Coordinates } from '@types';
 import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, LocationPinIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading } from 'phantom-library';
+import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading, StyledLink } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { USMap } from '@components/USMap';
@@ -102,7 +101,7 @@ const Home: FC = () => {
         <Layout>
             <Section>
                 <Heading align="center" subheading={<LocalMemoryFullIcon inline />}>
-                    US Local Media Per County
+                    US Local Media by County
                 </Heading>
                 <Column style={{ minHeight: '720px' }} verticalAlign="start">
                     <USMap search={search.current} updateSearch={updateSearch} />
@@ -159,9 +158,9 @@ const Home: FC = () => {
                                             <td>{index + 1}.</td>
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
                                             <td>
-                                                <Link to={organization.website} target="_blank" rel="noreferrer">
+                                                <StyledLink to={organization.website} external>
                                                     {organization.name}
-                                                </Link>
+                                                </StyledLink>
                                             </td>
                                             <td>
                                                 {organization['cityCountyName']}, {organization.usState}

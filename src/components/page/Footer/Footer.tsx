@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { Column, Flex, SimpleFooter, StyledLink, Typography } from 'phantom-library';
 
 const Footer: FC = () => {
@@ -11,15 +10,22 @@ const Footer: FC = () => {
                         <b>About</b>
                     </Typography.Text>
                     <Typography.Text>
-                        <i>The Local Memory Project is a service designed to help users discover local media in various US communities.</i>
+                        <i>The Local Memory Project is a service designed to help users discover local media in US communities as well as globally.</i>
                     </Typography.Text>
                 </Column>
                 <Column align="start">
                     <Typography.Text>
                         <b>Navigation</b>
                     </Typography.Text>
-                    <Link to="/">Home</Link>
-                    <Link to="/about">About</Link>
+                    <StyledLink to="/" inherit>
+                        Home
+                    </StyledLink>
+                    <StyledLink to="/about" inherit>
+                        About
+                    </StyledLink>
+                    <StyledLink to="/world" inherit>
+                        World
+                    </StyledLink>
                 </Column>
             </Flex>
             <Typography.Text>

@@ -1,5 +1,6 @@
 .visualization {
     width: 100%;
+    min-height: 660px;
     background-color: #f3f3ff;
     border-radius: var(--border-radius);
     margin-bottom: var(--space-lg);
@@ -9,11 +10,18 @@
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
-    padding: var(--space);
+
+    &[data-fullscreen] {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        width: 100vw;
+        height: 100vh;
+    }
 
     .map {
         width: 100%;
-        height: 650px;
+        height: 100%;
         position: relative;
         border-radius: var(--border-radius);
 
