@@ -1,7 +1,7 @@
 import { Coordinates } from '@types';
-import { IconProps } from 'phantom-library';
 import { ComponentType } from 'react';
 import { BroadcastIcon, BroadcastIconInline, NewsIcon, NewsIconInline, RadioIcon, RadioIconInline, TVIcon, TVIconInline } from '@icons';
+import { IconProps } from 'phantom-library';
 
 const haversineDistance = (coords1: Coordinates, coords2: Coordinates): number => {
     const R = 6371; // Earth's radius in kilometers

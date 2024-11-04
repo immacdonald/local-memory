@@ -1,11 +1,11 @@
-import { Heading, Page, Section, Typography } from 'phantom-library';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import style from './Views.module.scss';
+import { Heading, Section, Typography } from 'phantom-library';
+import { Layout } from 'src/layouts';
 
 const About: FC = () => {
     return (
-        <Page title="About | Local Memory Project" className={style.page}>
+        <Layout title="About | Local Memory Project">
             <Section variant="inset" hasBackground>
                 <Heading align="center">About</Heading>
                 <Typography.Paragraph>
@@ -75,7 +75,7 @@ const About: FC = () => {
                     (acnwala [at] wm.edu).
                 </Typography.Paragraph>
             </Section>
-        </Page>
+        </Layout>
     );
 };
 

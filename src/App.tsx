@@ -1,51 +1,39 @@
-import { LocationData } from '@types';
-import { StyleConfiguration, StyledApp } from 'phantom-library';
-import { Route, Routes } from 'react-router-dom';
-import { FC, useEffect, useState } from 'react';
-import { Footer, Header } from '@components/page';
+import { FC, useEffect } from 'react';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { StyledApp } from 'phantom-library';
 import { About, Home, NotFound, World } from '@views';
+import { GeolocationContextProvider } from './contexts/GeolocationContext';
+import { useGeolocationContext } from './contexts/useGeolocationContext';
 import { useAnalytics } from './hooks/useAnalytics';
 
-const styleConfiguration: StyleConfiguration = {
-    page: {
-        defaultHeader: <Header hasBackground pageSpace="pad" />,
-        defaultFooter: <Footer />
-    }
-};
-
-const App: FC = () => {
+const RoutedApp: FC = () => {
     useAnalytics('/tools/local-memory');
 
-    const [locationData, setLocationData] = useState<LocationData>({ loading: true, location: null });
-    const [locationError, setError] = useState<string | null>(null);
+    const { setGeolocation } = useGeolocationContext();
 
     const getLocation = (): void => {
+        const geolocationTimeout = setTimeout(() => {
+            console.log('Geolocation fetch timeout.');
+            setGeolocation('Geolocation is not supported by this browser.');
+        }, 10000);
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    setLocationData({
-                        loading: false,
-                        location: {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude
-                        }
+                    setGeolocation({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
                     });
-                    setError(null);
+                    clearTimeout(geolocationTimeout);
                 },
                 (error) => {
-                    setError(error.message);
-                    setLocationData({
-                        loading: false,
-                        location: null
-                    });
+                    setGeolocation(error.message);
+                    clearTimeout(geolocationTimeout);
                 }
             );
         } else {
-            setError('Geolocation is not supported by this browser.');
-            setLocationData({
-                loading: false,
-                location: null
-            });
+            setGeolocation('Geolocation is not supported by this browser.');
+            clearTimeout(geolocationTimeout);
         }
     };
 
@@ -53,21 +41,48 @@ const App: FC = () => {
         getLocation();
     }, []);
 
-    useEffect(() => {
-        if (locationError) {
-            console.warn(locationError);
-        }
-    }, [locationError]);
-
     return (
-        <StyledApp anchors modals banners configuration={styleConfiguration}>
-            <Routes>
-                <Route path="/" element={<Home geolocation={locationData} />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/world" element={<World geolocation={locationData} />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
+        <StyledApp>
+            <Outlet />
         </StyledApp>
+    );
+};
+
+const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <RoutedApp />,
+            children: [
+                {
+                    path: '/',
+                    element: <Home />
+                },
+                {
+                    path: '/about',
+                    element: <About />
+                },
+                {
+                    path: '/world',
+                    element: <World />
+                },
+                {
+                    path: '*',
+                    element: <NotFound />
+                }
+            ]
+        }
+    ],
+    {
+        basename: import.meta.env.BASE_URL
+    }
+);
+
+const App: FC = () => {
+    return (
+        <GeolocationContextProvider>
+            <RouterProvider router={router} />
+        </GeolocationContextProvider>
     );
 };
 

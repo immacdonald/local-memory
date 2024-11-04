@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Column, Flex, SimpleFooter, Typography } from 'phantom-library';
+import { Column, Flex, SimpleFooter, StyledLink, Typography } from 'phantom-library';
 
 const Footer: FC = () => {
     return (
         <SimpleFooter theme="dark">
             <Flex flex={{ base: 'row', xs: 'column' }} gap={{ base: '64px', xs: '8px' }} verticalAlign="start">
-                <Column align="start" gap="0">
+                <Column align="start">
                     <Typography.Text>
                         <b>About</b>
                     </Typography.Text>
@@ -14,7 +14,7 @@ const Footer: FC = () => {
                         <i>The Local Memory Project is a service designed to help users discover local media in various US communities.</i>
                     </Typography.Text>
                 </Column>
-                <Column align="start" gap="0">
+                <Column align="start">
                     <Typography.Text>
                         <b>Navigation</b>
                     </Typography.Text>
@@ -22,11 +22,11 @@ const Footer: FC = () => {
                     <Link to="/about">About</Link>
                 </Column>
             </Flex>
-            <Typography.Text styleLinks={false}>
+            <Typography.Text>
                 &copy; {new Date().getFullYear()}{' '}
-                <Link to="https://newsresearch.lab.wm.edu" target="_blank">
+                <StyledLink to="https://newsresearch.lab.wm.edu" inherit external>
                     Willam & Mary NEWS Lab
-                </Link>
+                </StyledLink>
             </Typography.Text>
         </SimpleFooter>
     );

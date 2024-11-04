@@ -1,39 +1,19 @@
-import type { FeatureCollection, GeoJsonProperties } from 'geojson';
-import type { Objects, Topology } from 'topojson-specification';
+import type { FeatureCollection } from 'geojson';
 import { Coordinates } from '@types';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { LocationPinFillInline } from '@icons';
 import * as d3 from 'd3';
+import { Button, Callback, MultiCallback, orUndefined, RecenterIcon, useNoScroll, useWindowSize, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import * as topojson from 'topojson-client';
-import { Button, Callback, MultiCallback, RecenterIcon, Typography, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
-import { CircleFillIcon, LocationPinFillInline, SquareFillIcon } from '@icons';
-import usTopology from '@data/us_topology.json';
+import { mediaHeatmapUS, mediaUS, topologyUS } from '@data';
 import { getIconForMediaClass } from '@utility';
+import { USMapLegend } from './USMapLegend';
 import style from './USMap.module.scss';
 
-interface MapProps {
-    heatmap: {
-        fips: string;
-        countyName: string;
-        total: number;
-        newspaper: number;
-        broadcast: number;
-        tv: number;
-        radio: number;
-    }[];
-    mediaData: {
-        name: string;
-        cityCountyLat: number;
-        cityCountyLong: number;
-        fips: string;
-        website: string;
-        mediaClass: string;
-    }[];
-    search: {
-        location: Coordinates;
-        radius: number;
-    } | null;
-    updateSearchRadius: Callback<number>;
-}
+// Returns an <img/> using the svg as a source to display inline with D3
+const inlineSVG = (path: string): string => {
+    return `<img src="${path}" style="width: 20px; display: inline-block; position: relative; top: 4px"/>`;
+};
 
 interface MapFunctions {
     setZoom: Callback<number>;
@@ -41,24 +21,29 @@ interface MapFunctions {
     zoomOut: Callback<void>;
     center: Callback<void>;
     addCircle: MultiCallback<number, number>;
-    addGeoCircle: MultiCallback<number, number, number>;
+    addGeoCircle: MultiCallback<number, number, number, string>;
     addSVG: MultiCallback<number, number, string>;
     removeIndicators: Callback<void>;
 }
 
-const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRadius = () => {} }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const us = usTopology as unknown as Topology<Objects<GeoJsonProperties>>;
+interface MapProps {
+    search: {
+        location: Coordinates;
+        radius: number;
+    } | null;
+    updateSearchRadius: Callback<number>;
+}
 
-    const width = 950;
-    const height = 650;
+const defaultWidth = 960;
+const defaultHeight = 660;
+
+const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { } }) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    const [width, setWidth] = useState<number>(defaultWidth);
+    const [height, setHeight] = useState<number>(defaultHeight);
 
     const mapFunctions = useRef<MapFunctions | null>(null);
-
-    // Returns an <img/> using the svg as a source to display inline with D3
-    const inlineSVG = (path: string): string => {
-        return `<img src="${path}" style="width: 20px; display: inline-block; position: relative; top: 4px"/>`;
-    };
 
     useEffect(() => {
         // Clear old SVGs
@@ -88,49 +73,39 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             .range(colors as any);
 
         // Create tooltip
-        const tooltip = d3
-            .select('body')
-            .append('div')
-            .attr('class', style.tooltip)
-            .style('position', 'absolute')
-            .style('min-width', '150px')
-            .style('background', 'white')
-            .style('border', '1px solid gray')
-            .style('padding', '5px')
-            .style('display', 'none');
+        const tooltip = d3.select('body').append('div').attr('class', style.tooltip);
 
         // Draw counties in the base layer
         baseLayer
             .selectAll('.county')
-            .data((topojson.feature(us, us.objects.counties) as unknown as FeatureCollection).features)
+            .data((topojson.feature(topologyUS, topologyUS.objects.counties) as unknown as FeatureCollection).features)
             .enter()
             .append('path')
             .attr('class', 'county')
             .attr('d', pathGenerator)
             .attr('fill', (d) => {
-                const county = heatmap.find((e) => e.fips == d.id);
+                const county = mediaHeatmapUS.find((e) => e.fips == d.id);
                 return colorScale(county?.total || 0);
             })
             .attr('stroke', colors[4])
             .attr('stroke-width', 0.25)
             .attr('data-fips', (d) => d.id!)
             .attr('data-county-name', (d) => {
-                const county = heatmap.find((e) => e.fips == d.id);
+                const county = mediaHeatmapUS.find((e) => e.fips == d.id);
                 return county?.countyName || 'Unknown';
             })
             .attr('data-media-total', (d) => {
-                const county = heatmap.find((e) => e.fips == d.id);
+                const county = mediaHeatmapUS.find((e) => e.fips == d.id);
                 return county?.total || 0;
             })
             .on('mouseover', function (_, d) {
-                const county = heatmap.find((e) => e.fips == d.id);
+                const county = mediaHeatmapUS.find((e) => e.fips == d.id);
                 tooltip.style('display', 'block').html(`
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${
-                        county?.total || 0 > 0
-                            ? `
+                    ${county?.total || 0 > 0
+                        ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -141,14 +116,14 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                         <br>
                         Radio: ${county!.radio}
                     `
-                            : 'No news organizations found'
+                        : 'No news organizations found'
                     }
                 `);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
-                const darkerColor = d3.color(currentFill)!.darker(0.75);
-                d3.select(this).attr('fill', darkerColor as any);
+                const darkerColor = d3.color(currentFill)!.darker(0.75) as unknown as string;
+                d3.select(this).attr('fill', darkerColor);
             })
             .on('mousemove', function (event) {
                 tooltip.style('left', `${event.pageX + 10}px`).style('top', `${event.pageY + 10}px`);
@@ -157,14 +132,17 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                 tooltip.style('display', 'none');
 
                 // Restore the original county color
-                const county = heatmap.find((e) => e.fips == (d.id as string));
+                const county = mediaHeatmapUS.find((e) => e.fips == (d.id as string));
                 d3.select(this).attr('fill', colorScale(county?.total || 0));
+            })
+            .on('mousedown', (event) => {
+                console.log('Clicked', d3.pointer(event));
             });
 
         // Draw states in the base layer
         baseLayer
             .selectAll('.state')
-            .data((topojson.feature(us, us.objects.states) as unknown as FeatureCollection).features)
+            .data((topojson.feature(topologyUS, topologyUS.objects.states) as unknown as FeatureCollection).features)
             .enter()
             .append('path')
             .attr('class', 'state')
@@ -175,7 +153,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         // Add circles for media objects in the media layer
         mediaLayer
             .selectAll('.media')
-            .data(mediaData)
+            .data(mediaUS)
             .enter()
             .append('circle')
             .attr('class', 'media')
@@ -192,16 +170,15 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             .attr('stroke', 'black')
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
-                const county = heatmap.find((e) => e.fips == d.fips);
+                const county = mediaHeatmapUS.find((e) => e.fips == d.fips);
                 tooltip.style('display', 'block').html(`
                     <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
                     <br>
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${
-                        county?.total || 0 > 0
-                            ? `
+                    ${county?.total || 0 > 0
+                        ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -212,14 +189,14 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                         <br>
                         Radio: ${county!.radio}
                     `
-                            : 'No news organizations found'
+                        : 'No news organizations found'
                     }
                 `);
 
                 // Darken the county color
                 const currentFill = d3.select(this).attr('fill');
-                const darkerColor = d3.color(currentFill)!.darker(0.75);
-                d3.select(this).attr('fill', darkerColor as any);
+                const darkerColor = d3.color(currentFill)!.darker(0.75) as unknown as string;
+                d3.select(this).attr('fill', darkerColor);
             })
             .on('mousemove', function (event) {
                 tooltip.style('left', `${event.pageX + 10}px`).style('top', `${event.pageY + 10}px`);
@@ -230,12 +207,17 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
                 // Restore the original media color
                 d3.select(this).attr('fill', 'gold');
             })
-            .on('mousedown', function (_, d) {
+            .on('mousedown', function (event) {
+                event.stopPropagation();
+                //window.open(d.website, '_blank');
+            })
+            .on('mouseup', function (event, d) {
+                event.stopPropagation();
                 window.open(d.website, '_blank');
             });
 
         // Function to add a circle at a given latitude and longitude in the interactable layer
-        const addCircle = (latitude: number, longitude: number, radius = 8, color = '#ff0000') => {
+        const addCircle = (latitude: number, longitude: number, radius = 8, color = '#ff0000'): void => {
             const coords = projection([longitude, latitude]);
             if (coords) {
                 interactableLayer.append('circle').attr('cx', coords[0]).attr('cy', coords[1]).attr('r', radius).attr('fill', color).style('pointer-events', 'none');
@@ -243,7 +225,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         };
 
         // Function to add a custom SVG at given latitude and longitude in the interactable layer
-        const addCustomSVG = (latitude: number, longitude: number, svgPath: string, width = 16, height = 16) => {
+        const addSVG = (latitude: number, longitude: number, svgPath: string, width = 16, height = 16): void => {
             const coords = projection([longitude, latitude]);
             if (coords) {
                 interactableLayer
@@ -258,7 +240,7 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
             }
         };
 
-        const addGeoCircle = (latitude: number, longitude: number, distance: number, color: string) => {
+        const addGeoCircle = (latitude: number, longitude: number, distance: number, color: string): void => {
             const circumference = 3958 * Math.PI * 2;
             const initialAngle = (distance / circumference) * 360;
             let currentAngle = initialAngle;
@@ -341,6 +323,10 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         // Add zoom functionality
         const zoom = d3
             .zoom<SVGSVGElement, unknown>()
+            .extent([
+                [0, 0],
+                [width, height]
+            ])
             .scaleExtent([1, 8])
             .on('zoom', (event) => {
                 group.attr('transform', event.transform);
@@ -351,8 +337,23 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         };
 
         const center = () => {
+            // Reset zoom scale
             //svg.transition().call(zoom.scaleTo, 1);
-            svg.transition().call(zoom.translateTo, 0.5 * width, 0.5 * height);
+
+            const containerWidth = ref.current?.clientWidth || width;
+            const containerHeight = ref.current?.clientHeight || height;
+
+            // Calculate bounding box of the map elements
+            const bbox = group.node()!.getBBox();
+
+            // Calculate offsets for centering the bounding box within the container
+            const offsetX = (containerWidth / 2) - (bbox.x + bbox.width / 2);
+            const offsetY = (containerHeight / 2) - (bbox.y + bbox.height / 2);
+
+            // Apply centering translation
+            svg.transition()
+                .duration(750)
+                .call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY).scale(1));
         };
 
         const zoomIn = () => {
@@ -365,23 +366,23 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
 
         mapFunctions.current = {
             setZoom,
-            center,
             zoomIn,
             zoomOut,
+            center,
             addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude),
-            addGeoCircle: (latitude: number, longitude: number, distance: number) => addGeoCircle(latitude, longitude, distance, '#ff000040'),
-            addSVG: (latitude: number, longitude: number, svgPath: string) => addCustomSVG(latitude, longitude, svgPath),
+            addGeoCircle,
+            addSVG,
             removeIndicators
         };
 
         svg.call(zoom);
-    }, [heatmap, usTopology, mediaData]);
+    }, []);
 
     useEffect(() => {
         mapFunctions.current!.removeIndicators();
         if (search) {
             mapFunctions.current!.addSVG(search.location.latitude, search.location.longitude, LocationPinFillInline);
-            mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius);
+            mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius, '#ff000040');
         }
     }, [search]);
 
@@ -389,29 +390,36 @@ const USMap: React.FC<MapProps> = ({ heatmap, mediaData, search, updateSearchRad
         mapFunctions.current!.center();
     }, [mapFunctions.current]);
 
+    const [fullscreen, setFullscreen] = useState<boolean>(false);
+
+    const noScroll = useNoScroll();
+    const windowSize = useWindowSize();
+
+    const toggleFullscreen = () => {
+        const toggled = !fullscreen;
+        setFullscreen(toggled);
+        noScroll(toggled);
+
+        const newHeight = toggled ? windowSize.height : defaultHeight;
+        setWidth(toggled ? windowSize.width : defaultWidth)
+        setHeight(newHeight)
+        d3.select(ref.current).select('svg').attr('height', newHeight)
+
+        setTimeout(() => {
+            mapFunctions.current!.center();
+        })
+    }
+
     return (
-        <div className={style.visualization}>
+        <div className={style.visualization} data-fullscreen={orUndefined(fullscreen, '')}>
             <div className={style.map}>
                 <div ref={ref} />
-                <div className={style.legend}>
-                    <Typography.Text>
-                        <b>Legend</b>
-                    </Typography.Text>
-                    <Typography.Text newline>
-                        <CircleFillIcon inline cssProperties={{ color: 'gold' }} /> Media
-                    </Typography.Text>
-                    <Typography.Text newline>
-                        0 in County <SquareFillIcon inline cssProperties={{ color: '#e3d9ff' }} />
-                        <SquareFillIcon inline cssProperties={{ color: '#bea9f8' }} />
-                        <SquareFillIcon inline cssProperties={{ color: '#9879ee' }} />
-                        <SquareFillIcon inline cssProperties={{ color: '#6e48e2' }} />
-                        <SquareFillIcon inline cssProperties={{ color: '#3700d4' }} /> 4+ in County
-                    </Typography.Text>
-                </div>
+                <USMapLegend />
                 <div className={style.tools}>
                     <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
+                    <Button onClick={() => toggleFullscreen()}>Fullscreen</Button>
                 </div>
             </div>
         </div>

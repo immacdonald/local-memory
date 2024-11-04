@@ -6,6 +6,6 @@
 
 .page {
     > section:first-child {
-        padding-top: $lg !important;
+        padding-top: var(--space-lg) !important;
     }
 }

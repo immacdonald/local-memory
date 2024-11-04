@@ -2,10 +2,10 @@ import type { FeatureCollection, GeoJsonProperties } from 'geojson';
 import type { Objects, Topology } from 'topojson-specification';
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import * as topojson from 'topojson-client';
 import { Button, Callback, RecenterIcon, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
-import worldTopology from '@data/world_topology.json';
+import * as topojson from 'topojson-client';
 import heatmap from '@data/world_heatmap.json';
+import worldTopology from '@data/world_topology.json';
 import { getIconForMediaClass } from '@utility';
 import style from './WorldMap.module.scss';
 

@@ -1,8 +1,9 @@
-import { Coordinates, LocationData, Media } from '@types';
+import { Coordinates, Media } from '@types';
 import { FC, ReactElement, useEffect, useState } from 'react';
-import { Button, capitalizeFirstLetter, decimalPlaces, Heading, Page, Row, Section, Typography } from 'phantom-library';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
+import { Button, capitalizeFirstLetter, decimalPlaces, Heading, Page, Row, Section, Typography } from 'phantom-library';
+import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Header } from '@components/page';
 import { WorldMap } from '@components/WorldMap';
 import worldMediaData from '@data/world_media.json';
@@ -28,11 +29,9 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxD
 
 const DEFAULT_SEARCH_RADIUS = Number.MAX_SAFE_INTEGER;
 
-interface WorldProps {
-    geolocation: LocationData;
-}
+const World: FC = () => {
+    const { geolocation } = useGeolocationContext();
 
-const World: FC<WorldProps> = ({ geolocation }) => {
     const media = worldMediaData as unknown as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
 
@@ -61,7 +60,7 @@ const World: FC<WorldProps> = ({ geolocation }) => {
             className={style.page}
         >
             <Section>
-                <Heading align="center" subtitle="Local Media Across the World">
+                <Heading align="center" subheading="Local Media Across the World">
                     <LocalMemoryFullIcon size="full" />
                 </Heading>
                 <Row>
@@ -100,9 +99,9 @@ const World: FC<WorldProps> = ({ geolocation }) => {
                                             </td>
                                             <td>
                                                 <Row gap="0px" align="start">
-                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} visual="text" />}
-                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} visual="text" />}
-                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} visual="text" />}
+                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} variant="text" />}
+                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} variant="text" />}
+                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} variant="text" />}
                                                 </Row>
                                             </td>
                                             <td>

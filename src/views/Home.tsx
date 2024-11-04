@@ -1,12 +1,12 @@
-import type { Media, Coordinates, LocationData } from '@types';
+import type { Media, Coordinates } from '@types';
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
-import { Button, capitalizeFirstLetter, FormInput, Heading, Page, Row, Section, decimalPlaces, Typography } from 'phantom-library';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
+import { Button, capitalizeFirstLetter, Heading, Row, Section, decimalPlaces, Typography, FormInput, ZoomInIcon, Divider, designTokens, Column } from 'phantom-library';
+import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
+import { Layout } from 'src/layouts';
 import { USMap } from '@components/USMap';
-import { Header } from '@components/page';
-import mediaSummary from '@data/media_heatmap.json';
 import mediaData from '@data/media.json';
 import zipcodeCoordinates from '@data/zipcode_coordinates.json';
 import { getIconForMediaClass, haversineDistance } from '@utility';
@@ -43,10 +43,6 @@ function findClosestZipcode(zipcodes: Record<string, Coordinates>, target: Coord
     return closestZipcode;
 }
 
-interface HomeProps {
-    geolocation: LocationData;
-}
-
 interface SearchInput {
     country: string;
     zipcode: string;
@@ -55,7 +51,9 @@ interface SearchInput {
 
 const DEFAULT_SEARCH_RADIUS = 100;
 
-const Home: FC<HomeProps> = ({ geolocation }) => {
+const Home: FC = () => {
+    const { geolocation } = useGeolocationContext();
+
     const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
@@ -102,40 +100,30 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
 
     const tableIcon = (mediaClass: string): ReactElement => {
         const As = getIconForMediaClass(mediaClass);
-        return <As />;
+        return <As inline />;
     };
 
     return (
-        <Page
-            title="Local Memory Project"
-            header={<Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }} />}
-            className={style.page}
-        >
+        <Layout>
             <Section>
-                <Heading align="center" subtitle="US Local Media Per County">
+                <Row align='space-between'>
                     <LocalMemoryFullIcon size="full" />
-                </Heading>
-                <Row>
-                    <USMap heatmap={mediaSummary} mediaData={mediaData as any} search={search.current} updateSearchRadius={updateSearchRadius} />
+                    <Typography.Text soft size='lg'>US Local Media Per County</Typography.Text>
                 </Row>
-                <Typography.Paragraph>
-                    Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection of{' '}
-                    <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is also sorted by proximity to your location (or any zip code).
-                </Typography.Paragraph>
-                <hr />
+                <Column style={{ minHeight: '720px' }} verticalAlign='start'>
+                    <USMap search={search.current} updateSearchRadius={updateSearchRadius} />
+                    <Typography.Paragraph>
+                        Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection of{' '}
+                        <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is sorted by proximity to your current location (or any zip code).
+                    </Typography.Paragraph>
+                </Column>
+                <Divider />
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
-                    <Row verticalAlign="start">
-                        <FormInput name="zipcode" type="text" placeholder="Zip Code" register={register} validationSchema={{ required: true }} error={errors.zipcode} />
-                        <FormInput
-                            name="radius"
-                            type="number"
-                            placeholder="Radius (miles)"
-                            defaultValue={DEFAULT_SEARCH_RADIUS}
-                            register={register}
-                            validationSchema={{ required: true }}
-                            error={errors.radius}
-                        />
-                        <Button context="primary" visual="filled" form="search" type="submit">
+                    <Row gap={designTokens.space.sm}>
+                        <Button type="primary" Icon={ZoomInIcon} />
+                        <FormInput type="text" {...register('zipcode', { required: true })} error={errors.zipcode?.message} />
+                        <FormInput type="number" {...register('radius', { required: true })} placeholder="Radius (miles)" defaultValue={DEFAULT_SEARCH_RADIUS} error={errors.radius?.message} />
+                        <Button type="primary" form="search" htmlType="submit">
                             Search
                         </Button>
                     </Row>
@@ -169,10 +157,10 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                                                 {organization['cityCountyName']}, {organization.usState}
                                             </td>
                                             <td>
-                                                <Row gap="0px" align="start">
-                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} visual="text" />}
-                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} visual="text" />}
-                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} visual="text" />}
+                                                <Row align="start">
+                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} variant="text" />}
+                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} variant="text" />}
+                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} variant="text" />}
                                                 </Row>
                                             </td>
                                             <td>
@@ -187,7 +175,7 @@ const Home: FC<HomeProps> = ({ geolocation }) => {
                     </div>
                 )}
             </Section>
-        </Page>
+        </Layout>
     );
 };
 
