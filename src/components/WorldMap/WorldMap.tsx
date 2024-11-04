@@ -424,10 +424,14 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
             <div className={style.map}>
                 <div ref={ref} />
                 <div className={style.tools}>
-                    <Button onClick={() => toggleInteractionMode()} Icon={interactionModeInteral ? TouchIcon : SwipeIcon} />
-                    <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
-                    <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
-                    <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
+                    <Button
+                        onClick={() => toggleInteractionMode()}
+                        Icon={interactionModeInteral ? TouchIcon : SwipeIcon}
+                        data-tooltip={interactionModeInteral ? 'Interact to change search location' : 'Interact to pan/zoom'}
+                    />
+                    <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded data-tooltip="Zoom in" />
+                    <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded data-tooltip="Zoom out" />
+                    <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded data-tooltip="Recenter" />
                     <Button onClick={() => toggleFullscreen()} Icon={fullscreen ? FullscreenExitIcon : FullscreenIcon} rounded />
                 </div>
                 <WorldMapLegend />

@@ -6,9 +6,6 @@ import styles from './USMapLegend.module.scss';
 const USMapLegend: FC = () => {
     return (
         <div className={styles.legend}>
-            <Typography.Text>
-                <b>Legend</b>
-            </Typography.Text>
             <Typography.Text newline>
                 <CircleFillIcon inline style={{ color: 'gold' }} /> Media
             </Typography.Text>

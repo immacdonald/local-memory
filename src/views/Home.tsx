@@ -2,7 +2,7 @@ import type { Media, Coordinates } from '@types';
 import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FacebookIcon, LocalMemoryFullIcon, LocationPinIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading, StyledLink } from 'phantom-library';
+import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading, StyledLink, Flex } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { USMap } from '@components/USMap';
@@ -112,7 +112,7 @@ const Home: FC = () => {
                 </Column>
                 <Divider />
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
-                    <Row gap={designTokens.space.sm}>
+                    <Flex flex={{ base: 'row', xs: 'column' }} gap={designTokens.space.sm}>
                         <div className={style.currentLocationSearch}>
                             <FormInput type="text" {...register('zipcode', { required: true })} placeholder="Zipcode" error={errors.zipcode?.message} onKeyDown={handleFullDelete} />
                             <Button
@@ -120,8 +120,10 @@ const Home: FC = () => {
                                 disabled={!geolocation.zipcode}
                                 onClick={() => {
                                     setValue('zipcode', `Current Location (${geolocation.zipcode})`);
+                                    onSearch(geolocation.location!, search.current!.radius);
                                 }}
                                 htmlType="button"
+                                variant="text"
                             />
                         </div>
                         <FormInput
@@ -135,7 +137,7 @@ const Home: FC = () => {
                         <Button type="primary" form="search" htmlType="submit">
                             Search
                         </Button>
-                    </Row>
+                    </Flex>
                 </form>
                 <br />
                 {sorted.length > 0 && (

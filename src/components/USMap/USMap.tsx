@@ -40,6 +40,8 @@ const defaultHeight = 660;
 const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
     const ref = useRef<HTMLDivElement>(null);
 
+    const windowSize = useWindowSize();
+
     const [width, setWidth] = useState<number>(defaultWidth);
     const [height, setHeight] = useState<number>(defaultHeight);
 
@@ -400,7 +402,6 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
     const [fullscreen, setFullscreen] = useState<boolean>(false);
 
     const noScroll = useNoScroll();
-    const windowSize = useWindowSize();
 
     const toggleFullscreen = () => {
         const toggled = !fullscreen;
@@ -431,10 +432,14 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 <div ref={ref} />
                 <USMapLegend />
                 <div className={style.tools}>
-                    <Button onClick={() => toggleInteractionMode()} Icon={interactionModeInteral ? TouchIcon : SwipeIcon} />
-                    <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
-                    <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
-                    <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
+                    <Button
+                        onClick={() => toggleInteractionMode()}
+                        Icon={interactionModeInteral ? TouchIcon : SwipeIcon}
+                        data-tooltip={interactionModeInteral ? 'Interact to change search location' : 'Interact to pan/zoom'}
+                    />
+                    <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded data-tooltip="Zoom in" />
+                    <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded data-tooltip="Zoom out" />
+                    <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded data-tooltip="Recenter" />
                     <Button onClick={() => toggleFullscreen()} Icon={fullscreen ? FullscreenExitIcon : FullscreenIcon} rounded />
                 </div>
             </div>
