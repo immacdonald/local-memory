@@ -57786,26 +57786,6 @@
         "city": "Thessaloniki"
     },
     {
-        "facebook": "http://facebook.com/mignatiou.com",
-        "cityCountyLat": 43.2098,
-        "mediaSubclass": "city-county",
-        "website": "http://www.proini.com/",
-        "cityCountyName": "USA",
-        "name": "Proini",
-        "rss": [
-            "http://www.proini.com/?feed=rss2",
-            "http://www.proini.com/?feed=comments-rss2",
-            "http://www.proini.com/?feed=rss2&page_id=116"
-        ],
-        "cityCountyLong": -77.6931,
-        "video": "",
-        "mediaClass": "newspaper",
-        "twitter": "",
-        "openSearch": [],
-        "country": "Greece",
-        "city": "USA"
-    },
-    {
         "facebook": "",
         "cityCountyLat": 41.13,
         "mediaSubclass": "city-county",

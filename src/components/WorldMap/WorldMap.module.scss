@@ -34,3 +34,12 @@
         }
     }
 }
+
+.tooltip {
+    position: absolute;
+    min-width: 150px;
+    background: var(--color-background-foreground);
+    border: var(--border-light);
+    padding: var(--space-sm);
+    display: none;
+}

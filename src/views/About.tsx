@@ -5,7 +5,7 @@ import { Layout } from 'src/layouts';
 
 const About: FC = () => {
     return (
-        <Layout title="About | Local Memory Project">
+        <Layout title="About | Local Memory Project" darkBackground>
             <Section variant="inset" hasBackground>
                 <Heading align="center">About</Heading>
                 <Typography.Paragraph>

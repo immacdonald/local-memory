@@ -70,22 +70,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
             .domain([0, 40])
             .range(colors as any);
 
-        /*baseLayer.append('path')
-            .attr('class', 'sphere')
-            .attr('d', pathGenerator({ type: 'Sphere' }))
-            //.attr('fill', '#e3d9ff');*/
-
         // Create tooltip
-        const tooltip = d3
-            .select('body')
-            .append('div')
-            .attr('class', style.tooltip)
-            .style('position', 'absolute')
-            .style('min-width', '150px')
-            .style('background', 'white')
-            .style('border', '1px solid gray')
-            .style('padding', '5px')
-            .style('display', 'none');
+        const tooltip = d3.select('body').append('div').attr('class', style.tooltip);
 
         baseLayer
             .selectAll('path')
@@ -225,8 +211,6 @@ const WorldMap: React.FC<WorldMapProps> = ({ mediaData }) => {
             .on('mousedown', function (_, d) {
                 window.open(d.website, '_blank');
             });
-
-        //const colors = ['#e3d9ff', '#bea9f8', '#9879ee', '#6e48e2', '#3700d4'];
 
         // Add zoom functionality
         const zoom = d3

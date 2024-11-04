@@ -24,6 +24,7 @@ interface Media {
 interface LocationData {
     loading: boolean;
     location: Coordinates | null;
+    zipcode: string | null;
 }
 
 type Coordinates = {

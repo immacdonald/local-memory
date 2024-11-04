@@ -1,15 +1,15 @@
 import type { Media, Coordinates } from '@types';
-import { FC, ReactElement, useEffect, useRef, useState } from 'react';
+import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Heading, Row, Section, decimalPlaces, Typography, FormInput, ZoomInIcon, Divider, designTokens, Column } from 'phantom-library';
+import { FacebookIcon, LocalMemoryFullIcon, LocationPinIcon, TwitterIcon, YouTubeIcon } from '@icons';
+import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { USMap } from '@components/USMap';
+import { zipcodeMap } from '@data';
 import mediaData from '@data/media.json';
-import zipcodeCoordinates from '@data/zipcode_coordinates.json';
-import { getIconForMediaClass, haversineDistance } from '@utility';
+import { findClosestZipcode, getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Views.module.scss';
 
 interface MediaWithDistance extends Media {
@@ -28,21 +28,6 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxD
     return filteredCities.slice(0, limit);
 }
 
-function findClosestZipcode(zipcodes: Record<string, Coordinates>, target: Coordinates): string {
-    let closestZipcode = '';
-    let minDistance = Infinity;
-
-    for (const [zipcode, coords] of Object.entries(zipcodes)) {
-        const distance = haversineDistance(target, coords);
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestZipcode = zipcode;
-        }
-    }
-
-    return closestZipcode;
-}
-
 interface SearchInput {
     country: string;
     zipcode: string;
@@ -54,7 +39,6 @@ const DEFAULT_SEARCH_RADIUS = 100;
 const Home: FC = () => {
     const { geolocation } = useGeolocationContext();
 
-    const zipcodes = zipcodeCoordinates as Record<string, Coordinates>;
     const media = mediaData as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
 
@@ -68,7 +52,7 @@ const Home: FC = () => {
     } = useForm<SearchInput>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
     const onSubmit: SubmitHandler<SearchInput> = (data) => {
-        const location = data.zipcode.includes('Current Location') ? geolocation.location! : zipcodes[data.zipcode];
+        const location = data.zipcode.includes('Current Location') ? geolocation.location! : zipcodeMap[data.zipcode];
         if (location) {
             onSearch(location, data.radius);
         } else {
@@ -86,16 +70,20 @@ const Home: FC = () => {
     };
 
     useEffect(() => {
-        if (!geolocation.loading && geolocation.location) {
-            const zipcode = findClosestZipcode(zipcodes, geolocation.location);
-            setValue('zipcode', `Current Location (${zipcode})`);
+        if (geolocation.location && geolocation.zipcode) {
+            setValue('zipcode', `Current Location (${geolocation.zipcode})`);
             onSearch(geolocation.location, DEFAULT_SEARCH_RADIUS);
         }
     }, [geolocation.loading, geolocation.location]);
 
-    const updateSearchRadius = (radius: number): void => {
-        setValue('radius', decimalPlaces(radius, 0));
-        onSearch(search.current!.location, radius);
+    const updateSearch = (coordinates: Coordinates | undefined, radius: number | undefined): void => {
+        if (radius) {
+            setValue('radius', decimalPlaces(radius, 0));
+            onSearch(search.current!.location, radius);
+        } else if (coordinates) {
+            setValue('zipcode', findClosestZipcode(coordinates));
+            onSearch(coordinates, search.current!.radius);
+        }
     };
 
     const tableIcon = (mediaClass: string): ReactElement => {
@@ -103,26 +91,48 @@ const Home: FC = () => {
         return <As inline />;
     };
 
+    const handleFullDelete = (event: KeyboardEvent<HTMLInputElement>) => {
+        // Check if the key pressed is backspace or delete
+        if (event.key === 'Backspace' || event.key === 'Delete') {
+            (event.target as HTMLInputElement).value = '';
+        }
+    };
+
     return (
         <Layout>
             <Section>
-                <Row align='space-between'>
-                    <LocalMemoryFullIcon size="full" />
-                    <Typography.Text soft size='lg'>US Local Media Per County</Typography.Text>
-                </Row>
-                <Column style={{ minHeight: '720px' }} verticalAlign='start'>
-                    <USMap search={search.current} updateSearchRadius={updateSearchRadius} />
+                <Heading align="center" subheading={<LocalMemoryFullIcon inline />}>
+                    US Local Media Per County
+                </Heading>
+                <Column style={{ minHeight: '720px' }} verticalAlign="start">
+                    <USMap search={search.current} updateSearch={updateSearch} />
                     <Typography.Paragraph>
-                        Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection of{' '}
-                        <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is sorted by proximity to your current location (or any zip code).
+                        Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection
+                        of <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is sorted by proximity to your current location (or any zip code).
                     </Typography.Paragraph>
                 </Column>
                 <Divider />
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
                     <Row gap={designTokens.space.sm}>
-                        <Button type="primary" Icon={ZoomInIcon} />
-                        <FormInput type="text" {...register('zipcode', { required: true })} error={errors.zipcode?.message} />
-                        <FormInput type="number" {...register('radius', { required: true })} placeholder="Radius (miles)" defaultValue={DEFAULT_SEARCH_RADIUS} error={errors.radius?.message} />
+                        <div className={style.currentLocationSearch}>
+                            <FormInput type="text" {...register('zipcode', { required: true })} placeholder="Zipcode" error={errors.zipcode?.message} onKeyDown={handleFullDelete} />
+                            <Button
+                                Icon={LocationPinIcon}
+                                disabled={!geolocation.zipcode}
+                                onClick={() => {
+                                    setValue('zipcode', `Current Location (${geolocation.zipcode})`);
+                                }}
+                                htmlType="button"
+                            />
+                        </div>
+                        <FormInput
+                            type="number"
+                            {...register('radius', { required: true })}
+                            placeholder="Radius (miles)"
+                            defaultValue={DEFAULT_SEARCH_RADIUS}
+                            error={errors.radius?.message}
+                            onKeyDown={handleFullDelete}
+                        />
                         <Button type="primary" form="search" htmlType="submit">
                             Search
                         </Button>

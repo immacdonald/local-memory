@@ -2,9 +2,9 @@ import { Coordinates, Media } from '@types';
 import { FC, ReactElement, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, decimalPlaces, Heading, Page, Row, Section, Typography } from 'phantom-library';
+import { Button, capitalizeFirstLetter, decimalPlaces, Heading, Row, Section, Typography } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
-import { Header } from '@components/page';
+import { Layout } from 'src/layouts';
 import { WorldMap } from '@components/WorldMap';
 import worldMediaData from '@data/world_media.json';
 import { getIconForMediaClass, haversineDistance } from '@utility';
@@ -36,13 +36,11 @@ const World: FC = () => {
     const [sorted, setSorted] = useState<Media[]>([]);
 
     const onSearch = (location: Coordinates, radius: number): void => {
-        //search.current = { location, radius };
         const sortedCities = sortCitiesByProximity(media, location, radius);
         setSorted(sortedCities);
     };
 
     useEffect(() => {
-        console.log(geolocation.loading, geolocation.location);
         if (!geolocation.loading && geolocation.location) {
             onSearch(geolocation.location, DEFAULT_SEARCH_RADIUS);
         }
@@ -54,11 +52,7 @@ const World: FC = () => {
     };
 
     return (
-        <Page
-            title="Local Memory Project"
-            header={<Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }} />}
-            className={style.page}
-        >
+        <Layout>
             <Section>
                 <Heading align="center" subheading="Local Media Across the World">
                     <LocalMemoryFullIcon size="full" />
@@ -68,7 +62,7 @@ const World: FC = () => {
                 </Row>
                 <Typography.Paragraph>
                     Local Memory provides data about the geographic distribution of local news organizations across the globe. This website displays an interactive map showing a collection of{' '}
-                    <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-country level around the world. The data is also sorted by proximity to your current location.
+                    <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-country level around the world. The data is sorted by proximity to your current location.
                 </Typography.Paragraph>
                 {sorted.length > 0 && (
                     <div>
@@ -116,7 +110,7 @@ const World: FC = () => {
                     </div>
                 )}
             </Section>
-        </Page>
+        </Layout>
     );
 };
 

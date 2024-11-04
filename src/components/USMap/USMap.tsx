@@ -1,7 +1,7 @@
 import type { FeatureCollection } from 'geojson';
 import { Coordinates } from '@types';
 import React, { useEffect, useRef, useState } from 'react';
-import { LocationPinFillInline } from '@icons';
+import { FullscreenExitIcon, FullscreenIcon, LocationPinFillInline, SwipeIcon, TouchIcon } from '@icons';
 import * as d3 from 'd3';
 import { Button, Callback, MultiCallback, orUndefined, RecenterIcon, useNoScroll, useWindowSize, ZoomInIcon, ZoomOutIcon } from 'phantom-library';
 import * as topojson from 'topojson-client';
@@ -31,17 +31,19 @@ interface MapProps {
         location: Coordinates;
         radius: number;
     } | null;
-    updateSearchRadius: Callback<number>;
+    updateSearch: MultiCallback<Coordinates | undefined, number | undefined>;
 }
 
 const defaultWidth = 960;
 const defaultHeight = 660;
 
-const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { } }) => {
+const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
     const ref = useRef<HTMLDivElement>(null);
 
     const [width, setWidth] = useState<number>(defaultWidth);
     const [height, setHeight] = useState<number>(defaultHeight);
+
+    const interactionMode = useRef<boolean>(false);
 
     const mapFunctions = useRef<MapFunctions | null>(null);
 
@@ -104,8 +106,9 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${county?.total || 0 > 0
-                        ? `
+                    ${
+                        county?.total || 0 > 0
+                            ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -116,7 +119,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
                         <br>
                         Radio: ${county!.radio}
                     `
-                        : 'No news organizations found'
+                            : 'No news organizations found'
                     }
                 `);
 
@@ -135,8 +138,16 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
                 const county = mediaHeatmapUS.find((e) => e.fips == (d.id as string));
                 d3.select(this).attr('fill', colorScale(county?.total || 0));
             })
-            .on('mousedown', (event) => {
-                console.log('Clicked', d3.pointer(event));
+            .on('mousedown', function (event) {
+                if (interactionMode.current) {
+                    event.stopPropagation();
+
+                    // Convert the pixel coordinates to geographic coordinates (latitude and longitude)
+                    const [x, y] = d3.pointer(event);
+                    const [longitude, latitude] = projection.invert!([x, y])!;
+
+                    updateSearch({ latitude, longitude }, undefined);
+                }
             });
 
         // Draw states in the base layer
@@ -177,8 +188,9 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
                     <i>${`${county?.countyName || 'Unknown County'}`}</i>
                     <br>
                     <br>
-                    ${county?.total || 0 > 0
-                        ? `
+                    ${
+                        county?.total || 0 > 0
+                            ? `
                         Total: ${county!.total}
                         <br>
                         Newspapers: ${county!.newspaper}
@@ -189,7 +201,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
                         <br>
                         Radio: ${county!.radio}
                     `
-                        : 'No news organizations found'
+                            : 'No news organizations found'
                     }
                 `);
 
@@ -295,7 +307,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
 
             function dragEnded() {
                 // Update the search radius or any other final actions
-                updateSearchRadius(currentRadius);
+                updateSearch(undefined, currentRadius);
             }
 
             function updateCircle() {
@@ -337,9 +349,6 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
         };
 
         const center = () => {
-            // Reset zoom scale
-            //svg.transition().call(zoom.scaleTo, 1);
-
             const containerWidth = ref.current?.clientWidth || width;
             const containerHeight = ref.current?.clientHeight || height;
 
@@ -347,13 +356,11 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
             const bbox = group.node()!.getBBox();
 
             // Calculate offsets for centering the bounding box within the container
-            const offsetX = (containerWidth / 2) - (bbox.x + bbox.width / 2);
-            const offsetY = (containerHeight / 2) - (bbox.y + bbox.height / 2);
+            const offsetX = containerWidth / 2 - (bbox.x + bbox.width / 2);
+            const offsetY = containerHeight / 2 - (bbox.y + bbox.height / 2);
 
             // Apply centering translation
-            svg.transition()
-                .duration(750)
-                .call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY).scale(1));
+            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY).scale(1));
         };
 
         const zoomIn = () => {
@@ -401,14 +408,22 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
         noScroll(toggled);
 
         const newHeight = toggled ? windowSize.height : defaultHeight;
-        setWidth(toggled ? windowSize.width : defaultWidth)
-        setHeight(newHeight)
-        d3.select(ref.current).select('svg').attr('height', newHeight)
+        setWidth(toggled ? windowSize.width : defaultWidth);
+        setHeight(newHeight);
+        d3.select(ref.current).select('svg').attr('height', newHeight);
 
         setTimeout(() => {
             mapFunctions.current!.center();
-        })
-    }
+        });
+    };
+
+    const [interactionModeInteral, setInteractionModeInternal] = useState<boolean>(false);
+
+    const toggleInteractionMode = () => {
+        const mode = !interactionMode.current;
+        interactionMode.current = mode;
+        setInteractionModeInternal(mode);
+    };
 
     return (
         <div className={style.visualization} data-fullscreen={orUndefined(fullscreen, '')}>
@@ -416,10 +431,11 @@ const USMap: React.FC<MapProps> = ({ search, updateSearchRadius = (): void => { 
                 <div ref={ref} />
                 <USMapLegend />
                 <div className={style.tools}>
+                    <Button onClick={() => toggleInteractionMode()} Icon={interactionModeInteral ? TouchIcon : SwipeIcon} />
                     <Button onClick={() => mapFunctions.current!.zoomIn()} Icon={ZoomInIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.zoomOut()} Icon={ZoomOutIcon} rounded />
                     <Button onClick={() => mapFunctions.current!.center()} Icon={RecenterIcon} rounded />
-                    <Button onClick={() => toggleFullscreen()}>Fullscreen</Button>
+                    <Button onClick={() => toggleFullscreen()} Icon={fullscreen ? FullscreenExitIcon : FullscreenIcon} rounded />
                 </div>
             </div>
         </div>

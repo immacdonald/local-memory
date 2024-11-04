@@ -1,5 +1,6 @@
 .visualization {
     width: 100%;
+    min-height: 660px;
     background-color: #f3f3ff;
     border-radius: var(--border-radius);
     margin-bottom: var(--space-lg);
@@ -9,7 +10,6 @@
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
-    //padding: var(--space);
 
     &[data-fullscreen] {
         position: fixed;
