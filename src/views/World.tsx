@@ -1,7 +1,7 @@
 import { Coordinates, Media } from '@types';
-import { FC, ReactElement, useEffect, useRef, useState } from 'react';
+import { FC, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Column, decimalPlaces, Divider, Heading, Row, Section, StyledLink, Typography } from 'phantom-library';
+import { Button, capitalizeFirstLetter, Column, decimalPlaces, designTokens, Divider, Heading, Row, Section, StyledLink, Typography, useResponsiveContext } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { WorldMap } from '@components/WorldMap';
@@ -32,6 +32,9 @@ const World: FC = () => {
 
     const media = worldMediaData as unknown as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
+
+    const { atBreakpoint, windowSize } = useResponsiveContext();
+    const isMobile = useMemo(() => atBreakpoint('xs'), [windowSize.width]);
 
     useEffect(() => {
         if (geolocation.location) {
@@ -64,11 +67,19 @@ const World: FC = () => {
     return (
         <Layout>
             <Section>
-                <Heading align="center" subheading={<LocalMemoryFullIcon inline />}>
+                <Heading align="center" subheading={<LocalMemoryFullIcon inline size={isMobile ? 'small' : undefined} />}>
                     Local Media Across the Globe
                 </Heading>
-                <Column style={{ minHeight: '720px' }} verticalAlign="start">
-                    <WorldMap search={search.current} updateSearch={updateSearch} />
+                <Column style={{ minHeight: '500px' }} verticalAlign="start">
+                    {isMobile ? (
+                        <Row
+                            style={{ height: '300px', border: designTokens.border.light, borderRadius: designTokens.borderRadius, padding: designTokens.space.md, marginBottom: designTokens.space.md }}
+                        >
+                            <Typography.Text>Please use a computer or tablet to view the interactive visualization.</Typography.Text>
+                        </Row>
+                    ) : (
+                        <WorldMap search={search.current} updateSearch={updateSearch} />
+                    )}
                     <Typography.Paragraph>
                         Local Memory provides data about the geographic distribution of local news organizations across the globe. This website displays an interactive map showing a collection of{' '}
                         <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-country level around the world. The data is sorted by proximity to your current location.
@@ -80,11 +91,11 @@ const World: FC = () => {
                         <table className={style.table}>
                             <thead>
                                 <tr>
-                                    <th>Rank</th>
+                                    {!isMobile && <th>Rank</th>}
                                     <th style={{ width: '140px' }}>Distance (mi)</th>
                                     <th style={{ width: '200px' }}>Name</th>
                                     <th style={{ width: '320px' }}>Location</th>
-                                    <th>Socials</th>
+                                    {!isMobile && <th>Socials</th>}
                                     <th style={{ width: '240px' }}>Type</th>
                                 </tr>
                             </thead>
@@ -92,7 +103,7 @@ const World: FC = () => {
                                 {sorted.map((organization: MediaWithDistance, index: number) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{index + 1}.</td>
+                                            {!isMobile && <td>{index + 1}.</td>}
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
                                             <td>
                                                 <StyledLink to={organization.website} external>
@@ -102,13 +113,15 @@ const World: FC = () => {
                                             <td>
                                                 {organization['cityCountyName']}, {(organization as any).country}
                                             </td>
-                                            <td>
-                                                <Row gap="0px" align="start">
-                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} variant="text" />}
-                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} variant="text" />}
-                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} variant="text" />}
-                                                </Row>
-                                            </td>
+                                            {!isMobile && (
+                                                <td>
+                                                    <Row gap="0px" align="start">
+                                                        {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} variant="text" />}
+                                                        {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} variant="text" />}
+                                                        {organization.video && <Button Icon={YouTubeIcon} link={organization.video} variant="text" />}
+                                                    </Row>
+                                                </td>
+                                            )}
                                             <td>
                                                 {tableIcon(organization.mediaClass!)} {capitalizeFirstLetter(organization.mediaSubclass!)}{' '}
                                                 {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}

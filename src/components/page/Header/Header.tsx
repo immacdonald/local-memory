@@ -1,30 +1,34 @@
 import { FC } from 'react';
 import { LocalMemoryFullIcon, LocalMemoryIcon } from '@icons';
-import { Button, Column, DynamicHeader, DynamicHeaderProps, Row, StyledLink } from 'phantom-library';
+import { Button, Column, DynamicHeader, DynamicHeaderProps, Row, StyledLink, useResponsiveContext } from 'phantom-library';
 import style from './Header.module.scss';
 
 interface HeaderProps extends DynamicHeaderProps {}
 
 const Header: FC<HeaderProps> = ({ ...props }) => {
+    const { isMobile } = useResponsiveContext();
+
     return (
         <DynamicHeader {...props}>
             <div className={style.content}>
-                <Row>
+                <Row align="start">
                     <StyledLink to="/">
                         <LocalMemoryIcon size="large" />
                     </StyledLink>
-                    <Column align="start">
-                        <LocalMemoryFullIcon style={{ width: '256px' }} />
-                        <div className={style.newslab}>
-                            <span>A </span>
-                            <b>
-                                <StyledLink to="https://newsresearch.lab.wm.edu" external>
-                                    NEWS Lab
-                                </StyledLink>
-                            </b>
-                            <span> Project</span>
-                        </div>
-                    </Column>
+                    {!isMobile && (
+                        <Column align="start">
+                            <LocalMemoryFullIcon style={{ width: '256px' }} />
+                            <div className={style.newslab}>
+                                <span>A </span>
+                                <b>
+                                    <StyledLink to="https://newsresearch.lab.wm.edu" external>
+                                        NEWS Lab
+                                    </StyledLink>
+                                </b>
+                                <span> Project</span>
+                            </div>
+                        </Column>
+                    )}
                 </Row>
                 <div className={style.navigation}>
                     <nav className={style.links}>

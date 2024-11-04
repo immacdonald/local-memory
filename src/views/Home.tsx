@@ -1,8 +1,8 @@
 import type { Media, Coordinates } from '@types';
-import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent } from 'react';
+import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FacebookIcon, LocalMemoryFullIcon, LocationPinIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading, StyledLink, Flex } from 'phantom-library';
+import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading, StyledLink, Flex, useResponsiveContext } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { USMap } from '@components/USMap';
@@ -42,6 +42,9 @@ const Home: FC = () => {
     const [sorted, setSorted] = useState<Media[]>([]);
 
     const search = useRef<{ location: Coordinates; radius: number } | null>(null);
+
+    const { atBreakpoint, windowSize } = useResponsiveContext();
+    const isMobile = useMemo(() => atBreakpoint('xs'), [windowSize.width]);
 
     const {
         register,
@@ -100,11 +103,19 @@ const Home: FC = () => {
     return (
         <Layout>
             <Section>
-                <Heading align="center" subheading={<LocalMemoryFullIcon inline />}>
+                <Heading align="center" subheading={<LocalMemoryFullIcon inline size={isMobile ? 'small' : undefined} />}>
                     US Local Media by County
                 </Heading>
-                <Column style={{ minHeight: '720px' }} verticalAlign="start">
-                    <USMap search={search.current} updateSearch={updateSearch} />
+                <Column style={{ minHeight: '500px' }} verticalAlign="start">
+                    {isMobile ? (
+                        <Row
+                            style={{ height: '300px', border: designTokens.border.light, borderRadius: designTokens.borderRadius, padding: designTokens.space.md, marginBottom: designTokens.space.md }}
+                        >
+                            <Typography.Text>Please use a computer or tablet to view the interactive visualization.</Typography.Text>
+                        </Row>
+                    ) : (
+                        <USMap search={search.current} updateSearch={updateSearch} />
+                    )}
                     <Typography.Paragraph>
                         Local Memory provides data about the geographic distribution of local news organizations across the United States. This website displays an interactive map showing a collection
                         of <i>newspapers</i>, <i>TV broadcasts</i>, and <i>radio stations</i> on a per-county level. This data is sorted by proximity to your current location (or any zip code).
@@ -145,11 +156,11 @@ const Home: FC = () => {
                         <table className={style.table}>
                             <thead>
                                 <tr>
-                                    <th>Rank</th>
+                                    {!isMobile && <th>Rank</th>}
                                     <th style={{ width: '140px' }}>Distance (mi)</th>
                                     <th style={{ width: '200px' }}>Name</th>
                                     <th style={{ width: '320px' }}>Location</th>
-                                    <th>Socials</th>
+                                    {!isMobile && <th>Socials</th>}
                                     <th style={{ width: '240px' }}>Type</th>
                                 </tr>
                             </thead>
@@ -157,7 +168,7 @@ const Home: FC = () => {
                                 {sorted.map((organization: MediaWithDistance, index: number) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{index + 1}.</td>
+                                            {!isMobile && <td>{index + 1}.</td>}
                                             <td>{decimalPlaces(organization.distance!, 1)}</td>
                                             <td>
                                                 <StyledLink to={organization.website} external>
@@ -167,13 +178,15 @@ const Home: FC = () => {
                                             <td>
                                                 {organization['cityCountyName']}, {organization.usState}
                                             </td>
-                                            <td>
-                                                <Row align="start">
-                                                    {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} variant="text" />}
-                                                    {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} variant="text" />}
-                                                    {organization.video && <Button Icon={YouTubeIcon} link={organization.video} variant="text" />}
-                                                </Row>
-                                            </td>
+                                            {!isMobile && (
+                                                <td>
+                                                    <Row align="start">
+                                                        {organization.twitter && <Button Icon={TwitterIcon} link={organization.twitter} variant="text" />}
+                                                        {organization.facebook && <Button Icon={FacebookIcon} link={organization.facebook} variant="text" />}
+                                                        {organization.video && <Button Icon={YouTubeIcon} link={organization.video} variant="text" />}
+                                                    </Row>
+                                                </td>
+                                            )}
                                             <td>
                                                 {tableIcon(organization.mediaClass!)} {capitalizeFirstLetter(organization.mediaSubclass!)}{' '}
                                                 {organization.mediaClass == 'tv' ? 'TV' : capitalizeFirstLetter(organization.mediaClass!)}

@@ -341,7 +341,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 [0, 0],
                 [width, height]
             ])
-            .scaleExtent([1, 8])
+            .scaleExtent([0.7, 8])
             .on('zoom', (event) => {
                 group.attr('transform', event.transform);
             });

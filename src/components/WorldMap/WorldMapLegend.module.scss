@@ -16,6 +16,6 @@
     gap: var(--space);
 
     @include respond-max($screen-sm) {
-        bottom: calc(var(--space) + 72px);
+        flex-direction: column;
     }
 }
