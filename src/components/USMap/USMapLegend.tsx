@@ -10,7 +10,7 @@ const USMapLegend: FC = () => {
                 <CircleFillIcon inline style={{ color: 'gold' }} /> Media Organization
             </Typography.Text>
             <Typography.Text newline>
-                0 Organizations <SquareFillIcon inline style={{ color: '#e3d9ff' }} />
+                0 <SquareFillIcon inline style={{ color: '#e3d9ff' }} />
                 <SquareFillIcon inline style={{ color: '#bea9f8' }} />
                 <SquareFillIcon inline style={{ color: '#9879ee' }} />
                 <SquareFillIcon inline style={{ color: '#6e48e2' }} />

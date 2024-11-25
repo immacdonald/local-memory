@@ -145,10 +145,10 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
             })
             .on('mousedown', function (event, d) {
                 if (d.properties!['name'] == 'United States of America') {
+                    event.stopPropagation();
                     navigate('/');
                 } else if (interactionMode.current) {
                     event.stopPropagation();
-
                     // Convert the pixel coordinates to geographic coordinates (latitude and longitude)
                     const [x, y] = d3.pointer(event);
                     const [longitude, latitude] = projection.invert!([x, y])!;
@@ -217,7 +217,19 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
                 // Restore the original media color
                 d3.select(this).attr('fill', 'gold');
             })
-            .on('mousedown', function (_, d) {
+            .on('mousedown', function (event) {
+                if (interactionMode.current) {
+                    event.stopPropagation();
+
+                    // Convert the pixel coordinates to geographic coordinates (latitude and longitude)
+                    const [x, y] = d3.pointer(event);
+                    const [longitude, latitude] = projection.invert!([x, y])!;
+
+                    updateSearch({ latitude, longitude }, undefined);
+                }
+            })
+            .on('mouseup', function (event, d) {
+                event.stopPropagation();
                 window.open(d.website, '_blank');
             });
 
@@ -410,8 +422,8 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
         });
     };
 
-    const interactionMode = useRef<boolean>(false);
-    const [interactionModeInteral, setInteractionModeInternal] = useState<boolean>(false);
+    const interactionMode = useRef<boolean>(true);
+    const [interactionModeInteral, setInteractionModeInternal] = useState<boolean>(true);
 
     const toggleInteractionMode = () => {
         const mode = !interactionMode.current;

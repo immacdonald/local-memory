@@ -1,4 +1,4 @@
-interface Media {
+type BaseMedia = {
     video?: string;
     twitter: string;
     mediaClass: string;
@@ -12,15 +12,27 @@ interface Media {
     openSearch?: unknown[];
     cityCountyName: string;
     rss?: string[];
-    usState: string;
     wikipedia?: string;
     instagram?: string;
     youtube?: string;
+};
+
+type USMedia = BaseMedia & {
+    usState: string;
     fips: string;
     stateAbbr: string;
+};
+
+type WorldMedia = BaseMedia & {
     country?: string;
     city?: string;
-}
+};
+
+type Media = USMedia | WorldMedia;
+
+type MediaWithDistance = Media & {
+    distance?: number;
+};
 
 interface LocationData {
     loading: boolean;
@@ -34,7 +46,8 @@ type Coordinates = {
 };
 
 interface USHeatmapData {
-    countyName: string;
+    countyName: string | null;
+    state: string | null;
     fips: string;
     total: number;
     newspaper: number;
@@ -53,4 +66,4 @@ interface WorldHeatmapData {
     total: number;
 }
 
-export type { Coordinates, LocationData, Media, USHeatmapData, WorldHeatmapData };
+export type { Coordinates, LocationData, USMedia, WorldMedia, Media, MediaWithDistance, USHeatmapData, WorldHeatmapData };

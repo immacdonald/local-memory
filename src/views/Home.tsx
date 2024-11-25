@@ -1,4 +1,4 @@
-import type { Media, Coordinates } from '@types';
+import type { Media, Coordinates, MediaWithDistance, USMedia } from '@types';
 import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FacebookIcon, LocalMemoryFullIcon, LocationPinIcon, TwitterIcon, YouTubeIcon } from '@icons';
@@ -10,10 +10,6 @@ import { zipcodeMap } from '@data';
 import mediaData from '@data/media.json';
 import { findClosestZipcode, getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Views.module.scss';
-
-interface MediaWithDistance extends Media {
-    distance?: number;
-}
 
 function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxDistance: number, limit = 500): MediaWithDistance[] {
     cities.forEach((city: MediaWithDistance) => {
@@ -176,7 +172,7 @@ const Home: FC = () => {
                                                 </StyledLink>
                                             </td>
                                             <td>
-                                                {organization['cityCountyName']}, {organization.usState}
+                                                {organization['cityCountyName']}, {(organization as USMedia).usState}
                                             </td>
                                             {!isMobile && (
                                                 <td>

@@ -45,7 +45,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
     const [width, setWidth] = useState<number>(defaultWidth);
     const [height, setHeight] = useState<number>(defaultHeight);
 
-    const interactionMode = useRef<boolean>(false);
+    const interactionMode = useRef<boolean>(true);
 
     const mapFunctions = useRef<MapFunctions | null>(null);
 
@@ -105,7 +105,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
             .on('mouseover', function (_, d) {
                 const county = mediaHeatmapUS.find((e) => e.fips == d.id);
                 tooltip.style('display', 'block').html(`
-                    <i>${`${county?.countyName || 'Unknown County'}`}</i>
+                    <i>${`${county?.countyName || 'Unknown County'}`}, ${`${county?.state || 'Unknown State'}`}</i>
                     <br>
                     <br>
                     ${
@@ -187,7 +187,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 tooltip.style('display', 'block').html(`
                     <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
                     <br>
-                    <i>${`${county?.countyName || 'Unknown County'}`}</i>
+                    <i>${`${county?.countyName || 'Unknown County'}`}, ${`${county?.state || 'Unknown State'}`}</i>
                     <br>
                     <br>
                     ${
@@ -222,8 +222,14 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 d3.select(this).attr('fill', 'gold');
             })
             .on('mousedown', function (event) {
-                event.stopPropagation();
-                //window.open(d.website, '_blank');
+                if (interactionMode.current) {
+                    event.stopPropagation();
+                    // Convert the pixel coordinates to geographic coordinates (latitude and longitude)
+                    const [x, y] = d3.pointer(event);
+                    const [longitude, latitude] = projection.invert!([x, y])!;
+
+                    updateSearch({ latitude, longitude }, undefined);
+                }
             })
             .on('mouseup', function (event, d) {
                 event.stopPropagation();
@@ -418,7 +424,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
         });
     };
 
-    const [interactionModeInteral, setInteractionModeInternal] = useState<boolean>(false);
+    const [interactionModeInteral, setInteractionModeInternal] = useState<boolean>(true);
 
     const toggleInteractionMode = () => {
         const mode = !interactionMode.current;

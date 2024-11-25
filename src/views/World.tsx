@@ -1,17 +1,35 @@
-import { Coordinates, Media } from '@types';
+import { Coordinates, Media, MediaWithDistance, WorldMedia } from '@types';
 import { FC, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Column, decimalPlaces, designTokens, Divider, Heading, Row, Section, StyledLink, Typography, useResponsiveContext } from 'phantom-library';
+import {
+    Button,
+    capitalizeFirstLetter,
+    Column,
+    decimalPlaces,
+    designTokens,
+    Divider,
+    Dropdown,
+    Flex,
+    Heading,
+    NullablePrimitive,
+    Row,
+    Section,
+    StyledLink,
+    Typography,
+    useResponsiveContext
+} from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { WorldMap } from '@components/WorldMap';
-import worldMediaData from '@data/world_media.json';
+import { mediaWorld } from '@data';
 import { getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Views.module.scss';
 
-interface MediaWithDistance extends Media {
-    distance?: number;
-}
+type CityCoordinatesPair = {
+    city: string;
+    latitude: number;
+    longitude: number;
+};
 
 function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxDistance: number, limit = 100): MediaWithDistance[] {
     cities.forEach((city: MediaWithDistance) => {
@@ -30,7 +48,6 @@ const DEFAULT_SEARCH_RADIUS = Number.MAX_SAFE_INTEGER;
 const World: FC = () => {
     const { geolocation } = useGeolocationContext();
 
-    const media = worldMediaData as unknown as Media[];
     const [sorted, setSorted] = useState<Media[]>([]);
 
     const { atBreakpoint, windowSize } = useResponsiveContext();
@@ -52,7 +69,7 @@ const World: FC = () => {
     const onSearch = (location: Coordinates, radius: number): void => {
         search.current = { location, radius };
 
-        const sortedCities = sortCitiesByProximity(media, location, radius);
+        const sortedCities = sortCitiesByProximity(mediaWorld, location, radius);
         setSorted(sortedCities);
     };
 
@@ -63,6 +80,33 @@ const World: FC = () => {
             onSearch(coordinates, search.current!.radius);
         }
     };
+
+    const countries: string[] = useMemo(() => [...new Set(mediaWorld.map((data: WorldMedia) => data.country!))].sort(), [mediaWorld]);
+
+    const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+
+    const cities: CityCoordinatesPair[] = useMemo(() => {
+        if (!selectedCountry) {
+            return [];
+        }
+
+        // Use a Map to ensure uniqueness based on the city name
+        const uniqueCitiesMap = new Map(
+            mediaWorld
+                .filter((data: WorldMedia) => data.country === selectedCountry)
+                .map((data: WorldMedia) => [
+                    data.city!,
+                    {
+                        city: data.city!,
+                        latitude: data.cityCountyLat,
+                        longitude: data.cityCountyLong
+                    }
+                ])
+        );
+
+        // Convert the Map back to an array and sort
+        return Array.from(uniqueCitiesMap.values()).sort((a, b) => a.city.localeCompare(b.city));
+    }, [selectedCountry, mediaWorld]);
 
     return (
         <Layout>
@@ -86,6 +130,26 @@ const World: FC = () => {
                     </Typography.Paragraph>
                 </Column>
                 <Divider />
+                <Flex flex={{ base: 'row', xs: 'column' }} gap={designTokens.space.sm}>
+                    <Dropdown
+                        options={countries.map((country) => ({
+                            value: country,
+                            label: country
+                        }))}
+                        onChange={(value: NullablePrimitive) => setSelectedCountry(value as string | null)}
+                    />
+                    <Dropdown
+                        options={cities.map((city) => ({
+                            value: `${city.latitude}#${city.longitude}`,
+                            label: city.city
+                        }))}
+                        onChange={(value: NullablePrimitive) => {
+                            const coordinates = (value as string).split('#');
+                            updateSearch({ latitude: parseFloat(coordinates[0]), longitude: parseFloat(coordinates[1]) }, undefined);
+                        }}
+                    />
+                </Flex>
+                <br />
                 {sorted.length > 0 && (
                     <div>
                         <table className={style.table}>
