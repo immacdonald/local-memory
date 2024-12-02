@@ -394,7 +394,7 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
         mapFunctions.current!.removeIndicators();
         if (search) {
             mapFunctions.current!.addSVG(search.location.latitude, search.location.longitude, LocationPinFillInline);
-            //mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius, '#ff000040');
+            mapFunctions.current!.addGeoCircle(search.location.latitude, search.location.longitude, search.radius, '#ff000040');
         }
     }, [search]);
 

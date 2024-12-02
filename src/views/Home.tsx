@@ -74,13 +74,13 @@ const Home: FC = () => {
         }
     }, [geolocation.loading, geolocation.location]);
 
-    const updateSearch = (coordinates: Coordinates | undefined, radius: number | undefined): void => {
+    const updateSearch = (coordinates?: Coordinates, radius?: number): void => {
         if (radius) {
             setValue('radius', decimalPlaces(radius, 0));
             onSearch(search.current!.location, radius);
         } else if (coordinates) {
             setValue('zipcode', findClosestZipcode(coordinates));
-            onSearch(coordinates, search.current!.radius);
+            onSearch(coordinates, search.current?.radius || DEFAULT_SEARCH_RADIUS);
         }
     };
 

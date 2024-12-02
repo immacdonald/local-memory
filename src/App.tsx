@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import { StyledApp } from 'phantom-library';
+import { Column, Loading, StyledApp } from 'phantom-library';
 import { About, Home, NotFound, World } from '@views';
 import { GeolocationContextProvider } from './contexts/GeolocationContext';
 import { useGeolocationContext } from './contexts/useGeolocationContext';
@@ -9,7 +9,7 @@ import { useAnalytics } from './hooks/useAnalytics';
 const RoutedApp: FC = () => {
     useAnalytics('/tools/local-memory');
 
-    const { setGeolocation } = useGeolocationContext();
+    const { geolocation, setGeolocation } = useGeolocationContext();
 
     const getLocation = (): void => {
         const geolocationTimeout = setTimeout(() => {
@@ -43,7 +43,13 @@ const RoutedApp: FC = () => {
 
     return (
         <StyledApp>
-            <Outlet />
+            {geolocation.loading ? (
+                <Column verticalAlign="center" style={{ height: '100vh' }}>
+                    <Loading />
+                </Column>
+            ) : (
+                <Outlet />
+            )}
         </StyledApp>
     );
 };

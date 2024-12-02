@@ -1,5 +1,5 @@
-import { Coordinates, Media, MediaWithDistance, WorldMedia } from '@types';
-import { FC, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
+import { Coordinates, MediaWithDistance, WorldMedia } from '@types';
+import { ChangeEvent, FC, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
 import {
     Button,
@@ -31,7 +31,7 @@ type CityCoordinatesPair = {
     longitude: number;
 };
 
-function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxDistance: number, limit = 100): MediaWithDistance[] {
+function sortCitiesByProximity(cities: WorldMedia[], currentCoords: Coordinates, maxDistance: number, limit = 500): MediaWithDistance[] {
     cities.forEach((city: MediaWithDistance) => {
         city.distance = haversineDistance(currentCoords, { latitude: city.cityCountyLat, longitude: city.cityCountyLong });
     });
@@ -43,12 +43,12 @@ function sortCitiesByProximity(cities: Media[], currentCoords: Coordinates, maxD
     return filteredCities.slice(0, limit);
 }
 
-const DEFAULT_SEARCH_RADIUS = Number.MAX_SAFE_INTEGER;
+const DEFAULT_SEARCH_RADIUS = 1000;
 
 const World: FC = () => {
     const { geolocation } = useGeolocationContext();
 
-    const [sorted, setSorted] = useState<Media[]>([]);
+    const [sorted, setSorted] = useState<WorldMedia[]>([]);
 
     const { atBreakpoint, windowSize } = useResponsiveContext();
     const isMobile = useMemo(() => atBreakpoint('xs'), [windowSize.width]);
@@ -73,17 +73,29 @@ const World: FC = () => {
         setSorted(sortedCities);
     };
 
-    const updateSearch = (coordinates: Coordinates | undefined, radius: number | undefined): void => {
+    const updateSearch = (coordinates?: Coordinates, radius?: number): void => {
         if (radius) {
-            onSearch(search.current!.location, radius);
+            onSearch(search.current!.location, Math.floor(radius));
         } else if (coordinates) {
-            onSearch(coordinates, search.current!.radius);
+            onSearch(coordinates, search.current?.radius || DEFAULT_SEARCH_RADIUS);
         }
     };
 
     const countries: string[] = useMemo(() => [...new Set(mediaWorld.map((data: WorldMedia) => data.country!))].sort(), [mediaWorld]);
 
-    const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+    const findClosestCountry = (): string => {
+        let nearest = sorted;
+        if (nearest.length == 0 && geolocation.location) {
+            nearest = sortCitiesByProximity(mediaWorld, geolocation.location, DEFAULT_SEARCH_RADIUS);
+        }
+        if (nearest.length > 0) {
+            return (nearest[0] as WorldMedia).country!;
+        }
+
+        return 'Canada';
+    };
+
+    const [selectedCountry, setSelectedCountry] = useState<string | null>(findClosestCountry());
 
     const cities: CityCoordinatesPair[] = useMemo(() => {
         if (!selectedCountry) {
@@ -136,6 +148,7 @@ const World: FC = () => {
                             value: country,
                             label: country
                         }))}
+                        defaultValue={selectedCountry}
                         onChange={(value: NullablePrimitive) => setSelectedCountry(value as string | null)}
                     />
                     <Dropdown
@@ -144,9 +157,17 @@ const World: FC = () => {
                             label: city.city
                         }))}
                         onChange={(value: NullablePrimitive) => {
-                            const coordinates = (value as string).split('#');
-                            updateSearch({ latitude: parseFloat(coordinates[0]), longitude: parseFloat(coordinates[1]) }, undefined);
+                            if (value) {
+                                const coordinates = (value as string).split('#');
+                                updateSearch({ latitude: parseFloat(coordinates[0]), longitude: parseFloat(coordinates[1]) }, undefined);
+                            }
                         }}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Radius (miles)"
+                        value={search.current?.radius || DEFAULT_SEARCH_RADIUS}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => updateSearch(undefined, parseFloat(event.target.value))}
                     />
                 </Flex>
                 <br />

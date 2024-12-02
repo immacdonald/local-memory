@@ -105,7 +105,9 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
             .on('mouseover', function (_, d) {
                 const county = mediaHeatmapUS.find((e) => e.fips == d.id);
                 tooltip.style('display', 'block').html(`
-                    <i>${`${county?.countyName || 'Unknown County'}`}, ${`${county?.state || 'Unknown State'}`}</i>
+                    <i>${`${county?.countyName || 'Unknown County'}`},</i>
+                    <br>
+                    <i>${`${county?.state || ''}`}</i>
                     <br>
                     <br>
                     ${
@@ -187,7 +189,9 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 tooltip.style('display', 'block').html(`
                     <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
                     <br>
-                    <i>${`${county?.countyName || 'Unknown County'}`}, ${`${county?.state || 'Unknown State'}`}</i>
+                    <i>${`${county?.countyName || 'Unknown County'}`},</i>
+                    <br>
+                    <i>${`${county?.state || ''}`}</i>
                     <br>
                     <br>
                     ${
