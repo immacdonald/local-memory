@@ -78,24 +78,48 @@ const World: FC = () => {
             onSearch(search.current!.location, Math.floor(radius));
         } else if (coordinates) {
             onSearch(coordinates, search.current?.radius || DEFAULT_SEARCH_RADIUS);
+            const country = findClosestCountry(coordinates);
+            setSelectedCountry(country);
+            if (country) {
+                setSelectedCity(findClosestCity(country, coordinates));
+            } else {
+                setSelectedCity(null);
+            }
         }
     };
 
     const countries: string[] = useMemo(() => [...new Set(mediaWorld.map((data: WorldMedia) => data.country!))].sort(), [mediaWorld]);
 
-    const findClosestCountry = (): string => {
+    const findClosestCountry = (location?: Coordinates): string | null => {
+        const coordinates = location || geolocation.location;
         let nearest = sorted;
-        if (nearest.length == 0 && geolocation.location) {
-            nearest = sortCitiesByProximity(mediaWorld, geolocation.location, DEFAULT_SEARCH_RADIUS);
+        if (nearest.length == 0 && coordinates) {
+            nearest = sortCitiesByProximity(mediaWorld, coordinates, DEFAULT_SEARCH_RADIUS);
         }
         if (nearest.length > 0) {
             return (nearest[0] as WorldMedia).country!;
         }
 
-        return 'Canada';
+        return null;
+    };
+
+    const findClosestCity = (country: string, location?: Coordinates): string | null => {
+        const coordinates = location || geolocation.location;
+        let nearest = sorted;
+        if (nearest.length == 0 && coordinates) {
+            nearest = sortCitiesByProximity(mediaWorld, coordinates, DEFAULT_SEARCH_RADIUS);
+        }
+        nearest = nearest.filter((m) => m.country == country);
+        if (nearest.length > 0) {
+            const nearestCity = nearest[0] as WorldMedia;
+            return `${nearestCity.cityCountyLat}#${nearestCity.cityCountyLong}`;
+        }
+
+        return null;
     };
 
     const [selectedCountry, setSelectedCountry] = useState<string | null>(findClosestCountry());
+    const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
     const cities: CityCoordinatesPair[] = useMemo(() => {
         if (!selectedCountry) {
@@ -149,7 +173,10 @@ const World: FC = () => {
                             label: country
                         }))}
                         defaultValue={selectedCountry}
-                        onChange={(value: NullablePrimitive) => setSelectedCountry(value as string | null)}
+                        onChange={(value: NullablePrimitive) => {
+                            setSelectedCity(null);
+                            setSelectedCountry(value as string | null);
+                        }}
                     />
                     <Dropdown
                         options={cities.map((city) => ({
@@ -162,6 +189,7 @@ const World: FC = () => {
                                 updateSearch({ latitude: parseFloat(coordinates[0]), longitude: parseFloat(coordinates[1]) }, undefined);
                             }
                         }}
+                        defaultValue={selectedCity}
                     />
                     <input
                         type="number"

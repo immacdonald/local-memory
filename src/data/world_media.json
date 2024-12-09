@@ -579,7 +579,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.liberte-algerie.com/",
         "cityCountyName": "Algiers",
-        "name": "Libert\u00e9",
+        "name": "Liberté",
         "rss": [],
         "cityCountyLong": 3.0588,
         "video": "https://www.youtube.com/watch?v=bi0TZvDpWyo",
@@ -873,7 +873,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.lanacion.com.ar/",
         "cityCountyName": "Buenos Aires",
-        "name": "La Naci\u00f3n",
+        "name": "La Nación",
         "rss": [
             "http://servicios.lanacion.com.ar/herramientas/rss/origen=2"
         ],
@@ -968,12 +968,12 @@
         "city": "Buenos Aires"
     },
     {
-        "facebook": "https://www.facebook.com/InfoCa\u00f1uelas-93261181654",
+        "facebook": "https://www.facebook.com/InfoCañuelas-93261181654",
         "cityCountyLat": -38.4161,
         "mediaSubclass": "city-county",
         "website": "http://www.infocanuelas.com/",
-        "cityCountyName": "Ca\u00f1uelas",
-        "name": "Info Ca\u00f1uelas",
+        "cityCountyName": "Cañuelas",
+        "name": "Info Cañuelas",
         "rss": [],
         "cityCountyLong": -63.6167,
         "video": "",
@@ -981,7 +981,7 @@
         "twitter": "https://twitter.com/infocanuelas",
         "openSearch": [],
         "country": "Argentina",
-        "city": "Ca\u00f1uelas"
+        "city": "Cañuelas"
     },
     {
         "facebook": "",
@@ -1010,7 +1010,7 @@
         "cityCountyLong": -58.0174,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?url=http://www.elheraldo.com.ar/noticias/145345_neuquen-ofrece-en-canada-y-estados-unidos-seis-areas-de-gas-y-petroleo.html&text=Neuqu\u00e9n",
+        "twitter": "https://twitter.com/intent/tweet?url=http://www.elheraldo.com.ar/noticias/145345_neuquen-ofrece-en-canada-y-estados-unidos-seis-areas-de-gas-y-petroleo.html&text=Neuquén",
         "openSearch": [],
         "country": "Argentina",
         "city": "Concordia"
@@ -1092,7 +1092,7 @@
         "cityCountyLong": -66.856,
         "video": "https://www.youtube.com/user/elindepdigital/videos",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?url=http://www.elindependiente.com.ar/pagina.php?id=135438&text=Iglesia cat\u00f3lica de M\u00e9xico conden\u00f3 abusos de curas",
+        "twitter": "https://twitter.com/intent/tweet?url=http://www.elindependiente.com.ar/pagina.php?id=135438&text=Iglesia católica de México condenó abusos de curas",
         "openSearch": [],
         "country": "Argentina",
         "city": "La Rioja"
@@ -1169,7 +1169,7 @@
         "cityCountyLat": -38.4161,
         "mediaSubclass": "city-county",
         "website": "http://www.elpopular.com.ar/",
-        "cityCountyName": "Olavarr\u00eda",
+        "cityCountyName": "Olavarría",
         "name": "El Popular",
         "rss": [
             "http://www.elpopular.com.ar/rss/"
@@ -1180,7 +1180,7 @@
         "twitter": "http://www.twitter.com/elpopularmedios",
         "openSearch": [],
         "country": "Argentina",
-        "city": "Olavarr\u00eda"
+        "city": "Olavarría"
     },
     {
         "facebook": "https://www.facebook.com/ElDiarioParana",
@@ -1301,7 +1301,7 @@
         "cityCountyLat": -51.623,
         "mediaSubclass": "city-county",
         "website": "http://www.tiemposur.com.ar/",
-        "cityCountyName": "R\u00edo Gallegos",
+        "cityCountyName": "Río Gallegos",
         "name": "Tiempo Sur",
         "rss": [],
         "cityCountyLong": -69.2168,
@@ -1310,7 +1310,7 @@
         "twitter": "http://twitter.com/#!/diariotiemposur",
         "openSearch": [],
         "country": "Argentina",
-        "city": "R\u00edo Gallegos"
+        "city": "Río Gallegos"
     },
     {
         "facebook": "https://www.facebook.com/eltribuno",
@@ -1382,7 +1382,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.jujuyaldia.com.ar/",
         "cityCountyName": "San Salvador de Jujuy",
-        "name": "Jujuy al d\u00eda",
+        "name": "Jujuy al día",
         "rss": [
             "http://www.jujuyaldia.com.ar/comments/feed/",
             "http://www.jujuyaldia.com.ar/feed/"
@@ -1519,7 +1519,7 @@
         "cityCountyLat": -38.4161,
         "mediaSubclass": "city-county",
         "website": "http://www.eldebate.com.ar/",
-        "cityCountyName": "Z\u00c3\u00a1rate",
+        "cityCountyName": "ZÃ¡rate",
         "name": "Diario El Debate",
         "rss": [
             "http://www.eldebate.com.ar/feed/",
@@ -1531,7 +1531,7 @@
         "twitter": "https://twitter.com/@diarioELDEBATE",
         "openSearch": [],
         "country": "Argentina",
-        "city": "Z\u00e1rate"
+        "city": "Zárate"
     },
     {
         "facebook": "https://www.facebook.com/pages/A1plus/121061077922161",
@@ -8767,7 +8767,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.oon.at",
         "cityCountyName": "Vienna",
-        "name": "Ober\u00f6sterreich Nachrichten",
+        "name": "Oberösterreich Nachrichten",
         "rss": [
             "http://www.nachrichten.at/storage/rss/rss/nachrichten.xml"
         ],
@@ -8785,7 +8785,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.oe-journal.at/",
         "cityCountyName": "Vienna",
-        "name": "\u00d6sterreich Journal",
+        "name": "Österreich Journal",
         "rss": [],
         "cityCountyLong": 16.3738,
         "video": "",
@@ -8801,7 +8801,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.oegb.or.at/",
         "cityCountyName": "Vienna",
-        "name": "\u00d6sterreichischen Gewerkschaftsbund",
+        "name": "Österreichischen Gewerkschaftsbund",
         "rss": [],
         "cityCountyLong": 16.3738,
         "video": "https://www.youtube.com/user/OEGBOnline",
@@ -8817,7 +8817,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.orf.at/",
         "cityCountyName": "Vienna",
-        "name": "\u00d6sterreichischer Rundfunk",
+        "name": "Österreichischer Rundfunk",
         "rss": [
             "http://rss.orf.at/news.xml"
         ],
@@ -12762,7 +12762,7 @@
         "city": "Rio de Janeiro"
     },
     {
-        "facebook": "http://www.facebook.com/share.php?u=http://www.atarde.com.br/mundo/noticias/1851975-grupo-militante-basco-eta-diz-que-planeja-entregar-suas-armas-neste-sabado&title=Grupo militante basco ETA diz que planeja entregar suas armas neste s\u00e1bado",
+        "facebook": "http://www.facebook.com/share.php?u=http://www.atarde.com.br/mundo/noticias/1851975-grupo-militante-basco-eta-diz-que-planeja-entregar-suas-armas-neste-sabado&title=Grupo militante basco ETA diz que planeja entregar suas armas neste sábado",
         "cityCountyLat": -12.973,
         "mediaSubclass": "city-county",
         "website": "http://www.atarde.com.br/",
@@ -12772,7 +12772,7 @@
         "cityCountyLong": -38.5023,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/home?status=Grupo militante basco ETA diz que planeja entregar suas armas neste s\u00e1bado+http://www.atarde.com.br/mundo/noticias/1851975-grupo-militante-basco-eta-diz-que-planeja-entregar-suas-armas-neste-sabado",
+        "twitter": "http://twitter.com/home?status=Grupo militante basco ETA diz que planeja entregar suas armas neste sábado+http://www.atarde.com.br/mundo/noticias/1851975-grupo-militante-basco-eta-diz-que-planeja-entregar-suas-armas-neste-sabado",
         "openSearch": [],
         "country": "Brazil",
         "city": "Salvador"
@@ -12783,7 +12783,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.folhanit.com.br/",
         "cityCountyName": "Santa Rosa",
-        "name": "Folha de Niter\u00f3i",
+        "name": "Folha de Niterói",
         "rss": [],
         "cityCountyLong": -54.4802,
         "video": "",
@@ -12799,7 +12799,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.dgabc.com.br",
         "cityCountyName": "Santo Andre",
-        "name": "Di\u00e1rio do Grande ABC",
+        "name": "Diário do Grande ABC",
         "rss": [
             "http://www.dgabc.com.br/Servicos/RSS"
         ],
@@ -12833,7 +12833,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.folha.com.br",
         "cityCountyName": "Sao Paulo",
-        "name": "Folha de S\u00e3o Paulo",
+        "name": "Folha de São Paulo",
         "rss": [],
         "cityCountyLong": -46.6333,
         "video": "https://www.youtube.com/watch?v=yVQdyBEqkSE&feature=youtu.be",
@@ -13464,7 +13464,7 @@
         "cityCountyName": "Sofia",
         "name": "Bulgarian News Agency",
         "rss": [
-            "http://bta.bg/bg/page/109/RSS_\u0435\u043c\u0438\u0441\u0438\u0438"
+            "http://bta.bg/bg/page/109/RSS_емисии"
         ],
         "cityCountyLong": 23.3219,
         "video": "",
@@ -14596,7 +14596,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.lebulletinregional.com/",
         "cityCountyName": "Alma",
-        "name": "Le Bulletin R\u00e9gional",
+        "name": "Le Bulletin Régional",
         "rss": [
             "http://www.lebulletinregional.com/comments/feed/",
             "http://www.lebulletinregional.com/feed/"
@@ -24321,7 +24321,7 @@
         "city": "Winnipeg"
     },
     {
-        "facebook": "http://www.facebook.com/pages/L\u00f6gberg-Heimskringla/142964285774061",
+        "facebook": "http://www.facebook.com/pages/Lögberg-Heimskringla/142964285774061",
         "cityCountyLat": 49.8951,
         "mediaSubclass": "city-county",
         "website": "http://www.lh-inc.ca/",
@@ -24665,7 +24665,7 @@
         "cityCountyLat": -36.8201,
         "mediaSubclass": "city-county",
         "website": "http://www.cronica.cl/",
-        "cityCountyName": "Concepci\u00f3n",
+        "cityCountyName": "Concepción",
         "name": "La Estrella de Concepcion",
         "rss": [],
         "cityCountyLong": -73.0444,
@@ -24674,14 +24674,14 @@
         "twitter": "",
         "openSearch": [],
         "country": "Chile",
-        "city": "Concepci\u00f3n"
+        "city": "Concepción"
     },
     {
         "facebook": "https://www.facebook.com/mejoresdatoscl",
         "cityCountyLat": -36.8201,
         "mediaSubclass": "city-county",
         "website": "http://www.mejoresdatos.cl",
-        "cityCountyName": "Concepci\u00f3n",
+        "cityCountyName": "Concepción",
         "name": "Mejores Datos",
         "rss": [],
         "cityCountyLong": -73.0444,
@@ -24690,7 +24690,7 @@
         "twitter": "http://www.twitter.com/MejoresDatos",
         "openSearch": [],
         "country": "Chile",
-        "city": "Concepci\u00f3n"
+        "city": "Concepción"
     },
     {
         "facebook": "http://www.facebook.com/chanarcillo",
@@ -24713,7 +24713,7 @@
         "cityCountyLat": -34.978,
         "mediaSubclass": "city-county",
         "website": "http://www.diariolaprensa.cl/",
-        "cityCountyName": "Curic\u00f3",
+        "cityCountyName": "Curicó",
         "name": "La Prensa",
         "rss": [
             "http://www.diariolaprensa.cl/comments/feed/",
@@ -24725,7 +24725,7 @@
         "twitter": "https://twitter.com/dlaprensa",
         "openSearch": [],
         "country": "Chile",
-        "city": "Curic\u00f3"
+        "city": "Curicó"
     },
     {
         "facebook": "",
@@ -25682,7 +25682,7 @@
         "cityCountyLat": 4.5709,
         "mediaSubclass": "city-county",
         "website": "http://www.laopinion.com.co/",
-        "cityCountyName": "C\u00facuta",
+        "cityCountyName": "Cúcuta",
         "name": "La opinion",
         "rss": [
             "http://www.laopinion.com.co/rss.xml"
@@ -25693,7 +25693,7 @@
         "twitter": "https://www.twitter.com/laopinioncucuta",
         "openSearch": [],
         "country": "Colombia",
-        "city": "C\u00facuta"
+        "city": "Cúcuta"
     },
     {
         "facebook": "https://www.facebook.com/lapatria.manizales",
@@ -25750,7 +25750,7 @@
         "cityCountyLat": 2.4448,
         "mediaSubclass": "city-county",
         "website": "http://www.elliberal.com.co/",
-        "cityCountyName": "Popay\u00c3\u00a1n",
+        "cityCountyName": "PopayÃ¡n",
         "name": "El Liberal",
         "rss": [],
         "cityCountyLong": -76.6147,
@@ -25759,14 +25759,14 @@
         "twitter": "",
         "openSearch": [],
         "country": "Colombia",
-        "city": "Popay\u00e1n"
+        "city": "Popayán"
     },
     {
         "facebook": "https://www.facebook.com/eltabloidetulua",
         "cityCountyLat": 4.0899,
         "mediaSubclass": "city-county",
         "website": "http://www.eltabloide.com.co/",
-        "cityCountyName": "Tulu\u00c3\u00a1",
+        "cityCountyName": "TuluÃ¡",
         "name": "El Tabloide",
         "rss": [
             "http://www.eltabloide.com.co/feed/",
@@ -25778,7 +25778,7 @@
         "twitter": "https://twitter.com/eltabloide",
         "openSearch": [],
         "country": "Colombia",
-        "city": "Tulu\u00e1"
+        "city": "Tuluá"
     },
     {
         "facebook": "https://www.facebook.com/excelsio.boyaca",
@@ -26179,7 +26179,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.kepesujsag.com/",
         "cityCountyName": "Esseg",
-        "name": "\u00daj Magyar K\u00e9pes \u00dajs\u00e1g",
+        "name": "Új Magyar Képes Újság",
         "rss": [
             "http://www.kepesujsag.com/kepesujsag-com-horvatorszagi-magyar-hetilap/feed/",
             "http://www.kepesujsag.com/comments/feed/",
@@ -28067,7 +28067,7 @@
         "city": "Kromeriz"
     },
     {
-        "facebook": "http://www.facebook.com/T\u00fdden\u00edk-Krom\u011b\u0159\u00ed\u017eska-191966617499094/",
+        "facebook": "http://www.facebook.com/Týdeník-Kroměřížska-191966617499094/",
         "cityCountyLat": 49.2917,
         "mediaSubclass": "city-county",
         "website": "http://www.tydenik-km.cz/",
@@ -29926,7 +29926,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.stiften-aarhus.dk/",
         "cityCountyName": "Arhus",
-        "name": "\u00c5rhus Stiftstidende",
+        "name": "Århus Stiftstidende",
         "rss": [],
         "cityCountyLong": 10.2039,
         "video": "",
@@ -30227,7 +30227,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ing.dk/",
         "cityCountyName": "Copenhagen",
-        "name": "Ingeni\u00f8ren Net",
+        "name": "Ingeniøren Net",
         "rss": [],
         "cityCountyLong": 12.5683,
         "video": "",
@@ -32536,7 +32536,7 @@
         "cityCountyLong": -79.9224,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?text=Pamela Anderson viste lencer\u00eda a pocos meses de cumplir 50;url=http://www.extra.ec/buena-vida/pamelanderson-sexylenceria-cocodemer-julianassange-GI1219888",
+        "twitter": "https://twitter.com/intent/tweet?text=Pamela Anderson viste lencería a pocos meses de cumplir 50;url=http://www.extra.ec/buena-vida/pamelanderson-sexylenceria-cocodemer-julianassange-GI1219888",
         "openSearch": [],
         "country": "Ecuador",
         "city": "Guayaquil"
@@ -33618,7 +33618,7 @@
         "cityCountyLong": -89.2182,
         "video": "https://www.youtube.com/user/elsalvadorpuntocom",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?text=Vos%20Sab\u00e9s:%20\u00bfA%20qui\u00e9n%20dejar\u00edas%20en%20una%20isla%20desierta?&url=http%3A%2F%2Fwww.elsalvador.com%2Fvideos%2Fentretenimiento-videos%2F333315%2Fvos-sabes-a-quien-dejarias-en-una-isla-desierta%2F&via=elsalvadorcom",
+        "twitter": "https://twitter.com/intent/tweet?text=Vos%20Sabés:%20¿A%20quién%20dejarías%20en%20una%20isla%20desierta?&url=http%3A%2F%2Fwww.elsalvador.com%2Fvideos%2Fentretenimiento-videos%2F333315%2Fvos-sabes-a-quien-dejarias-en-una-isla-desierta%2F&via=elsalvadorcom",
         "openSearch": [],
         "country": "El Salvador",
         "city": "San Salvador"
@@ -33634,7 +33634,7 @@
         "cityCountyLong": -89.2182,
         "video": "http://youtube.com/elfaro",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?url=http://losblogs.elfaro.net/cosmica/&text=C\u00f3smica&via=_ElFaro_",
+        "twitter": "https://twitter.com/intent/tweet?url=http://losblogs.elfaro.net/cosmica/&text=Cósmica&via=_ElFaro_",
         "openSearch": [],
         "country": "El Salvador",
         "city": "San Salvador"
@@ -44005,7 +44005,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.epl.ee/",
         "cityCountyName": "Tallinn",
-        "name": "Eesti P\u00e4evaleht",
+        "name": "Eesti Päevaleht",
         "rss": [],
         "cityCountyLong": 24.7536,
         "video": "",
@@ -44652,7 +44652,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.lansivayla.fi/",
         "cityCountyName": "Espoo",
-        "name": "L\u00e4nsiv\u00e4yl\u00e4",
+        "name": "Länsiväylä",
         "rss": [],
         "cityCountyLong": 24.6559,
         "video": "",
@@ -44751,7 +44751,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.kaupunkiuutiset.com/",
         "cityCountyName": "Hameenlinna",
-        "name": "H\u00e4meenlinnan Kaupunkiuutiset",
+        "name": "Hämeenlinnan Kaupunkiuutiset",
         "rss": [],
         "cityCountyLong": 24.459,
         "video": "",
@@ -44813,7 +44813,7 @@
         "city": "Heinavesi"
     },
     {
-        "facebook": "https://www.facebook.com/It\u00e4-H\u00e4me-374003438389/",
+        "facebook": "https://www.facebook.com/Itä-Häme-374003438389/",
         "cityCountyLat": 61.2102,
         "mediaSubclass": "city-county",
         "website": "http://www.itahame.fi/",
@@ -45921,7 +45921,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ess.fi/",
         "cityCountyName": "Lahti",
-        "name": "Etel\u00e4-Suomen Sanomat",
+        "name": "Etelä-Suomen Sanomat",
         "rss": [],
         "cityCountyLong": 25.6612,
         "video": "",
@@ -46025,7 +46025,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.esaimaa.fi/",
         "cityCountyName": "Lappeenranta",
-        "name": "Etel\u00e4 Saimaa",
+        "name": "Etelä Saimaa",
         "rss": [
             "http://www.esaimaa.fi/rss/uutiset.xml"
         ],
@@ -46169,7 +46169,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.lansi-uusimaa.fi/",
         "cityCountyName": "Lohja",
-        "name": "L\u00e4nsi-Uusimaa",
+        "name": "Länsi-Uusimaa",
         "rss": [],
         "cityCountyLong": 24.0675,
         "video": "",
@@ -46243,7 +46243,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.tidningen.aland.net/",
         "cityCountyName": "Maarianhamina",
-        "name": "\u00c5landtidningen",
+        "name": "Ålandtidningen",
         "rss": [],
         "cityCountyLong": 19.9348,
         "video": "",
@@ -46259,7 +46259,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nyan.aland.fi/",
         "cityCountyName": "Maarianhamina",
-        "name": "Nya \u00c5land",
+        "name": "Nya Åland",
         "rss": [
             "http://www.nyan.ax/feed/",
             "http://www.nyan.ax/comments/feed/"
@@ -46345,7 +46345,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.lansi-savo.fi/",
         "cityCountyName": "Mikkeli",
-        "name": "L\u00e4nsi-Savo",
+        "name": "Länsi-Savo",
         "rss": [],
         "cityCountyLong": 27.2721,
         "video": "",
@@ -46841,8 +46841,8 @@
         "cityCountyLat": 61.9241,
         "mediaSubclass": "city-county",
         "website": "http://www.pyhajarvensanomat.fi/",
-        "cityCountyName": "Pyh\u00e4j\u00e4rvi",
-        "name": "Pyh\u00e4j\u00e4rven Sanomat",
+        "cityCountyName": "Pyhäjärvi",
+        "name": "Pyhäjärven Sanomat",
         "rss": [
             "http://www.pyhajarvensanomat.fi/sivut/feed",
             "http://www.pyhajarvensanomat.fi/sivut/comments/feed"
@@ -46853,7 +46853,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Finland",
-        "city": "Pyh\u00e4j\u00e4rvi"
+        "city": "Pyhäjärvi"
     },
     {
         "facebook": "",
@@ -47344,7 +47344,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.abounderrattelser.fi/",
         "cityCountyName": "Turku",
-        "name": "\u00c5bo Underr\u00e4ttelser",
+        "name": "Åbo Underrättelser",
         "rss": [],
         "cityCountyLong": 22.2666,
         "video": "",
@@ -47871,7 +47871,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.letelegramme.com/",
         "cityCountyName": "Brest",
-        "name": "Le T\u00e9l\u00e9gramme de Brest",
+        "name": "Le Télégramme de Brest",
         "rss": [
             "http://www.letelegramme.fr//rss.xml"
         ],
@@ -48235,7 +48235,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.republicain-lorrain.fr",
         "cityCountyName": "Metz",
-        "name": "Le R\u00e9publicain Lorrain",
+        "name": "Le Républicain Lorrain",
         "rss": [],
         "cityCountyLong": 6.1757,
         "video": "",
@@ -48356,7 +48356,7 @@
         "cityCountyLong": 7.262,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/share?text=L'HAPPY HOUR PRESIDENTIELLE. Ce qu'il faut avoir lu, vu ou entendu aujourd'hui pour briller en soci\u00e9t\u00e9 via @nice_matin&url=http://www.nicematin.com/a/127997",
+        "twitter": "http://twitter.com/share?text=L'HAPPY HOUR PRESIDENTIELLE. Ce qu'il faut avoir lu, vu ou entendu aujourd'hui pour briller en société via @nice_matin&url=http://www.nicematin.com/a/127997",
         "openSearch": [],
         "country": "France",
         "city": "Nice"
@@ -48390,7 +48390,7 @@
         "cityCountyLong": 7.262,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/share?text=Le lyc\u00e9e de Coeur du Var annonc\u00e9 pour la rentr\u00e9e 2023 via @var_matin&url=http://www.varmatin.com/a/127988",
+        "twitter": "http://twitter.com/share?text=Le lycée de Coeur du Var annoncé pour la rentrée 2023 via @var_matin&url=http://www.varmatin.com/a/127988",
         "openSearch": [],
         "country": "France",
         "city": "Nice"
@@ -48935,7 +48935,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.humanite.presse.fr",
         "cityCountyName": "Paris",
-        "name": "L'Humanit\u00e9",
+        "name": "L'Humanité",
         "rss": [
             "http://www.humanite.fr/rss/actu.rss"
         ],
@@ -49039,7 +49039,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.metropoleparis.com/",
         "cityCountyName": "Paris",
-        "name": "M\u00e9tropole",
+        "name": "Métropole",
         "rss": [],
         "cityCountyLong": 2.3522,
         "video": "",
@@ -49126,7 +49126,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.pyrenees.com",
         "cityCountyName": "Pau",
-        "name": "La R\u00e9publique des Pyr\u00e9n\u00e9es",
+        "name": "La République des Pyrénées",
         "rss": [
             "http://www.larepubliquedespyrenees.fr/actualite/rss.xml"
         ],
@@ -49345,7 +49345,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ladepeche.com",
         "cityCountyName": "Toulouse",
-        "name": "La D\u00e9p\u00eache du Midi",
+        "name": "La Dépêche du Midi",
         "rss": [
             "http://www.ladepeche.fr/rss/home.rss"
         ],
@@ -49663,7 +49663,7 @@
         "cityCountyLong": 44.8271,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/home?status=\u0413\u0440\u0443\u0437\u0438\u044f%20\u0438%20\u0423\u043a\u0440\u0430\u0438\u043d\u0430%20\u043c\u0435\u0436\u0434\u0443%20\u0412\u043e\u0441\u0442\u043e\u043a\u043e\u043c%20\u0438%20\u0417\u0430\u043f\u0430\u0434\u043e\u043c:https://www.newsgeorgia.ge/gruziya-i-ukraina-mezhdu-vostokom-i-zapadom/",
+        "twitter": "https://twitter.com/home?status=Грузия%20и%20Украина%20между%20Востоком%20и%20Западом:https://www.newsgeorgia.ge/gruziya-i-ukraina-mezhdu-vostokom-i-zapadom/",
         "openSearch": [],
         "country": "Georgia",
         "city": "Tbilisi"
@@ -50074,7 +50074,7 @@
         "cityCountyLong": 10.3823,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Bad Oldesloe"
@@ -50187,7 +50187,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.fraenkischer-tag.de/",
         "cityCountyName": "Bamberg",
-        "name": "Fr\u00e4nkischer Tag",
+        "name": "Fränkischer Tag",
         "rss": [
             "http://www.infranken.de/storage/rss/rss/2.0/startseite.xml"
         ],
@@ -50832,7 +50832,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nw-news.de/",
         "cityCountyName": "Bielefeld",
-        "name": "Neue Westf\u00e4lische Zeitung",
+        "name": "Neue Westfälische Zeitung",
         "rss": [
             "http://www.nw.de/_export/site_rss/nw/index.rss"
         ],
@@ -51353,7 +51353,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ksta.de",
         "cityCountyName": "Cologne",
-        "name": "K\u00f6lner Stadtanzeiger",
+        "name": "Kölner Stadtanzeiger",
         "rss": [
             "http://www.ksta.de/feed/index.rss"
         ],
@@ -51721,7 +51721,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.sz-online.de/",
         "cityCountyName": "Dresden",
-        "name": "S\u00e4chsische Zeitung",
+        "name": "Sächsische Zeitung",
         "rss": [
             "http://www.sz-online.de/News/Dippoldiswalde.rss",
             "http://www.sz-online.de/News/Goerlitz.rss",
@@ -51861,7 +51861,7 @@
         "cityCountyLong": 9.8384,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Eckernforde"
@@ -51895,7 +51895,7 @@
         "cityCountyLong": 9.6633,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Elmshorn"
@@ -52134,7 +52134,7 @@
         "cityCountyLong": 10.6095,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Eutin"
@@ -52186,7 +52186,7 @@
         "cityCountyLong": 9.447,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Flensburg"
@@ -52204,7 +52204,7 @@
         "cityCountyLong": 9.447,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Flensburg"
@@ -53335,7 +53335,7 @@
         "cityCountyLong": 9.0601,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Husum"
@@ -53403,7 +53403,7 @@
         "cityCountyLong": 9.5051,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Itzehoe"
@@ -53437,7 +53437,7 @@
         "cityCountyLong": 6.3662,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Kapellen"
@@ -53645,7 +53645,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.skol.de",
         "cityCountyName": "Konstanz",
-        "name": "S\u00fcd Kurier",
+        "name": "Süd Kurier",
         "rss": [],
         "cityCountyLong": 9.1732,
         "video": "",
@@ -54066,7 +54066,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.landeszeitung.de",
         "cityCountyName": "Luneburgo",
-        "name": "L\u00fcneburger Landes Zeitung",
+        "name": "Lüneburger Landes Zeitung",
         "rss": [
             "https://www.landeszeitung.de/comments/feed",
             "https://www.landeszeitung.de/feed"
@@ -54084,8 +54084,8 @@
         "cityCountyLat": 51.1657,
         "mediaSubclass": "city-county",
         "website": "http://www.ln-online.de/",
-        "cityCountyName": "L\u00fcbeck",
-        "name": "L\u00fcbecker Nachrichten",
+        "cityCountyName": "Lübeck",
+        "name": "Lübecker Nachrichten",
         "rss": [],
         "cityCountyLong": 10.4515,
         "video": "http://www.youtube.com/lnonlinede",
@@ -54093,7 +54093,7 @@
         "twitter": "https://twitter.com/ln_online",
         "openSearch": [],
         "country": "Germany",
-        "city": "L\u00fcbeck"
+        "city": "Lübeck"
     },
     {
         "facebook": "https://www.facebook.com/volksstimme",
@@ -54356,7 +54356,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.wnonline.de/",
         "cityCountyName": "Muenster",
-        "name": "Westf\u00e4lische Nachrichten",
+        "name": "Westfälische Nachrichten",
         "rss": [],
         "cityCountyLong": 7.6261,
         "video": "http://www.youtube.com/wntvchannel",
@@ -54466,7 +54466,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.merkur-online.de/",
         "cityCountyName": "Munich",
-        "name": "M\u00fcnchner Merkur",
+        "name": "Münchner Merkur",
         "rss": [
             "http://www.merkur-online.de/rssfeed.rdf"
         ],
@@ -54602,7 +54602,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.aerztezeitung.de/",
         "cityCountyName": "Neu-Isenburg",
-        "name": "\u00c4rzte Zeitung",
+        "name": "Ärzte Zeitung",
         "rss": [
             "http://www.aerztezeitung.de/extras/rss/?cat=panorama",
             "http://www.aerztezeitung.de/extras/rss/?cat=politik_gesellschaft",
@@ -54649,7 +54649,7 @@
         "cityCountyLong": 9.984,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Neumunster"
@@ -54718,7 +54718,7 @@
         "cityCountyLong": 8.8308,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Niebull"
@@ -54844,7 +54844,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nn-online.de/",
         "cityCountyName": "Nurnburg",
-        "name": "N\u00fcrnburger Nachrichten",
+        "name": "Nürnburger Nachrichten",
         "rss": [
             "http://www.nn-online.de/cmlink/15.423?cid=2.244"
         ],
@@ -54862,7 +54862,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nz-online.de/",
         "cityCountyName": "Nurnburg",
-        "name": "N\u00fcrnburger Zeitung",
+        "name": "Nürnburger Zeitung",
         "rss": [
             "http://www.nz-online.de/cmlink/15.423?cid=2.244"
         ],
@@ -55167,7 +55167,7 @@
         "cityCountyLong": 9.7938,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Pinneberg"
@@ -55363,7 +55363,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ntz.de/",
         "cityCountyName": "Reding",
-        "name": "N\u00fcrtinger Zeitung",
+        "name": "Nürtinger Zeitung",
         "rss": [
             "http://www.ntz.de/rss/rss.xml"
         ],
@@ -55491,7 +55491,7 @@
         "cityCountyLong": 9.6607,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Rendsburg"
@@ -55589,7 +55589,7 @@
         "cityCountyLong": 12.0991,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.svz.de%2F\u00aeion=follow_link&screen_name=NNNonline&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.svz.de%2F®ion=follow_link&screen_name=NNNonline&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Rostock"
@@ -55666,7 +55666,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.sz-sb.de/",
         "cityCountyName": "Sarrebruck",
-        "name": "Saarbr\u00fccker Zeitung",
+        "name": "Saarbrücker Zeitung",
         "rss": [],
         "cityCountyLong": 6.9969,
         "video": "",
@@ -55705,7 +55705,7 @@
         "cityCountyLong": 9.5632,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Schleswig"
@@ -55757,7 +55757,7 @@
         "cityCountyLong": 11.4012,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.svz.de%2F\u00aeion=follow_link&screen_name=SVZonline&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.svz.de%2F®ion=follow_link&screen_name=SVZonline&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Schwerin"
@@ -56062,7 +56062,7 @@
         "cityCountyLong": 8.318,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Sylt"
@@ -56103,7 +56103,7 @@
         "city": "Teltow"
     },
     {
-        "facebook": "https://www.facebook.com/Wir-sind-Uckerm\u00e4rker-853771467991527/",
+        "facebook": "https://www.facebook.com/Wir-sind-Uckermärker-853771467991527/",
         "cityCountyLat": 53.1169,
         "mediaSubclass": "city-county",
         "website": "http://www.uckermarkkurier.de/",
@@ -56181,7 +56181,7 @@
         "cityCountyLong": 9.6763,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Uetersen"
@@ -56520,7 +56520,7 @@
         "cityCountyLong": 9.374,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Wilster"
@@ -56698,7 +56698,7 @@
         "cityCountyLong": 8.5564,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F\u00aeion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
+        "twitter": "https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.shz.de%2F®ion=follow_link&screen_name=shz_de&tw_p=followbutton&variant=2.0",
         "openSearch": [],
         "country": "Germany",
         "city": "Wyk"
@@ -57011,7 +57011,7 @@
         "city": "Athens"
     },
     {
-        "facebook": "http://www.facebook.com/sharer.php?u=http://www.athinapoli.gr/2017/04/blog-post_96.html&title=\u0393\u03b9\u03b2\u03c1\u03b1\u03bb\u03c4\u03ac\u03c1: \u039f \u03b2\u03c1\u03ac\u03c7\u03bf\u03c2 \u03c0\u03bf\u03c5 \u03c7\u03c9\u03c1\u03af\u03b6\u03b5\u03b9 \u0399\u03c3\u03c0\u03b1\u03bd\u03af\u03b1 \u2013 \u0392\u03c1\u03b5\u03c4\u03b1\u03bd\u03af\u03b1",
+        "facebook": "http://www.facebook.com/sharer.php?u=http://www.athinapoli.gr/2017/04/blog-post_96.html&title=Γιβραλτάρ: Ο βράχος που χωρίζει Ισπανία – Βρετανία",
         "cityCountyLat": 37.9838,
         "mediaSubclass": "city-county",
         "website": "http://www.athinapoli.gr/",
@@ -57025,7 +57025,7 @@
         "cityCountyLong": 23.7275,
         "video": "https://www.youtube.com/user/athinapoli",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/share?url=http://www.athinapoli.gr/2017/04/blog-post_96.html&title=\u0393\u03b9\u03b2\u03c1\u03b1\u03bb\u03c4\u03ac\u03c1: \u039f \u03b2\u03c1\u03ac\u03c7\u03bf\u03c2 \u03c0\u03bf\u03c5 \u03c7\u03c9\u03c1\u03af\u03b6\u03b5\u03b9 \u0399\u03c3\u03c0\u03b1\u03bd\u03af\u03b1 \u2013 \u0392\u03c1\u03b5\u03c4\u03b1\u03bd\u03af\u03b1",
+        "twitter": "http://twitter.com/share?url=http://www.athinapoli.gr/2017/04/blog-post_96.html&title=Γιβραλτάρ: Ο βράχος που χωρίζει Ισπανία – Βρετανία",
         "openSearch": [],
         "country": "Greece",
         "city": "Athens"
@@ -57047,7 +57047,7 @@
         "city": "Athens"
     },
     {
-        "facebook": "https://www.facebook.com/\u0395\u03c6\u03b7\u03bc\u03b5\u03c1\u03af\u03b4\u03b1-\u0397-\u0391\u03c5\u03b3\u03ae-345324598921301/",
+        "facebook": "https://www.facebook.com/Εφημερίδα-Η-Αυγή-345324598921301/",
         "cityCountyLat": 37.9838,
         "mediaSubclass": "city-county",
         "website": "http://www.avgi.gr/",
@@ -57381,7 +57381,7 @@
         "cityCountyLong": 19.9217,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/share?url=http://enimerosi.com/details.php?id=9465&text=\u0391\u03c0\u03bf\u03ba\u03b1\u03b8\u03af\u03c3\u03c4\u03b1\u03c4\u03b1\u03b9 \u03b7 \u03c5\u03b4\u03c1\u03bf\u03b4\u03cc\u03c4\u03b7\u03c3\u03b7 \u03c3\u03c4\u03b7 \u0393\u03b1\u03c1\u03af\u03c4\u03c3\u03b1&hashtags=\u039d\u03bf\u03c3\u03bf\u03ba\u03bf\u03bc\u03b5\u03af\u03bf \u039a\u03ad\u03c1\u03ba\u03c5\u03c1\u03b1\u03c2,",
+        "twitter": "http://twitter.com/share?url=http://enimerosi.com/details.php?id=9465&text=Αποκαθίσταται η υδροδότηση στη Γαρίτσα&hashtags=Νοσοκομείο Κέρκυρας,",
         "openSearch": [],
         "country": "Greece",
         "city": "Corfu"
@@ -57824,7 +57824,7 @@
         "cityCountyLat": 13.4443,
         "mediaSubclass": "city-county",
         "website": "http://www.mbjguam.net/",
-        "cityCountyName": "Hag\u00e5t\u00f1a",
+        "cityCountyName": "Hagåtña",
         "name": "Marianas Business Journal",
         "rss": [
             "https://mbjguam.com/feed/",
@@ -57836,14 +57836,14 @@
         "twitter": "",
         "openSearch": [],
         "country": "Guam",
-        "city": "Hag\u00e5t\u00f1a"
+        "city": "Hagåtña"
     },
     {
         "facebook": "",
         "cityCountyLat": 13.4443,
         "mediaSubclass": "city-county",
         "website": "http://www.guampdn.com/",
-        "cityCountyName": "Hag\u00e5t\u00f1a",
+        "cityCountyName": "Hagåtña",
         "name": "Pacific Daily News",
         "rss": [],
         "cityCountyLong": 144.7937,
@@ -57852,7 +57852,7 @@
         "twitter": "https://twitter.com/intent/tweet?url=http://www.guampdn.com/picture-gallery/news/2017/04/05/yury-gryaznov-and-his-25000th-skydive-jump/100062110/&text=Yury%20Gryaznov%20and%20his%2025,000th%20skydive%20jump&via=GuamPDN",
         "openSearch": [],
         "country": "Guam",
-        "city": "Hag\u00e5t\u00f1a"
+        "city": "Hagåtña"
     },
     {
         "facebook": "",
@@ -58816,7 +58816,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.168ora.hu",
         "cityCountyName": "Budapest",
-        "name": "168 \u00d3ra",
+        "name": "168 Óra",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "",
@@ -58832,7 +58832,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.c3.hu/~beszelo",
         "cityCountyName": "Budapest",
-        "name": "Besz\u00e9l\u00f5",
+        "name": "Beszélõ",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "",
@@ -58900,7 +58900,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.es.hu/",
         "cityCountyName": "Budapest",
-        "name": "\u00c9let \u00e9s Irodalom",
+        "name": "Élet és Irodalom",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "",
@@ -58916,7 +58916,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.figyelo.hu/",
         "cityCountyName": "Budapest",
-        "name": "Figyel\u00f5",
+        "name": "Figyelõ",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "",
@@ -58950,7 +58950,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.hetivalasz.hu/",
         "cityCountyName": "Budapest",
-        "name": "Heti V\u00e1lasz",
+        "name": "Heti Válasz",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "",
@@ -59052,7 +59052,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.magyarhirlap.hu/",
         "cityCountyName": "Budapest",
-        "name": "Magyar H\u00edrlap",
+        "name": "Magyar Hírlap",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "https://www.youtube.com/channel/UC0UTcK2i10eG3i_07i7rSIg",
@@ -59116,7 +59116,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.napi.hu/",
         "cityCountyName": "Budapest",
-        "name": "Napi Gazdas\u00e1g",
+        "name": "Napi Gazdaság",
         "rss": [
             "http://www.napi.hu/feed/mindencikk.xml"
         ],
@@ -59150,7 +59150,7 @@
         "mediaSubclass": "city-county",
         "website": "http://nol.hu/",
         "cityCountyName": "Budapest",
-        "name": "N\u00e9pszabads\u00e1g",
+        "name": "Népszabadság",
         "rss": [
             "http://nol.hu/feed"
         ],
@@ -59168,7 +59168,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nepszava.hu",
         "cityCountyName": "Budapest",
-        "name": "N\u00e9pszava",
+        "name": "Népszava",
         "rss": [],
         "cityCountyLong": 19.0402,
         "video": "https://www.youtube.com/channel/UCWE-9NwXVXvJmfi-AZfsoeQ",
@@ -59218,7 +59218,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.pafi.hu/",
         "cityCountyName": "Budapest",
-        "name": "P\u00e1ly\u00e1zatfigyel\u00f5",
+        "name": "Pályázatfigyelõ",
         "rss": [
             "http://www.pafi.hu/_pafi/Palyazat.nsf/uj_palyazatok.rss"
         ],
@@ -59252,7 +59252,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.bmhirlap.hu/",
         "cityCountyName": "Nagymajor",
-        "name": "B\u00e9k\u00e9s Megyei H\u00edrlap",
+        "name": "Békés Megyei Hírlap",
         "rss": [],
         "cityCountyLong": 19.5033,
         "video": "",
@@ -59485,7 +59485,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.huni.is/",
         "cityCountyName": "Reykjavik",
-        "name": "H\u00fanahorni\u00f0",
+        "name": "Húnahornið",
         "rss": [
             "http://www.huni.is/rss.php"
         ],
@@ -60642,7 +60642,7 @@
         "cityCountyLong": 80.2707,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?button_hashtag=ChennaiOnline&text=\u0b8e\u0ba9\u0ba4\u0bc1 \u0ba8\u0bc0\u0b95\u0bcd\u0b95\u0ba4\u0bcd\u0ba4\u0bbf\u0bb1\u0bcd\u0b95\u0bc1 \u0bae\u0b95\u0bc7\u0bb7\u0bcd \u0baa\u0bc2\u0baa\u0ba4\u0bbf\u0baf\u0bc7 \u0b95\u0bbe\u0bb0\u0ba3\u0bae\u0bcd : \u0bb2\u0bbf\u0baf\u0bbe\u0ba3\u0bcd\u0b9f\u0bb0\u0bcd \u0baa\u0baf\u0bb8\u0bcd \u0b95\u0bbe\u0b9f\u0bcd\u0b9f\u0bae\u0bcd",
+        "twitter": "https://twitter.com/intent/tweet?button_hashtag=ChennaiOnline&text=எனது நீக்கத்திற்கு மகேஷ் பூபதியே காரணம் : லியாண்டர் பயஸ் காட்டம்",
         "openSearch": [],
         "country": "India",
         "city": "Chennai"
@@ -60711,7 +60711,7 @@
         "cityCountyLong": 80.2707,
         "video": "http://www.youtube.com/dinamalardaily",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?url=http://www.dinamalar.com/&text=\u0b95\u0bbe\u0bb5\u0bbf\u0bb0\u0bbf\u0baf\u0bbf\u0bb2\u0bcd \u0ba4\u0ba3\u0bcd\u0ba3\u0bc0\u0bb0\u0bcd \u0ba4\u0bbf\u0bb1\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0b8e\u0ba4\u0bbf\u0bb0\u0bbe\u0ba9 \u0b95\u0bb0\u0bcd\u0ba8\u0bbe\u0b9f\u0b95 \u0bae\u0ba9\u0bc1 \u0ba4\u0bb3\u0bcd\u0bb3\u0bc1\u0baa\u0b9f\u0bbf",
+        "twitter": "https://twitter.com/intent/tweet?url=http://www.dinamalar.com/&text=காவிரியில் தண்ணீர் திறப்புக்கு எதிரான கர்நாடக மனு தள்ளுபடி",
         "openSearch": [],
         "country": "India",
         "city": "Chennai"
@@ -63642,13 +63642,13 @@
         "cityCountyName": "New Delhi",
         "name": "Aaj Tak",
         "rss": [
-            "http://www.aajtak.com/rssfeeds/?feed=rss1.0&no_html=1&rsspage=content\u00a7ionid=13",
-            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content\u00a7ionid=13",
+            "http://www.aajtak.com/rssfeeds/?feed=rss1.0&no_html=1&rsspage=content§ionid=13",
+            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content§ionid=13",
             "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=karyakram",
             "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=video",
-            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content\u00a7ionid=31",
-            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content\u00a7ionid=43",
-            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content\u00a7ionid=9",
+            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content§ionid=31",
+            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content§ionid=43",
+            "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=content§ionid=9",
             "http://www.aajtak.com/rssfeeds/?feed=RSS1.0&no_html=1&rsspage=photo"
         ],
         "cityCountyLong": 77.209,
@@ -64162,7 +64162,7 @@
         "city": "New Delhi"
     },
     {
-        "facebook": "https://www.facebook.com/\u092a\u094d\u0930\u092d\u093e\u0938\u093e\u0915\u094d\u0937\u0940\u0915\u0949\u092e-579070728906826/",
+        "facebook": "https://www.facebook.com/प्रभासाक्षीकॉम-579070728906826/",
         "cityCountyLat": 28.6139,
         "mediaSubclass": "city-county",
         "website": "http://www.prabhasakshi.com",
@@ -66222,7 +66222,7 @@
         "city": "Chabahar"
     },
     {
-        "facebook": "http://www.facebook.com/sharer.php?u=http://khorasannews.com/newspaper/page/19504/1/570712/0&t=\u067e\u0631\u0648\u0646\u062f\u0647-\u0627\u06cc-\u062f\u0631\u0628\u0627\u0631\u0647-\u0622\u0645\u0627\u062f\u06af\u06cc--\u062f\u0631-\u0628\u0631\u0627\u0628\u0631-\u0632\u0644\u0632\u0644\u0647-",
+        "facebook": "http://www.facebook.com/sharer.php?u=http://khorasannews.com/newspaper/page/19504/1/570712/0&t=پرونده-ای-درباره-آمادگی--در-برابر-زلزله-",
         "cityCountyLat": 36.2605,
         "mediaSubclass": "city-county",
         "website": "http://www.khorasannews.com/",
@@ -66234,7 +66234,7 @@
         "cityCountyLong": 59.6168,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/home?status=\u067e\u0631\u0648\u0646\u062f\u0647-\u0627\u06cc-\u062f\u0631\u0628\u0627\u0631\u0647-\u0622\u0645\u0627\u062f\u06af\u06cc--\u062f\u0631-\u0628\u0631\u0627\u0628\u0631-\u0632\u0644\u0632\u0644\u0647- http://khorasannews.com/newspaper/page/19504/1/570712/\u067e\u0631\u0648\u0646\u062f\u0647-\u0627\u06cc-\u062f\u0631\u0628\u0627\u0631\u0647-\u0622\u0645\u0627\u062f\u06af\u06cc--\u062f\u0631-\u0628\u0631\u0627\u0628\u0631-\u0632\u0644\u0632\u0644\u0647-",
+        "twitter": "http://twitter.com/home?status=پرونده-ای-درباره-آمادگی--در-برابر-زلزله- http://khorasannews.com/newspaper/page/19504/1/570712/پرونده-ای-درباره-آمادگی--در-برابر-زلزله-",
         "openSearch": [],
         "country": "Iran",
         "city": "Mashhad"
@@ -66402,7 +66402,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ettelaat.com",
         "cityCountyName": "Tehran",
-        "name": "Ettela\u00b4at Tehran",
+        "name": "Ettela´at Tehran",
         "rss": [],
         "cityCountyLong": 51.389,
         "video": "",
@@ -69251,7 +69251,7 @@
         "city": "Bologna"
     },
     {
-        "facebook": "http://www.facebook.com/pages/Die-Neue-S\u00fcdtiroler-Tageszeitung/209897642382307",
+        "facebook": "http://www.facebook.com/pages/Die-Neue-Südtiroler-Tageszeitung/209897642382307",
         "cityCountyLat": 46.4983,
         "mediaSubclass": "city-county",
         "website": "http://www.tageszeitung.it/",
@@ -69900,7 +69900,7 @@
         "city": "Ivrea"
     },
     {
-        "facebook": "http://www.facebook.com/sharer.php?u=http://www.improntalaquila.org/2017/03/30/sanita-insieme-per-le-cure-palliative-religioni-firmano-carta/&t=Sanit\u00e0: insieme per le cure palliative, religioni firmano 'carta'",
+        "facebook": "http://www.facebook.com/sharer.php?u=http://www.improntalaquila.org/2017/03/30/sanita-insieme-per-le-cure-palliative-religioni-firmano-carta/&t=Sanità: insieme per le cure palliative, religioni firmano 'carta'",
         "cityCountyLat": 42.3498,
         "mediaSubclass": "city-county",
         "website": "http://www.improntalaquila.org/",
@@ -71639,7 +71639,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.unita.it/",
         "cityCountyName": "Rome",
-        "name": "L'Unit\u00e0",
+        "name": "L'Unità",
         "rss": [],
         "cityCountyLong": 12.4964,
         "video": "",
@@ -74609,7 +74609,7 @@
         "city": "Toyohashi-shi"
     },
     {
-        "facebook": "https://www.facebook.com/\u0088\u00c9\u0090\u00a8\u0090V\u0095\u00b7\u008e\u00d0-374597632606001/",
+        "facebook": "https://www.facebook.com/É¨V·Ð-374597632606001/",
         "cityCountyLat": 34.7186,
         "mediaSubclass": "city-county",
         "website": "http://www.isenp.co.jp/",
@@ -74695,7 +74695,7 @@
         "city": "Yamagata-shi"
     },
     {
-        "facebook": "https://www.facebook.com/pages/\u795e\u5948\u5ddd\u65b0\u805e/218525258291920",
+        "facebook": "https://www.facebook.com/pages/神奈川新聞/218525258291920",
         "cityCountyLat": 35.4437,
         "mediaSubclass": "city-county",
         "website": "http://www.kanaloco.jp/",
@@ -75783,7 +75783,7 @@
         "city": "Kuwait City"
     },
     {
-        "facebook": "https://www.facebook.com/\u062c\u0631\u064a\u062f\u0629-\u0633\u0628\u0631-\u0627\u0644\u0627\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0629-145864822266768/",
+        "facebook": "https://www.facebook.com/جريدة-سبر-الالكترونية-145864822266768/",
         "cityCountyLat": 29.3759,
         "mediaSubclass": "city-county",
         "website": "http://www.sabr.cc/",
@@ -76839,7 +76839,7 @@
         "city": "Wentspils"
     },
     {
-        "facebook": "http://www.facebook.com/pages/br\u012bv\u0101-daugava/481819648582600",
+        "facebook": "http://www.facebook.com/pages/brīvā-daugava/481819648582600",
         "cityCountyLat": 56.5015,
         "mediaSubclass": "city-county",
         "website": "http://www.bdaugava.lv/",
@@ -77767,7 +77767,7 @@
         "city": "Druskininkai"
     },
     {
-        "facebook": "http://www.facebook.com/sharer.php?u=http://www.kronika.lt/&title=Elektr\u0117n\u0173 Kronika - gyvenimas elektr\u0117nuose ir aplink mus.",
+        "facebook": "http://www.facebook.com/sharer.php?u=http://www.kronika.lt/&title=Elektrėnų Kronika - gyvenimas elektrėnuose ir aplink mus.",
         "cityCountyLat": 54.7858,
         "mediaSubclass": "city-county",
         "website": "http://www.kronika.lt/",
@@ -77780,7 +77780,7 @@
         "cityCountyLong": 24.6625,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/home?status=http://www.kronika.lt/&title=Elektr\u0117n\u0173 Kronika - gyvenimas elektr\u0117nuose ir aplink mus.",
+        "twitter": "http://twitter.com/home?status=http://www.kronika.lt/&title=Elektrėnų Kronika - gyvenimas elektrėnuose ir aplink mus.",
         "openSearch": [
             "http://www.kronika.lt/index.php?option=com_search&format=opensearch"
         ],
@@ -78394,7 +78394,7 @@
         "city": "Vilnius"
     },
     {
-        "facebook": "https://www.facebook.com/pages/Laisvas-Laikra\u0161tis/463773110455370",
+        "facebook": "https://www.facebook.com/pages/Laisvas-Laikraštis/463773110455370",
         "cityCountyLat": 54.6872,
         "mediaSubclass": "city-county",
         "website": "http://www.laisvaslaikrastis.lt/",
@@ -79660,7 +79660,7 @@
         "city": "Kuala Lumpur"
     },
     {
-        "facebook": "http://www.facebook.com/pages/\u6771\u65b9\u65e5\u5831-OrientalDailyNews/108713149189581",
+        "facebook": "http://www.facebook.com/pages/東方日報-OrientalDailyNews/108713149189581",
         "cityCountyLat": 3.139,
         "mediaSubclass": "city-county",
         "website": "http://www.orientaldaily.com.my/",
@@ -80425,7 +80425,7 @@
         "cityCountyLat": 27.4828,
         "mediaSubclass": "city-county",
         "website": "http://www.tribuna.com.mx/",
-        "cityCountyName": "Ciudad Obreg\u00f3n",
+        "cityCountyName": "Ciudad Obregón",
         "name": "La Tribuna",
         "rss": [],
         "cityCountyLong": -109.9304,
@@ -80434,7 +80434,7 @@
         "twitter": "https://twitter.com/TribunaSonora",
         "openSearch": [],
         "country": "Mexico",
-        "city": "Ciudad Obreg\u00f3n"
+        "city": "Ciudad Obregón"
     },
     {
         "facebook": "https://www.facebook.com/circulo.ddm",
@@ -80654,7 +80654,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.unomasuno.com.mx/",
         "cityCountyName": "Mexico City",
-        "name": "Unom\u00e1suno",
+        "name": "Unomásuno",
         "rss": [
             "http://www.unomasuno.com.mx/comments/feed/",
             "http://www.unomasuno.com.mx/feed/"
@@ -80707,7 +80707,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.elmanana.com.mx/",
         "cityCountyName": "Nuevo Laredo",
-        "name": "El Ma\u00f1ana",
+        "name": "El Mañana",
         "rss": [],
         "cityCountyLong": -99.5496,
         "video": "",
@@ -80895,7 +80895,7 @@
         "cityCountyLat": 25.5428,
         "mediaSubclass": "city-county",
         "website": "https://www.elsiglodetorreon.com.mx/?pub=1",
-        "cityCountyName": "Torre\u00f3n",
+        "cityCountyName": "Torreón",
         "name": "El Siglo de Torreon",
         "rss": [
             "http://www.elsiglodetorreon.com.mx/index.xml"
@@ -80906,14 +80906,14 @@
         "twitter": "https://twitter.com/torreon",
         "openSearch": [],
         "country": "Mexico",
-        "city": "Torre\u00f3n"
+        "city": "Torreón"
     },
     {
         "facebook": "https://www.facebook.com/dinamicascuartopoder",
         "cityCountyLat": 23.6345,
         "mediaSubclass": "city-county",
         "website": "http://www.cuarto-poder.com.mx/",
-        "cityCountyName": "Tuxtla Guti\u00e9rrez",
+        "cityCountyName": "Tuxtla Gutiérrez",
         "name": "Cuarto Poder",
         "rss": [],
         "cityCountyLong": -102.5528,
@@ -80922,7 +80922,7 @@
         "twitter": "https://twitter.com/@cuartopodermx",
         "openSearch": [],
         "country": "Mexico",
-        "city": "Tuxtla Guti\u00e9rrez"
+        "city": "Tuxtla Gutiérrez"
     },
     {
         "facebook": "https://www.facebook.com/laopinionpr/",
@@ -82094,7 +82094,7 @@
         "cityCountyLong": -7.5898,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?text=\u0641\u064a\u062f\u064a\u0648: \u062d\u0627\u062f\u062b \u0625\u0635\u0637\u062f\u0627\u0645 \u0642\u0637\u0627\u0631\u064a\u0646 \u0628\u0627\u0644\u0645\u062d\u0645\u062f\u064a\u0629&url=http://www.nichane.com/?p=21042",
+        "twitter": "https://twitter.com/intent/tweet?text=فيديو: حادث إصطدام قطارين بالمحمدية&url=http://www.nichane.com/?p=21042",
         "openSearch": [],
         "country": "Morocco",
         "city": "Casablanca"
@@ -82305,7 +82305,7 @@
         "cityCountyLat": 34.682,
         "mediaSubclass": "city-county",
         "website": "http://www.oujdacity.net/",
-        "cityCountyName": "\u0648\u062c\u062f\u0629 Oujda",
+        "cityCountyName": "وجدة Oujda",
         "name": "Oujda City",
         "rss": [
             "http://www.oujdacity.net/comments/feed",
@@ -82317,7 +82317,7 @@
         "twitter": "https://twitter.com/intent/tweet?status=home%20-%20http://www.oujdacity.net/",
         "openSearch": [],
         "country": "Morocco",
-        "city": "\u0648\u062c\u062f\u0629 Oujda"
+        "city": "وجدة Oujda"
     },
     {
         "facebook": "",
@@ -82425,7 +82425,7 @@
         "city": "Windhoek"
     },
     {
-        "facebook": "http://www.facebook.com/pages/Informant\u00e9/183476948385940",
+        "facebook": "http://www.facebook.com/pages/Informanté/183476948385940",
         "cityCountyLat": -22.5609,
         "mediaSubclass": "city-county",
         "website": "http://www.informante.web.na/",
@@ -86717,7 +86717,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.budstikka.no/",
         "cityCountyName": "Asker",
-        "name": "Asker og B\u00e6rum Budstikke",
+        "name": "Asker og Bærum Budstikke",
         "rss": [],
         "cityCountyLong": 10.421,
         "video": "",
@@ -87081,7 +87081,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.jbl.no/",
         "cityCountyName": "Bryne",
-        "name": "J\u00e6rbladet",
+        "name": "Jærbladet",
         "rss": [
             "http://jbl.no/rss.xml"
         ],
@@ -87358,8 +87358,8 @@
         "cityCountyLat": 60.472,
         "mediaSubclass": "city-county",
         "website": "http://www.oyposten.no/",
-        "cityCountyName": "Finn\u00f8y",
-        "name": "\u00d8yposten",
+        "cityCountyName": "Finnøy",
+        "name": "Øyposten",
         "rss": [
             "http://www.oyposten.no/index.cfm?event=rss&famId=337633"
         ],
@@ -87369,7 +87369,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Norway",
-        "city": "Finn\u00f8y"
+        "city": "Finnøy"
     },
     {
         "facebook": "https://www.facebook.com/synstemore",
@@ -88018,7 +88018,7 @@
         "cityCountyLat": 60.472,
         "mediaSubclass": "city-county",
         "website": "http://www.strandbuen.no/",
-        "cityCountyName": "J\u00f8rpeland",
+        "cityCountyName": "Jørpeland",
         "name": "Strandbuen",
         "rss": [
             "http://strandbuen.no/rss.xml"
@@ -88029,7 +88029,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Norway",
-        "city": "J\u00f8rpeland"
+        "city": "Jørpeland"
     },
     {
         "facebook": "https://www.facebook.com/avvir",
@@ -88876,7 +88876,7 @@
         "city": "Ornes"
     },
     {
-        "facebook": "http://www.facebook.com/Pernill\u00e8s-284242741732762/?fref=ts",
+        "facebook": "http://www.facebook.com/Pernillès-284242741732762/?fref=ts",
         "cityCountyLat": 66.8688,
         "mediaSubclass": "city-county",
         "website": "http://www.meloyavisa.no/",
@@ -90274,7 +90274,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.sirdolen.no/",
         "cityCountyName": "Tonstad",
-        "name": "Sird\u00f8len",
+        "name": "Sirdølen",
         "rss": [],
         "cityCountyLong": 6.7169,
         "video": "",
@@ -90476,7 +90476,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.tysver-bygdeblad.no/",
         "cityCountyName": "Uskedal",
-        "name": "Tysv\u00e6r Bygdeblad",
+        "name": "Tysvær Bygdeblad",
         "rss": [
             "https://tysver-bygdeblad.no/comments/feed/",
             "https://tysver-bygdeblad.no/feed/"
@@ -95741,7 +95741,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.regiao-sul.pt/",
         "cityCountyName": "Algarve",
-        "name": "Di\u00e1rio Online do Algarve",
+        "name": "Diário Online do Algarve",
         "rss": [
             "https://regiao-sul.pt/comments/feed",
             "https://regiao-sul.pt/feed"
@@ -95760,7 +95760,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.regiao-sul.com/",
         "cityCountyName": "Almancil",
-        "name": "Regi\u00e3o Sul",
+        "name": "Região Sul",
         "rss": [
             "https://regiao-sul.pt/comments/feed",
             "https://regiao-sul.pt/feed"
@@ -95778,8 +95778,8 @@
         "cityCountyLat": 39.3999,
         "mediaSubclass": "city-county",
         "website": "http://www.diarioinsular.pt/",
-        "cityCountyName": "Angra do Hero\u00edsmo",
-        "name": "Di\u00e1rio Insular",
+        "cityCountyName": "Angra do Heroísmo",
+        "name": "Diário Insular",
         "rss": [
             "http://www.diarioinsular.com/rss"
         ],
@@ -95789,7 +95789,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Portugal",
-        "city": "Angra do Hero\u00edsmo"
+        "city": "Angra do Heroísmo"
     },
     {
         "facebook": "",
@@ -95816,7 +95816,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.diarioaveiro.pt/",
         "cityCountyName": "Aveiro",
-        "name": "Di\u00e1rio Regional Aveiro",
+        "name": "Diário Regional Aveiro",
         "rss": [],
         "cityCountyLong": -8.6538,
         "video": "",
@@ -95827,7 +95827,7 @@
         "city": "Aveiro"
     },
     {
-        "facebook": "http://www.facebook.com/pages/Not\u00edcias-de-Aveiro/319155601442711",
+        "facebook": "http://www.facebook.com/pages/Notícias-de-Aveiro/319155601442711",
         "cityCountyLat": 40.6405,
         "mediaSubclass": "city-county",
         "website": "http://www.noticiasdeaveiro.pt",
@@ -95850,7 +95850,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.diariodoalentejo.pt/",
         "cityCountyName": "Beja",
-        "name": "Di\u00e1rio do Alentejo",
+        "name": "Diário do Alentejo",
         "rss": [],
         "cityCountyLong": -7.8627,
         "video": "",
@@ -95885,7 +95885,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.jornaldaregiao.pt/",
         "cityCountyName": "Cascais",
-        "name": "Jornal da Regi\u00e3o",
+        "name": "Jornal da Região",
         "rss": [
             "http://jornaldaregiao.pt/rss/all.xml"
         ],
@@ -95903,7 +95903,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.diariocoimbra.pt/",
         "cityCountyName": "Coimbra",
-        "name": "Di\u00e1rio de Coimbra",
+        "name": "Diário de Coimbra",
         "rss": [],
         "cityCountyLong": -8.4103,
         "video": "",
@@ -95924,7 +95924,7 @@
         "cityCountyLong": -16.9241,
         "video": "",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?text=PSP Madeira deita a m\u00e3o a tr\u00eas ca\u00e7adeiras em situa\u00e7\u00e3o irregular;url=http://www.dnoticias.pt/casos-do-dia/psp-madeira-deita-a-mao-a-tres-cacadeiras-em-situacao-irregular-EK1194226",
+        "twitter": "https://twitter.com/intent/tweet?text=PSP Madeira deita a mão a três caçadeiras em situação irregular;url=http://www.dnoticias.pt/casos-do-dia/psp-madeira-deita-a-mao-a-tres-cacadeiras-em-situacao-irregular-EK1194226",
         "openSearch": [],
         "country": "Portugal",
         "city": "Funchal"
@@ -95968,8 +95968,8 @@
         "cityCountyLat": 40.138,
         "mediaSubclass": "city-county",
         "website": "http://www.jornaldofundao.pt/",
-        "cityCountyName": "Fund\u00e3o",
-        "name": "Jornal do Fund\u00e3o",
+        "cityCountyName": "Fundão",
+        "name": "Jornal do Fundão",
         "rss": [
             "http://www.jornaldofundao.pt/feed/",
             "http://www.jornaldofundao.pt/comments/feed/"
@@ -95980,7 +95980,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Portugal",
-        "city": "Fund\u00e3o"
+        "city": "Fundão"
     },
     {
         "facebook": "",
@@ -96071,7 +96071,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.dn.pt/",
         "cityCountyName": "Lisbon",
-        "name": "Di\u00e1rio de Not\u00ed",
+        "name": "Diário de Notí",
         "rss": [],
         "cityCountyLong": -9.1393,
         "video": "",
@@ -96189,7 +96189,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.diarioleiria.pt/",
         "cityCountyName": "Loures",
-        "name": "Di\u00e1rio Regional Leiriao",
+        "name": "Diário Regional Leiriao",
         "rss": [],
         "cityCountyLong": -9.1741,
         "video": "",
@@ -96204,7 +96204,7 @@
         "cityCountyLat": 39.2498,
         "mediaSubclass": "city-county",
         "website": "http://www.alvorada.pt/",
-        "cityCountyName": "Lourinh\u00e3",
+        "cityCountyName": "Lourinhã",
         "name": "Alvorada",
         "rss": [],
         "cityCountyLong": -9.2896,
@@ -96213,7 +96213,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Portugal",
-        "city": "Lourinh\u00e3"
+        "city": "Lourinhã"
     },
     {
         "facebook": "https://www.facebook.com/maiaprimeiramao",
@@ -96312,7 +96312,7 @@
         "cityCountyLat": 39.3999,
         "mediaSubclass": "city-county",
         "website": "http://www.imediato.pt/",
-        "cityCountyName": "Pa\u00e7os de Ferreira",
+        "cityCountyName": "Paços de Ferreira",
         "name": "Imediato",
         "rss": [],
         "cityCountyLong": -8.2245,
@@ -96321,7 +96321,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Portugal",
-        "city": "Pa\u00e7os de Ferreira"
+        "city": "Paços de Ferreira"
     },
     {
         "facebook": "",
@@ -96358,7 +96358,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.jn.pt/paginainicial/",
         "cityCountyName": "Porto",
-        "name": "Jornal de Not\u00edcias",
+        "name": "Jornal de Notícias",
         "rss": [],
         "cityCountyLong": -8.6291,
         "video": "",
@@ -96463,7 +96463,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.avozdetrasosmontes.com",
         "cityCountyName": "Vila Real",
-        "name": "A Voz de Tr\u00e1s-os-Montes",
+        "name": "A Voz de Trás-os-Montes",
         "rss": [],
         "cityCountyLong": -7.7422,
         "video": "https://www.youtube.com/channel/UCTqD5cxiY2sjl2WIxhZlPRg",
@@ -96478,7 +96478,7 @@
         "cityCountyLat": 37.1937,
         "mediaSubclass": "city-county",
         "website": "http://www.jornaldoalgarve.pt/",
-        "cityCountyName": "Vila Real de Santo Ant\u00f3nio",
+        "cityCountyName": "Vila Real de Santo António",
         "name": "Jornal do Algarve",
         "rss": [
             "http://www.jornaldoalgarve.pt/feed/",
@@ -96490,7 +96490,7 @@
         "twitter": "https://twitter.com/jornaldoalgarve",
         "openSearch": [],
         "country": "Portugal",
-        "city": "Vila Real de Santo Ant\u00f3nio"
+        "city": "Vila Real de Santo António"
     },
     {
         "facebook": "",
@@ -96545,7 +96545,7 @@
         "cityCountyLat": 40.5754,
         "mediaSubclass": "city-county",
         "website": "http://www.soberaniadopovo.pt/",
-        "cityCountyName": "\u00c3gueda",
+        "cityCountyName": "Ãgueda",
         "name": "Soberania do Povo",
         "rss": [
             "http://www.soberaniadopovo.pt/rss/"
@@ -96556,7 +96556,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Portugal",
-        "city": "\u00c3gueda"
+        "city": "Ãgueda"
     },
     {
         "facebook": "https://www.facebook.com/elexpressopr",
@@ -96583,7 +96583,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.endi.com",
         "cityCountyName": "San Juan",
-        "name": "El Nuevo D\u00eda",
+        "name": "El Nuevo Día",
         "rss": [],
         "cityCountyLong": -66.1057,
         "video": "",
@@ -96693,7 +96693,7 @@
         "city": "Doha"
     },
     {
-        "facebook": "https://www.facebook.com/sharer/sharer.php?u=http://www.al-sharq.com/news/details/481131&title=\u0627\u0644\u0634\u0631\u0642 \u062a\u0646\u0634\u0631 \u0636\u0648\u0627\u0628\u0637 \u0645\u0639\u0627\u062f\u0644\u0629 \u0627\u0644\u0634\u0647\u0627\u062f\u0627\u062a \u0648\u0627\u0644\u062a\u0639\u0644\u064a\u0645 \u0639\u0646 \u0628\u0639\u062f  ",
+        "facebook": "https://www.facebook.com/sharer/sharer.php?u=http://www.al-sharq.com/news/details/481131&title=الشرق تنشر ضوابط معادلة الشهادات والتعليم عن بعد  ",
         "cityCountyLat": 25.2854,
         "mediaSubclass": "city-county",
         "website": "http://www.al-sharq.com/",
@@ -96703,7 +96703,7 @@
         "cityCountyLong": 51.531,
         "video": "https://www.youtube.com/channel/UC5SvZ-pkEKt1E11n9Mx183w",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/share?url=http://www.al-sharq.com/news/details/481131&via=alsharq_portal&text=\u0627\u0644\u0634\u0631\u0642 \u062a\u0646\u0634\u0631 \u0636\u0648\u0627\u0628\u0637 \u0645\u0639\u0627\u062f\u0644\u0629 \u0627\u0644\u0634\u0647\u0627\u062f\u0627\u062a \u0648\u0627\u0644\u062a\u0639\u0644\u064a\u0645 \u0639\u0646 \u0628\u0639\u062f  ",
+        "twitter": "https://twitter.com/share?url=http://www.al-sharq.com/news/details/481131&via=alsharq_portal&text=الشرق تنشر ضوابط معادلة الشهادات والتعليم عن بعد  ",
         "openSearch": [],
         "country": "Qatar",
         "city": "Doha"
@@ -98174,7 +98174,7 @@
         "city": "Iasi"
     },
     {
-        "facebook": "https://www.facebook.com/pages/H\u00e1romsz\u00e9k-f\u00fcggetlen-napilap-Sepsiszentgy\u00f6rgy/320820594614015",
+        "facebook": "https://www.facebook.com/pages/Háromszék-független-napilap-Sepsiszentgyörgy/320820594614015",
         "cityCountyLat": 45.9432,
         "mediaSubclass": "city-county",
         "website": "http://www.3szek.ro/",
@@ -98216,7 +98216,7 @@
         "mediaSubclass": "city-county",
         "website": "http://hargitanepe.eu/",
         "cityCountyName": "Miercurea-Ciuc",
-        "name": "Hargita N\u00e9pe",
+        "name": "Hargita Népe",
         "rss": [
             "http://hargitanepe.eu/comments/feed/",
             "http://hargitanepe.eu/feed/"
@@ -98553,7 +98553,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.frissujsag.ro/",
         "cityCountyName": "Satu Mare",
-        "name": "Szatm\u00e1ri Friss \u00dajs\u00e1g",
+        "name": "Szatmári Friss Újság",
         "rss": [],
         "cityCountyLong": 22.8576,
         "video": "https://www.youtube.com/watch?v=0PVIopJYP4Q&fs=1&autoplay=1",
@@ -98810,7 +98810,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.hirmondo.ro/web/",
         "cityCountyName": "Tarcu Sacuesc",
-        "name": "Sz\u00e9kely H\u00edrmond\u00f3",
+        "name": "Székely Hírmondó",
         "rss": [],
         "cityCountyLong": 26.1346,
         "video": "",
@@ -99298,7 +99298,7 @@
         "city": "Moscow"
     },
     {
-        "facebook": "https://www.facebook.com/pages/\u0413\u0430\u0437\u0435\u0442\u0430-\u041a\u0440\u0435\u0441\u0442\u044c\u044f\u043d\u0441\u043a\u0438\u0435-\u0432\u0435\u0434\u043e\u043c\u043e\u0441\u0442\u0438/1545550819046431",
+        "facebook": "https://www.facebook.com/pages/Газета-Крестьянские-ведомости/1545550819046431",
         "cityCountyLat": 55.7558,
         "mediaSubclass": "city-county",
         "website": "http://www.agronews.ru",
@@ -102355,7 +102355,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.magyarszo.rs/",
         "cityCountyName": "Novi Sad",
-        "name": "Magyar Sz\u00f3",
+        "name": "Magyar Szó",
         "rss": [],
         "cityCountyLong": 19.8335,
         "video": "",
@@ -102901,7 +102901,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ujszo.com/",
         "cityCountyName": "Bratislava",
-        "name": "\u00daj Sz\u00f3",
+        "name": "Új Szó",
         "rss": [],
         "cityCountyLong": 17.1077,
         "video": "",
@@ -104825,7 +104825,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.elperiodico.es",
         "cityCountyName": "Barcelona",
-        "name": "El Peri\u00f3dico de Catalunya",
+        "name": "El Periódico de Catalunya",
         "rss": [],
         "cityCountyLong": 2.1734,
         "video": "http://www.youtube.com/elperiodico/",
@@ -104965,7 +104965,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.elperiodicoextremadura.com/",
         "cityCountyName": "Caceres",
-        "name": "El Peri\u00f3dico Extremadura",
+        "name": "El Periódico Extremadura",
         "rss": [
             "http://zetaestaticos.com/extremadura/rss/portada_es.xml"
         ],
@@ -105235,7 +105235,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.diariojaen.es/",
         "cityCountyName": "Jaen",
-        "name": "Diario Ja\u00e9n",
+        "name": "Diario Jaén",
         "rss": [],
         "cityCountyLong": -3.7849,
         "video": "https://www.youtube.com/channel/UCu270XARhSf6JyPWPbwopBg",
@@ -106354,7 +106354,7 @@
         "cityCountyLat": 39.4699,
         "mediaSubclass": "city-county",
         "website": "http://www.levante-emv.com/",
-        "cityCountyName": "Val\u00e8ncia",
+        "cityCountyName": "València",
         "name": "Levante El Mercantil Valenciano",
         "rss": [
             "http://www.levante-emv.com/elementosInt/rss/1"
@@ -106365,14 +106365,14 @@
         "twitter": "https://twitter.com/levante_emv",
         "openSearch": [],
         "country": "Spain",
-        "city": "Val\u00e8ncia"
+        "city": "València"
     },
     {
         "facebook": "http://www.facebook.com/superdeporte",
         "cityCountyLat": 39.4699,
         "mediaSubclass": "city-county",
         "website": "http://www.superdeporte.es",
-        "cityCountyName": "Val\u00e8ncia",
+        "cityCountyName": "València",
         "name": "Super Deporte",
         "rss": [
             "http://www.superdeporte.eselementosInt/rss/1"
@@ -106383,7 +106383,7 @@
         "twitter": "https://twitter.com/#!/superdeporte_es",
         "openSearch": [],
         "country": "Spain",
-        "city": "Val\u00e8ncia"
+        "city": "València"
     },
     {
         "facebook": "https://www.facebook.com/farodevigo",
@@ -106427,7 +106427,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.elperiodicodearagon.com/",
         "cityCountyName": "Zaragoza",
-        "name": "El Peri\u00f3dico de Arag\u00f3n",
+        "name": "El Periódico de Aragón",
         "rss": [
             "http://www.zetaestaticos.com/aragon/rss/portada_es.xml"
         ],
@@ -106691,7 +106691,7 @@
         "city": "Colombo"
     },
     {
-        "facebook": "https://www.facebook.com/sharer/sharer.php?u=http://www.lankadeepa.lk/top_story/\u0db1\u0dd9\u0dc0\u0dd2\u0dbd\u0dca-\u0db4\u0dca\u200d\u0dbb\u0db1\u0dcf\u0db1\u0dca\u0daf\u0dd4-\u0dbb\u0ddd\u0dc4\u0dbd-\u0dc3\u0dde\u0d9b\u0dca\u200d\u0dba-\u0d85\u0db8\u0dcf\u0dad\u0dca\u200d\u0dba\u0d82\u0dc1\u0dba-\u0dba\u0da7\u0dad\u0da7/10-511626",
+        "facebook": "https://www.facebook.com/sharer/sharer.php?u=http://www.lankadeepa.lk/top_story/නෙවිල්-ප්‍රනාන්දු-රෝහල-සෞඛ්‍ය-අමාත්‍යංශය-යටතට/10-511626",
         "cityCountyLat": 6.9271,
         "mediaSubclass": "city-county",
         "website": "http://www.lankadeepa.lk",
@@ -106701,7 +106701,7 @@
         "cityCountyLong": 79.8612,
         "video": "https://www.youtube.com/channel/UC2gl0cPNslZ6xkyc8RYa_xg",
         "mediaClass": "newspaper",
-        "twitter": "http://twitter.com/home?status=http://www.lankadeepa.lk/top_story/\u0db1\u0dd9\u0dc0\u0dd2\u0dbd\u0dca-\u0db4\u0dca\u200d\u0dbb\u0db1\u0dcf\u0db1\u0dca\u0daf\u0dd4-\u0dbb\u0ddd\u0dc4\u0dbd-\u0dc3\u0dde\u0d9b\u0dca\u200d\u0dba-\u0d85\u0db8\u0dcf\u0dad\u0dca\u200d\u0dba\u0d82\u0dc1\u0dba-\u0dba\u0da7\u0dad\u0da7/10-511626",
+        "twitter": "http://twitter.com/home?status=http://www.lankadeepa.lk/top_story/නෙවිල්-ප්‍රනාන්දු-රෝහල-සෞඛ්‍ය-අමාත්‍යංශය-යටතට/10-511626",
         "openSearch": [],
         "country": "Sri Lanka",
         "city": "Colombo"
@@ -107265,7 +107265,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.dt.se/nyheter/borlange/",
         "cityCountyName": "Borlange",
-        "name": "Borl\u00e4nge Tidning",
+        "name": "Borlänge Tidning",
         "rss": [
             "http://www.dt.se/nyheter/borlange/borlange.xml",
             "http://www.dt.se/nyheter/borlange/feed"
@@ -107562,7 +107562,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.gp.se/",
         "cityCountyName": "Gothenburg",
-        "name": "G\u00f6teborgs-Posten",
+        "name": "Göteborgs-Posten",
         "rss": [],
         "cityCountyLong": 11.9746,
         "video": "",
@@ -107676,7 +107676,7 @@
         "mediaSubclass": "city-county",
         "website": "http://allehanda.se/",
         "cityCountyName": "Harnosand",
-        "name": "Tidningen \u00c5ngermanland",
+        "name": "Tidningen Ångermanland",
         "rss": [
             "http://allehanda.se/feed",
             "http://allehanda.se/ettan.xml"
@@ -107695,7 +107695,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nsk.se/",
         "cityCountyName": "Hassleholm",
-        "name": "Norra Sk\u00e5ne",
+        "name": "Norra Skåne",
         "rss": [
             "http://www.nsk.se/startsidan/feed/",
             "http://www.nsk.se/comments/feed/",
@@ -107837,7 +107837,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ostrasmaland.se/",
         "cityCountyName": "Kalmar",
-        "name": "\u00d6stra Sm\u00e5land",
+        "name": "Östra Småland",
         "rss": [],
         "cityCountyLong": 16.3568,
         "video": "",
@@ -108206,7 +108206,7 @@
         "cityCountyLat": 58.4108,
         "mediaSubclass": "city-county",
         "website": "http://www.corren.se",
-        "cityCountyName": "Link\u00f6ping",
+        "cityCountyName": "Linköping",
         "name": "Correspondenten",
         "rss": [],
         "cityCountyLong": 15.6214,
@@ -108215,7 +108215,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Sweden",
-        "city": "Link\u00f6ping"
+        "city": "Linköping"
     },
     {
         "facebook": "",
@@ -108480,7 +108480,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.sn.se/",
         "cityCountyName": "Nykoping",
-        "name": "S\u00f6dermanlands Nyheter",
+        "name": "Södermanlands Nyheter",
         "rss": [],
         "cityCountyLong": 17.0092,
         "video": "",
@@ -108565,7 +108565,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.oea.se/",
         "cityCountyName": "Ornskoldsvik",
-        "name": "\u00d6rnsk\u00f6ldsviks Allehanda",
+        "name": "Örnsköldsviks Allehanda",
         "rss": [
             "http://www.oea.se/feed",
             "http://www.oea.se/ettan.xml"
@@ -108584,7 +108584,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.ltz.se",
         "cityCountyName": "Ostersund",
-        "name": "L\u00e4nstidningen",
+        "name": "Länstidningen",
         "rss": [
             "http://www.ltz.sefeed",
             "http://www.ltz.seettan.xml"
@@ -108603,7 +108603,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.op.se/",
         "cityCountyName": "Ostersund",
-        "name": "\u00d6stersundsposten",
+        "name": "Östersundsposten",
         "rss": [
             "http://www.op.se/feed",
             "http://www.op.se/ettan.xml"
@@ -108622,7 +108622,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.pitea-tidningen.se/",
         "cityCountyName": "Pitea",
-        "name": "Pite\u00e5tidningen",
+        "name": "Piteåtidningen",
         "rss": [],
         "cityCountyLong": 21.48,
         "video": "",
@@ -108708,7 +108708,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.norran.se/",
         "cityCountyName": "Skelleftea",
-        "name": "Norra V\u00e4sterbotten",
+        "name": "Norra Västerbotten",
         "rss": [
             "http://norran.se/feed/podcast",
             "http://norran.se/startsida/feed"
@@ -108727,7 +108727,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.sla.se",
         "cityCountyName": "Skovde",
-        "name": "Skaraborgs L\u00e4ns Allehanda",
+        "name": "Skaraborgs Läns Allehanda",
         "rss": [],
         "cityCountyLong": 13.8461,
         "video": "",
@@ -109360,7 +109360,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.bohuslaningen.se",
         "cityCountyName": "Uddevalla",
-        "name": "Bohusl\u00e4ningen",
+        "name": "Bohusläningen",
         "rss": [],
         "cityCountyLong": 11.9356,
         "video": "",
@@ -109392,7 +109392,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.folkbladet.nu/",
         "cityCountyName": "Umea",
-        "name": "V\u00e4sterbottens Folkblad",
+        "name": "Västerbottens Folkblad",
         "rss": [
             "http://www.folkbladet.nu/feed/atom",
             "http://www.folkbladet.nu/feed"
@@ -109577,7 +109577,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.vlt.se",
         "cityCountyName": "Vasteras",
-        "name": "Vestmanlans L\u00e4ns Tidning",
+        "name": "Vestmanlans Läns Tidning",
         "rss": [
             "http://www.vlt.sefeed",
             "http://www.vlt.seettan.xml"
@@ -109596,7 +109596,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.vt.se/",
         "cityCountyName": "Vastervik",
-        "name": "V\u00e4sterviks Tidningen",
+        "name": "Västerviks Tidningen",
         "rss": [],
         "cityCountyLong": 16.637,
         "video": "",
@@ -110043,7 +110043,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nbt.ch/",
         "cityCountyName": "Bulach",
-        "name": "Neues B\u00fclacher Tagblatt",
+        "name": "Neues Bülacher Tagblatt",
         "rss": [],
         "cityCountyLong": 8.542,
         "video": "",
@@ -110054,12 +110054,12 @@
         "city": "Bulach"
     },
     {
-        "facebook": "https://www.facebook.com/pages/Z\u00fcrcher-Unterl\u00e4nder/588623241193743",
+        "facebook": "https://www.facebook.com/pages/Zürcher-Unterländer/588623241193743",
         "cityCountyLat": 47.5161,
         "mediaSubclass": "city-county",
         "website": "http://www.zuonline.ch/",
         "cityCountyName": "Bulach",
-        "name": "Z\u00fcrcher Unterl\u00e4nder",
+        "name": "Zürcher Unterländer",
         "rss": [
             "http://www.zuonline.ch/rss_ticker.html"
         ],
@@ -110130,7 +110130,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.suedostschweiz.ch/",
         "cityCountyName": "Chur",
-        "name": "Die S\u00fcdostschweiz",
+        "name": "Die Südostschweiz",
         "rss": [],
         "cityCountyLong": 9.532,
         "video": "https://www.youtube.com/channel/UCkpKLjgcZU-T8OUdqqu5xig",
@@ -110242,12 +110242,12 @@
         "city": "Fribourg"
     },
     {
-        "facebook": "http://www.facebook.com/pages/QUOTIDIEN-LA-LIBERT\u00c9/288448691670",
+        "facebook": "http://www.facebook.com/pages/QUOTIDIEN-LA-LIBERTÉ/288448691670",
         "cityCountyLat": 46.8065,
         "mediaSubclass": "city-county",
         "website": "http://www.laliberte.ch",
         "cityCountyName": "Fribourg",
-        "name": "La Libert\u00e9",
+        "name": "La Liberté",
         "rss": [],
         "cityCountyLong": 7.162,
         "video": "",
@@ -110298,7 +110298,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.hebdo.ch/",
         "cityCountyName": "Geneva",
-        "name": "L\u00b4Hebdo",
+        "name": "L´Hebdo",
         "rss": [],
         "cityCountyLong": 6.1432,
         "video": "https://www.youtube.com/user/hebdomag",
@@ -110348,7 +110348,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.tdg.ch/",
         "cityCountyName": "Geneva",
-        "name": "Tribune de Gen\u00e8ve",
+        "name": "Tribune de Genève",
         "rss": [
             "http://www.tdg.ch/rss_ticker.html"
         ],
@@ -110740,7 +110740,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.lexpress.ch/",
         "cityCountyName": "Neuchatel",
-        "name": "L\u00b4Express",
+        "name": "L´Express",
         "rss": [],
         "cityCountyLong": 6.9293,
         "video": "",
@@ -110951,7 +110951,7 @@
         "cityCountyLat": 46.8182,
         "mediaSubclass": "city-county",
         "website": "http://www.entlebucher-anzeiger.ch/",
-        "cityCountyName": "Sch\u00fcpfheim",
+        "cityCountyName": "Schüpfheim",
         "name": "Entlebucher Anzeiger",
         "rss": [
             "http://www.entlebucher-anzeiger.ch/rss.xml"
@@ -110962,7 +110962,7 @@
         "twitter": "https://twitter.com/EntlebucherAnz",
         "openSearch": [],
         "country": "Switzerland",
-        "city": "Sch\u00fcpfheim"
+        "city": "Schüpfheim"
     },
     {
         "facebook": "",
@@ -111141,7 +111141,7 @@
         "city": "Thalheim an der Thur"
     },
     {
-        "facebook": "https://www.facebook.com/pages/Z\u00fcrichsee-Zeitung/385968291506847",
+        "facebook": "https://www.facebook.com/pages/Zürichsee-Zeitung/385968291506847",
         "cityCountyLat": 47.2949,
         "mediaSubclass": "city-county",
         "website": "http://www.thalwileranzeiger.ch/",
@@ -111297,7 +111297,7 @@
         "city": "Winterthur"
     },
     {
-        "facebook": "https://www.facebook.com/pages/March-Anzeiger-H\u00f6fner-Volksblatt/460904437257531?fref=ts",
+        "facebook": "https://www.facebook.com/pages/March-Anzeiger-Höfner-Volksblatt/460904437257531?fref=ts",
         "cityCountyLat": 47.1972,
         "mediaSubclass": "city-county",
         "website": "http://www.hoefner.ch/",
@@ -111474,7 +111474,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.nzz.ch",
         "cityCountyName": "Zurich",
-        "name": "Neue Z\u00fcricher Zeitung",
+        "name": "Neue Züricher Zeitung",
         "rss": [
             "http://www.nzz.chstartseite.rss"
         ],
@@ -111663,7 +111663,7 @@
         "city": "Zurich"
     },
     {
-        "facebook": "https://www.facebook.com/pages/Z\u00fcrichsee-Zeitung/385968291506847",
+        "facebook": "https://www.facebook.com/pages/Zürichsee-Zeitung/385968291506847",
         "cityCountyLat": 47.3769,
         "mediaSubclass": "city-county",
         "website": "http://www.zsz.ch",
@@ -112712,7 +112712,7 @@
         "mediaSubclass": "city-county",
         "website": "http://www.burasiturkiye.com/",
         "cityCountyName": "Canakkale",
-        "name": "Buras\u00fd T\u00fcrkiye",
+        "name": "Burasý Türkiye",
         "rss": [
             "http://www.burasiturkiye.com/comments/feed/",
             "http://www.burasiturkiye.com/feed/"
@@ -112730,7 +112730,7 @@
         "cityCountyLat": 39.7667,
         "mediaSubclass": "city-county",
         "website": "http://www.anadolugazetesi.net",
-        "cityCountyName": "Eski\u015fehir",
+        "cityCountyName": "Eskişehir",
         "name": "Anadolu",
         "rss": [
             "http://www.anadolugazetesi.netRSS.xml"
@@ -112741,14 +112741,14 @@
         "twitter": "https://twitter.com/anadolugzt",
         "openSearch": [],
         "country": "Turkey",
-        "city": "Eski\u015fehir"
+        "city": "Eskişehir"
     },
     {
         "facebook": "https://www.facebook.com/sakaryagazetesi.com.tr/",
         "cityCountyLat": 39.7667,
         "mediaSubclass": "city-county",
         "website": "http://www.sakaryagazetesi.com.tr/",
-        "cityCountyName": "Eski\u015fehir",
+        "cityCountyName": "Eskişehir",
         "name": "Sakarya",
         "rss": [],
         "cityCountyLong": 30.5256,
@@ -112757,7 +112757,7 @@
         "twitter": "https://twitter.com/sakaryagazetesi",
         "openSearch": [],
         "country": "Turkey",
-        "city": "Eski\u015fehir"
+        "city": "Eskişehir"
     },
     {
         "facebook": "https://www.facebook.com/giresunluyuz.biz/",
@@ -114032,7 +114032,7 @@
         "cityCountyLat": -32.5228,
         "mediaSubclass": "city-county",
         "website": "http://www.eltelegrafo.com/",
-        "cityCountyName": "Paysand\u00fa",
+        "cityCountyName": "Paysandú",
         "name": "El Telegrafo",
         "rss": [],
         "cityCountyLong": -55.7658,
@@ -114041,7 +114041,7 @@
         "twitter": "",
         "openSearch": [],
         "country": "Uruguay",
-        "city": "Paysand\u00fa"
+        "city": "Paysandú"
     },
     {
         "facebook": "",
@@ -114400,7 +114400,7 @@
         "cityCountyLong": -71.7148,
         "video": "http://www.youtube.com/panoramamultimedia",
         "mediaClass": "newspaper",
-        "twitter": "https://twitter.com/intent/tweet?text=Pacientes renales cr\u00f3nicos est\u00e1n angustiados y piden insumos para su di\u00e1lisis&url=http%3A%2F%2Fpanorama.com.ve/ciudad/Pacientes-renales-cronicos-estan-angustiados-y-piden-insumos-para-su-dialisis-20170406-0010.html&via=diariopanorama",
+        "twitter": "https://twitter.com/intent/tweet?text=Pacientes renales crónicos están angustiados y piden insumos para su diálisis&url=http%3A%2F%2Fpanorama.com.ve/ciudad/Pacientes-renales-cronicos-estan-angustiados-y-piden-insumos-para-su-dialisis-20170406-0010.html&via=diariopanorama",
         "openSearch": [],
         "country": "Venezuela",
         "city": "Maracaibo"
@@ -114448,7 +114448,7 @@
         "cityCountyLat": 6.4238,
         "mediaSubclass": "city-county",
         "website": "http://www.laverdad.com/",
-        "cityCountyName": "Mucurub\u00c3\u00a1",
+        "cityCountyName": "MucurubÃ¡",
         "name": "La Verdad",
         "rss": [
             "http://www.laverdad.com/rss/index"
@@ -114459,7 +114459,7 @@
         "twitter": "https://twitter.com/laverdadweb",
         "openSearch": [],
         "country": "Venezuela",
-        "city": "Mucurub\u00e1"
+        "city": "Mucurubá"
     },
     {
         "facebook": "",
