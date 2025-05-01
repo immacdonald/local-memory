@@ -1,5 +1,6 @@
+import type { GeolocationContextInterface } from './GeolocationContext';
 import { useContext } from 'react';
-import { GeolocationContext, GeolocationContextInterface } from './GeolocationContext';
+import { GeolocationContext } from './GeolocationContext';
 
 const useGeolocationContext = (): GeolocationContextInterface => {
     const context = useContext(GeolocationContext);

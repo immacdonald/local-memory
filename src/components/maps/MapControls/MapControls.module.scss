@@ -1,0 +1,15 @@
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+    position: absolute;
+    bottom: var(--space);
+    right: var(--space);
+    padding: var(--space-sm);
+    height: 56px;
+    background-color: var(--background-content);
+    box-shadow: var(--shadow-lifted);
+    border-radius: var(--border-radius);
+}

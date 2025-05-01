@@ -1,20 +1,21 @@
-import { FC } from 'react';
-import { designTokens, Heading, Section, StyledLink, Typography } from 'phantom-library';
+import type { FC } from 'react';
+import { tokens, Heading, Section, StyledLink, Typography, Box } from 'phantom-library';
 import { Layout } from 'src/layouts';
-import styles from './Views.module.scss';
 
 const About: FC = () => {
     return (
         <Layout title="About | Local Memory Project">
-            <Section className={styles.background}>
-                <div style={{ border: designTokens.border.light, padding: designTokens.space.lg, borderRadius: designTokens.borderRadius, backgroundColor: 'var(--color-background-foreground)' }}>
-                    <Heading align="center">About</Heading>
+            <Section background="container">
+                <Box background="content" border padding={tokens.space.lg}>
+                    <Heading align="center" style={{ marginBottom: tokens.space.sm }}>
+                        About
+                    </Heading>
                     <Typography.Paragraph>
                         Local media is vital for a healthy democracy, but sadly in{' '}
                         <StyledLink to="https://localnewsinitiative.northwestern.edu/projects/state-of-local-news/" external>
                             decline
                         </StyledLink>
-                        . The Local Memory Project (LMP) is a service designed to help users discover local media in various US communities.
+                        . The Local Memory Project (LMP) is a service designed to help users discover local media in various US communities and across the world.
                     </Typography.Paragraph>
                     <Typography.Paragraph>
                         Our US local news media dataset currently has about{' '}
@@ -22,13 +23,13 @@ const About: FC = () => {
                             14,086 local media sources
                         </StyledLink>
                         :
-                        <ul>
-                            <li>9,441 Newspapers</li>
-                            <li>2,449 Radio</li>
-                            <li>886 TV</li>
-                            <li>1,310 Broadcast (TV or Radio)</li>
-                        </ul>
                     </Typography.Paragraph>
+                    <ul>
+                        <li>9,441 Newspapers</li>
+                        <li>2,449 Radio</li>
+                        <li>886 TV</li>
+                        <li>1,310 Broadcast (TV or Radio)</li>
+                    </ul>
                     <Typography.Paragraph>
                         The original idea of LMP was conceived by Adam Ziegler and Anastasia Aizman at the{' '}
                         <StyledLink to="https://lil.law.harvard.edu" external>
@@ -49,17 +50,19 @@ const About: FC = () => {
                         .
                     </Typography.Paragraph>
 
-                    <Heading minor>Publications</Heading>
+                    <Heading size="minor">Publications</Heading>
                     <Typography.Text>3DLNews: A Three-decade Dataset of US Local News Articles</Typography.Text>
-                    <Typography.Text newline>Gangani Ariyarathne and Alexander C. Nwala</Typography.Text>
-                    <Typography.Text newline>
+                    <br />
+                    <Typography.Text>Gangani Ariyarathne and Alexander C. Nwala</Typography.Text>
+                    <br />
+                    <Typography.Text>
                         <StyledLink to="https://arxiv.org/abs/2408.04716" external>
                             CIKM
                         </StyledLink>
                     </Typography.Text>
                     <br />
-
-                    <Heading minor>About Us</Heading>
+                    <br />
+                    <Heading size="minor">About Us</Heading>
                     <Typography.Paragraph>
                         Local Memory Project is a project of the News Web and Social Media (NEWS) research lab at{' '}
                         <StyledLink to="https://www.wm.edu/" external>
@@ -75,7 +78,7 @@ const About: FC = () => {
                         </StyledLink>{' '}
                         (acnwala [at] wm.edu).
                     </Typography.Paragraph>
-                </div>
+                </Box>
             </Section>
         </Layout>
     );

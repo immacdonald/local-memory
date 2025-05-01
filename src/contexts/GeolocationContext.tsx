@@ -1,6 +1,7 @@
-import { Coordinates, LocationData } from '@types';
-import { createContext, FC, ReactElement, ReactNode, useState } from 'react';
-import { Callback } from 'phantom-library';
+import type { Callback } from 'phantom-library';
+import type { Coordinates, LocationData } from '@types';
+import type { FC, ReactElement, ReactNode } from 'react';
+import { createContext, useState } from 'react';
 import { findClosestZipcode } from '@utility';
 
 interface GeolocationContextInterface {

@@ -1,26 +1,12 @@
-import { Coordinates, MediaWithDistance, WorldMedia } from '@types';
-import { ChangeEvent, FC, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
+import type { NullablePrimitive } from 'phantom-library';
+import type { Coordinates, MediaWithDistance, WorldMedia } from '@types';
+import type { ChangeEvent, FC, ReactElement } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import {
-    Button,
-    capitalizeFirstLetter,
-    Column,
-    decimalPlaces,
-    designTokens,
-    Divider,
-    Dropdown,
-    Flex,
-    Heading,
-    NullablePrimitive,
-    Row,
-    Section,
-    StyledLink,
-    Typography,
-    useResponsiveContext
-} from 'phantom-library';
+import { Button, capitalizeFirstLetter, Column, decimalPlaces, tokens, Divider, Dropdown, Flex, Heading, Row, Section, StyledLink, Typography, useResponsiveContext } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
-import { WorldMap } from '@components/WorldMap';
+import { WorldMap } from '@components/maps';
 import { mediaWorld } from '@data';
 import { getIconForMediaClass, haversineDistance } from '@utility';
 import style from './Views.module.scss';
@@ -147,14 +133,12 @@ const World: FC = () => {
     return (
         <Layout>
             <Section>
-                <Heading align="center" subheading={<LocalMemoryFullIcon inline size={isMobile ? 'small' : undefined} />}>
+                <Heading align="center" subheading={<LocalMemoryFullIcon inline size={isMobile ? 'small' : undefined} />} style={{ marginBottom: tokens.space.md }}>
                     Local Media Across the Globe
                 </Heading>
                 <Column style={{ minHeight: '500px' }} verticalAlign="start">
                     {isMobile ? (
-                        <Row
-                            style={{ height: '300px', border: designTokens.border.light, borderRadius: designTokens.borderRadius, padding: designTokens.space.md, marginBottom: designTokens.space.md }}
-                        >
+                        <Row style={{ height: '300px', border: tokens.border.soft, borderRadius: tokens.borderRadius, padding: tokens.space.md, marginBottom: tokens.space.md }}>
                             <Typography.Text>Please use a computer or tablet to view the interactive visualization.</Typography.Text>
                         </Row>
                     ) : (
@@ -166,7 +150,7 @@ const World: FC = () => {
                     </Typography.Paragraph>
                 </Column>
                 <Divider />
-                <Flex flex={{ base: 'row', xs: 'column' }} gap={designTokens.space.sm}>
+                <Flex flex={{ base: 'row', xs: 'column' }} gap={tokens.space.sm}>
                     <Dropdown
                         options={countries.map((country) => ({
                             value: country,

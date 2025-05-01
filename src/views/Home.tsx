@@ -1,11 +1,13 @@
 import type { Media, Coordinates, MediaWithDistance, USMedia } from '@types';
-import { FC, ReactElement, useEffect, useRef, useState, KeyboardEvent, useMemo } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { FC, ReactElement, KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FacebookIcon, LocalMemoryFullIcon, LocationPinIcon, TwitterIcon, YouTubeIcon } from '@icons';
-import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, designTokens, Column, Heading, StyledLink, Flex, useResponsiveContext } from 'phantom-library';
+import { Button, capitalizeFirstLetter, Row, Section, decimalPlaces, Typography, FormInput, Divider, tokens, Column, Heading, StyledLink, Flex, useResponsiveContext } from 'phantom-library';
 import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
-import { USMap } from '@components/USMap';
+import { USMap } from '@components/maps';
 import { zipcodeMap } from '@data';
 import mediaData from '@data/media.json';
 import { findClosestZipcode, getIconForMediaClass, haversineDistance } from '@utility';
@@ -99,14 +101,12 @@ const Home: FC = () => {
     return (
         <Layout>
             <Section>
-                <Heading align="center" subheading={<LocalMemoryFullIcon inline size={isMobile ? 'small' : undefined} />}>
+                <Heading align="center" subheading={<LocalMemoryFullIcon inline size={isMobile ? 'small' : undefined} />} style={{ marginBottom: tokens.space.md }}>
                     US Local Media by County
                 </Heading>
                 <Column style={{ minHeight: '500px' }} verticalAlign="start">
                     {isMobile ? (
-                        <Row
-                            style={{ height: '300px', border: designTokens.border.light, borderRadius: designTokens.borderRadius, padding: designTokens.space.md, marginBottom: designTokens.space.md }}
-                        >
+                        <Row style={{ height: '300px', border: tokens.border.soft, borderRadius: tokens.borderRadius, padding: tokens.space.md, marginBottom: tokens.space.md }}>
                             <Typography.Text>Please use a computer or tablet to view the interactive visualization.</Typography.Text>
                         </Row>
                     ) : (
@@ -119,7 +119,7 @@ const Home: FC = () => {
                 </Column>
                 <Divider />
                 <form id="search" onSubmit={handleSubmit(onSubmit)}>
-                    <Flex flex={{ base: 'row', xs: 'column' }} gap={designTokens.space.sm}>
+                    <Flex flex={{ base: 'row', xs: 'column' }} gap={tokens.space.sm}>
                         <div className={style.currentLocationSearch}>
                             <FormInput type="text" {...register('zipcode', { required: true })} placeholder="Zipcode" error={errors.zipcode?.message} onKeyDown={handleFullDelete} />
                             <Button

@@ -1,4 +1,5 @@
-import { FC, useEffect } from 'react';
+import type { FC } from 'react';
+import { useEffect } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import { Column, Loading, StyledApp } from 'phantom-library';
 import { About, Home, NotFound, World } from '@views';
@@ -42,7 +43,7 @@ const RoutedApp: FC = () => {
     }, []);
 
     return (
-        <StyledApp>
+        <StyledApp rootId="root">
             {geolocation.loading ? (
                 <Column verticalAlign="center" style={{ height: '100vh' }}>
                     <Loading />

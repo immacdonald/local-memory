@@ -1,20 +1,16 @@
-import { FC, ReactNode } from 'react';
-import { orUndefined, Page } from 'phantom-library';
+import type { FC, ReactNode } from 'react';
 import { Footer, Header } from '@components/page';
 
 interface LayoutProps {
     title?: string;
-    darkBackground?: boolean;
     children: ReactNode;
 }
 
-const Layout: FC<LayoutProps> = ({ title, darkBackground = false, children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
     return (
         <>
-            <Header hasBackground inline dynamicSettings={{ enabled: true, scrollDistance: 1000, inline: false, hasBackground: true, pageSpace: 'pad' }} />
-            <Page title={title ?? 'Local Memory Project'} style={{ backgroundColor: orUndefined(darkBackground, 'var(--color-background)') }}>
-                {children}
-            </Page>
+            <Header hasBackground inline />
+            <main style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, width: '100%' }}>{children}</main>
             <Footer />
         </>
     );

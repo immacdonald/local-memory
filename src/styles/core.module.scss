@@ -1,0 +1,21 @@
+@use 'sass:color';
+
+:root {
+    // Theme Color
+    $primary: rgb(60 60 237);
+
+    --color-primary: #{$primary};
+    --color-primary-dark: #{color.scale($primary, $lightness: -15%)};
+    --color-primary-darker: #{color.scale($primary, $lightness: -30%)};
+    --color-primary-alpha: rgb(60 60 237 / 30%);
+    --background-container: #f6f6ff;
+}
+
+[class^='phantom-input'] {
+    margin: 0;
+    padding: 0;
+
+    > input {
+        margin: 0;
+    }
+}
