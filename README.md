@@ -29,9 +29,9 @@ The website is then accessible at `http://localhost:5173/`.
 
 #### Project Structure
 
-On the top level of the project are all the configuration files related to Vite, TypeScript, the [package.json](app/package.json), and utilities related to linting and formatting. The [src](app/src/) folder contains the contents of the React app.
+On the top level of the project are all the configuration files related to Vite, TypeScript, the [package.json](package.json), and utilities related to linting and formatting. The [src](src/) folder contains the contents of the React app.
 
-The main file of the React app is [index.tsx](app/src/index.tsx), which contains the contexts for persistent data, URL routing, responsive styling, and the application itself. [App.tsx](app/src/App.tsx) contains the actual routing (done with [react-router-dom](https://reactrouter.com/en/main)).
+The main file of the React app is [index.tsx](src/index.tsx), which contains the contexts for persistent data, URL routing, responsive styling, and the application itself. [App.tsx](src/App.tsx) contains the actual routing (done with [react-router-dom](https://reactrouter.com/en/main)).
 
 #### Linting & Formatting
 

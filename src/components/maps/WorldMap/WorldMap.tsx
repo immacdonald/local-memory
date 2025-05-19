@@ -172,8 +172,7 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
             .attr('stroke', 'black')
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
-                // @ts-expect-error id doesn't play nice?
-                const country = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
+                const country = mediaHeatmapWorld.find((e) => e.countryCode == d.countryCode);
                 //console.log(d);
                 //console.log(country);
 

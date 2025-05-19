@@ -26,6 +26,7 @@ type USMedia = BaseMedia & {
 type WorldMedia = BaseMedia & {
     country?: string;
     city?: string;
+    countryCode?: number;
 };
 
 type Media = USMedia | WorldMedia;
