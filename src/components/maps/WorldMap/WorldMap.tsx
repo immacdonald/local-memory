@@ -68,7 +68,7 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
         const colorScale = d3
             .scaleQuantize()
             .domain([0, 40])
-            .range(config.colors as any);
+            .range(config.colors.slice(1) as any);
 
         // Create tooltip
         const tooltip = d3.select('body').append('div').attr('class', style.tooltip);
@@ -89,8 +89,9 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
                     const country = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
                     if (!country) {
                         //console.log('No country found for', d.id, d.properties!.name);
+                        return config.colors[0];
                     }
-                    return colorScale(country?.total || 0);
+                    return country.total == 0 ? config.colors[0] : colorScale(country.total);
                 }
             })
             .attr('stroke', 'white')
@@ -100,7 +101,7 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
                     const country = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
 
                     tooltip.style('display', 'block').html(`
-                    <i>${d.properties!.name}</i>
+                    <i>${country?.countryName || d.properties!.name || 'Unknown Country'}</i>
                     <br>
                     <br>
                     ${
@@ -135,7 +136,8 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
                     d3.select(this).attr('fill', 'grey');
                 } else {
                     const country = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
-                    d3.select(this).attr('fill', colorScale(country?.total || 0));
+                    const fillColor = country ? (country.total == 0 ? config.colors[0] : colorScale(country.total)) : config.colors[0];
+                    d3.select(this).attr('fill', fillColor);
                 }
             })
             .on('mousedown', function (event, d) {
