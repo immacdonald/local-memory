@@ -1,6 +1,6 @@
 import type { IconProps } from 'phantom-library';
 import type { Coordinates } from '@types';
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactElement } from 'react';
 import { BroadcastIcon, BroadcastIconInline, NewsIcon, NewsIconInline, RadioIcon, RadioIconInline, TVIcon, TVIconInline } from '@icons';
 import { zipcodeMap } from '@data';
 
@@ -63,4 +63,9 @@ const findClosestZipcode = (target: Coordinates): string => {
     return closestZipcode;
 };
 
-export { findClosestZipcode, haversineDistance, toRadians, getIconForMediaClass };
+const tableIcon = (mediaClass: string): ReactElement => {
+    const As = getIconForMediaClass(mediaClass);
+    return <As />;
+};
+
+export { findClosestZipcode, haversineDistance, tableIcon, toRadians, getIconForMediaClass };

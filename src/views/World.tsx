@@ -1,6 +1,6 @@
 import type { NullablePrimitive } from 'phantom-library';
 import type { Coordinates, MediaWithDistance, WorldMedia } from '@types';
-import type { ChangeEvent, FC, ReactElement } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { FacebookIcon, LocalMemoryFullIcon, TwitterIcon, YouTubeIcon } from '@icons';
 import { Button, capitalizeFirstLetter, Column, decimalPlaces, tokens, Divider, Dropdown, Flex, Heading, Row, Section, StyledLink, Typography, useResponsiveContext } from 'phantom-library';
@@ -8,7 +8,7 @@ import { useGeolocationContext } from 'src/contexts/useGeolocationContext';
 import { Layout } from 'src/layouts';
 import { WorldMap } from '@components/maps';
 import { mediaWorld } from '@data';
-import { getIconForMediaClass, haversineDistance } from '@utility';
+import { haversineDistance, tableIcon } from '@utility';
 import style from './Views.module.scss';
 
 type CityCoordinatesPair = {
@@ -39,18 +39,15 @@ const World: FC = () => {
     const { atBreakpoint, windowSize } = useResponsiveContext();
     const isMobile = useMemo(() => atBreakpoint('xs'), [windowSize.width]);
 
+    const [selectedCountry, setSelectedCountry] = useState<string | null>();
+    const [selectedCity, setSelectedCity] = useState<string | null>(null);
+    const search = useRef<{ location: Coordinates; radius: number } | null>(null);
+
     useEffect(() => {
         if (geolocation.location) {
             onSearch(geolocation.location, DEFAULT_SEARCH_RADIUS);
         }
     }, [geolocation.loading, geolocation.location]);
-
-    const tableIcon = (mediaClass: string): ReactElement => {
-        const As = getIconForMediaClass(mediaClass);
-        return <As />;
-    };
-
-    const search = useRef<{ location: Coordinates; radius: number } | null>(null);
 
     const onSearch = (location: Coordinates, radius: number): void => {
         search.current = { location, radius };
@@ -59,28 +56,29 @@ const World: FC = () => {
         setSorted(sortedCities);
     };
 
-    const updateSearch = (coordinates?: Coordinates, radius?: number): void => {
+    const updateSearch = (coordinates?: Coordinates, radius?: number, shouldUpdateCountry = true): void => {
         if (radius) {
             onSearch(search.current!.location, Math.floor(radius));
         } else if (coordinates) {
             onSearch(coordinates, search.current?.radius || DEFAULT_SEARCH_RADIUS);
-            const country = findClosestCountry(coordinates);
-            setSelectedCountry(country);
-            if (country) {
-                setSelectedCity(findClosestCity(country, coordinates));
-            } else {
-                setSelectedCity(null);
+            if (shouldUpdateCountry) {
+                const country = findClosestCountry(coordinates);
+                setSelectedCountry(country);
+                if (country) {
+                    setSelectedCity(findClosestCity(country, coordinates));
+                } else {
+                    setSelectedCity(null);
+                }
             }
         }
     };
 
     const countries: string[] = useMemo(() => [...new Set(mediaWorld.map((data: WorldMedia) => data.country!))].sort(), [mediaWorld]);
 
-    const findClosestCountry = (location?: Coordinates): string | null => {
-        const coordinates = location || geolocation.location;
+    const findClosestCountry = (location: Coordinates): string | null => {
         let nearest = sorted;
-        if (nearest.length == 0 && coordinates) {
-            nearest = sortCitiesByProximity(mediaWorld, coordinates, DEFAULT_SEARCH_RADIUS);
+        if (nearest.length == 0 && location) {
+            nearest = sortCitiesByProximity(mediaWorld, location, DEFAULT_SEARCH_RADIUS);
         }
         if (nearest.length > 0) {
             return (nearest[0] as WorldMedia).country!;
@@ -103,9 +101,6 @@ const World: FC = () => {
 
         return null;
     };
-
-    const [selectedCountry, setSelectedCountry] = useState<string | null>(findClosestCountry());
-    const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
     const cities: CityCoordinatesPair[] = useMemo(() => {
         if (!selectedCountry) {
@@ -163,6 +158,7 @@ const World: FC = () => {
                         }}
                     />
                     <Dropdown
+                        key={selectedCountry}
                         options={cities.map((city) => ({
                             value: `${city.latitude}#${city.longitude}`,
                             label: city.city
@@ -170,7 +166,7 @@ const World: FC = () => {
                         onChange={(value: NullablePrimitive) => {
                             if (value) {
                                 const coordinates = (value as string).split('#');
-                                updateSearch({ latitude: parseFloat(coordinates[0]), longitude: parseFloat(coordinates[1]) }, undefined);
+                                updateSearch({ latitude: parseFloat(coordinates[0]), longitude: parseFloat(coordinates[1]) }, undefined, false);
                             }
                         }}
                         defaultValue={selectedCity}

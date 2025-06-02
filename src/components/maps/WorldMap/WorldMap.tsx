@@ -88,7 +88,6 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
                 } else {
                     const country = mediaHeatmapWorld.find((e) => e.countryCode == d.id);
                     if (!country) {
-                        //console.log('No country found for', d.id, d.properties!.name);
                         return config.colors[0];
                     }
                     return country.total == 0 ? config.colors[0] : colorScale(country.total);
@@ -175,8 +174,6 @@ const WorldMap: FC<MapProps> = ({ search, updateSearch = (): void => {} }) => {
             .attr('stroke-width', 0.25)
             .on('mouseover', function (_, d) {
                 const country = mediaHeatmapWorld.find((e) => e.countryCode == d.countryCode);
-                //console.log(d);
-                //console.log(country);
 
                 tooltip.style('display', 'block').html(`
                     <b>${d.name} ${d.mediaClass && inlineSVG(getIconForMediaClass(d.mediaClass, true) as string)}</b>
