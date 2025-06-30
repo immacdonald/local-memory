@@ -91,7 +91,7 @@ const Home: FC = () => {
         return <As inline />;
     };
 
-    const handleFullDelete = (event: KeyboardEvent<HTMLInputElement>) => {
+    const handleFullDelete = (event: KeyboardEvent<HTMLInputElement>): void => {
         // Check if the key pressed is backspace or delete
         if (event.key === 'Backspace' || event.key === 'Delete') {
             (event.target as HTMLInputElement).value = '';

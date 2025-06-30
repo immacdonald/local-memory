@@ -65,7 +65,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
         const colorScale = d3
             .scaleQuantize()
             .domain([0, 5])
-            .range(config.colors as any);
+            .range(config.colors as Iterable<number>);
 
         // Create tooltip
         const tooltip = d3.select('body').append('div').attr('class', style.tooltip);
@@ -272,7 +272,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
 
             let currentRadius = distance;
 
-            function dragStarted(event: any) {
+            function dragStarted(event: d3.D3DragEvent<SVGPathElement, unknown, unknown>): void {
                 initialPosition = { x: event.x, y: event.y };
 
                 // Calculate the initial distance from the center of the circle to the mouse position
@@ -280,11 +280,10 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 const dy = initialPosition.y - centerCoords[1];
                 initialDistanceFromCenter = Math.sqrt(dx * dx + dy * dy);
 
-                /* @tslint:disable-next-line */
-                currentRadius = Number(d3.select(event.target).attr('data-radius'));
+                currentRadius = Number(d3.select(event.target as unknown as SVGPathElement).attr('data-radius'));
             }
 
-            function dragged(event: any) {
+            function dragged(event: d3.D3DragEvent<SVGPathElement, unknown, unknown>): void {
                 currentPosition = { x: event.x, y: event.y };
 
                 // Calculate the new distance from the center of the circle to the current mouse position
@@ -308,12 +307,12 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 initialDistanceFromCenter = newDistanceFromCenter;
             }
 
-            function dragEnded() {
+            function dragEnded(): void {
                 // Update the search radius or any other final actions
                 updateSearch(undefined, currentRadius);
             }
 
-            function updateCircle() {
+            function updateCircle(): void {
                 const updatedCircle = d3.geoCircle().center([longitude, latitude]).radius(currentAngle);
                 circlePath.attr('d', path(updatedCircle()));
                 circlePath.attr('data-radius', currentRadius);
@@ -325,13 +324,13 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 .attr('d', path(circle()))
                 .attr('class', 'indicator')
                 .attr('data-radius', currentRadius)
-                .call(dragBehavior as any)
+                .call(dragBehavior as unknown as d3.DragBehavior<SVGPathElement, unknown, unknown>)
                 .style('pointer-events', 'all')
                 .style('cursor', 'ew-resize')
                 .lower();
         };
 
-        const removeIndicators = () => {
+        const removeIndicators = (): void => {
             svg.selectAll('.indicator').remove();
         };
 
@@ -347,11 +346,11 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
                 group.attr('transform', event.transform);
             });
 
-        const setZoom = (level: number) => {
+        const setZoom = (level: number): void => {
             svg.transition().call(zoom.scaleTo, level);
         };
 
-        const center = (instant: boolean = false) => {
+        const center = (instant: boolean = false): void => {
             const containerWidth = ref.current?.clientWidth || width;
             const containerHeight = ref.current?.clientHeight || height;
             const bbox = group.node()!.getBBox();
@@ -362,11 +361,11 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
             (instant ? svg : svg.transition().duration(750)).call(zoom.transform, t);
         };
 
-        const zoomIn = () => {
+        const zoomIn = (): void => {
             svg.transition().duration(500).call(zoom.scaleBy, 2);
         };
 
-        const zoomOut = () => {
+        const zoomOut = (): void => {
             svg.transition().duration(500).call(zoom.scaleBy, 0.5);
         };
 
@@ -375,7 +374,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
             zoomIn,
             zoomOut,
             center,
-            addCircle: (latitude: number, longitude: number) => addCircle(latitude, longitude),
+            addCircle: (latitude: number, longitude: number): void => addCircle(latitude, longitude),
             addGeoCircle,
             addSVG,
             removeIndicators
@@ -400,7 +399,7 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
 
     const noScroll = useNoScroll();
 
-    const toggleFullscreen = () => {
+    const toggleFullscreen = (): void => {
         const toggled = !fullscreen;
         setFullscreen(toggled);
         noScroll(toggled);
@@ -410,14 +409,14 @@ const USMap: React.FC<MapProps> = ({ search, updateSearch = (): void => {} }) =>
         setHeight(newHeight);
         d3.select(ref.current).select('svg').attr('height', newHeight);
 
-        setTimeout(() => {
+        setTimeout((): void => {
             mapFunctions.current!.center(true);
         });
     };
 
     const [interactionModeState, setInteractionModeState] = useState<boolean>(true);
 
-    const toggleInteractionMode = () => {
+    const toggleInteractionMode = (): void => {
         const mode = !interactionMode.current;
         interactionMode.current = mode;
         setInteractionModeState(mode);

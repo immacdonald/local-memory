@@ -18,7 +18,7 @@ interface GeolocationContextProviderProps {
 const GeolocationContextProvider: FC<GeolocationContextProviderProps> = ({ children }): ReactElement => {
     const [geolocation, setGeolocationInternal] = useState<LocationData>({ loading: true, location: null, zipcode: null });
 
-    const setGeolocation = (location: Coordinates | null | string) => {
+    const setGeolocation = (location: Coordinates | null | string): void => {
         if (typeof location === 'string') {
             // Error
             console.warn(`Unable to get geolocation data due to: ${location}`);

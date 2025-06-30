@@ -2,7 +2,7 @@
 
 Visit the site [here](https://newsresearch.lab.wm.edu/tools/local-memory/)!
 
-Local Memory is an interactive online visualization to explore the distribution of local news organizations across the United States. It is a [React](https://react.dev/) website written in [TypeScript](https://www.typescriptlang.org/) built with [Vite](https://vitejs.dev/). Packages and dependencies are managed with [npm](https://www.npmjs.com/). In order to develop and deploy agwagram you will need to have installed `npm` on your system.
+Local Memory is an interactive online visualization to explore the distribution of local news organizations across the United States. It is a [React](https://react.dev/) website written in [TypeScript](https://www.typescriptlang.org/) built with [Vite](https://vitejs.dev/). Packages and dependencies are managed with [npm](https://www.npmjs.com/). In order to develop and deploy Local Memory you will need to have installed `npm` on your system.
 
 ### Development
 

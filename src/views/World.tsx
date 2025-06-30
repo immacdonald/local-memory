@@ -204,7 +204,7 @@ const World: FC = () => {
                                                 </StyledLink>
                                             </td>
                                             <td>
-                                                {organization['cityCountyName']}, {(organization as any).country}
+                                                {organization['cityCountyName']}, {(organization as WorldMedia).country}
                                             </td>
                                             {!isMobile && (
                                                 <td>
